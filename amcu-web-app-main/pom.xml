@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>amcu-web</artifactId>
+        <groupId>site.amcu.amcuweb</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../amcu-web/pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>amcu-web-app-main</artifactId>
+
+    <dependencies>
+        <!-- 引入core中的pom dependency中的配置，version版本号在amcu-web中管理，前期对主要对browser进行测试 -->
+        <dependency>
+            <groupId>site.amcu.amcuweb</groupId>
+            <artifactId>amcu-web-app</artifactId>
+            <version>${amcu.web.version}</version>
+        </dependency>
+        <!--jwt（json web token），app/小程序的登录需要的token-->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.7.0</version>
+        </dependency>
+    </dependencies>
+
+    <!-- 构建工具插件配置 -->
+    <build>
+        <plugins>
+            <plugin><!-- 聚合项目的jar聚合打包 -->
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>1.3.3.RELEASE</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+        <finalName>amcu-web-app-main</finalName>
+    </build>
+
+
+</project>

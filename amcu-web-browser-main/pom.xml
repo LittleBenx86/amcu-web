@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>amcu-web</artifactId>
+        <groupId>site.amcu.amcuweb</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../amcu-web/pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>amcu-web-browser-main</artifactId>
+
+    <dependencies>
+        <!-- 引入core中的pom dependency中的配置，version版本号在amcu-web中管理，前期对主要对browser进行测试 -->
+        <dependency>
+            <groupId>site.amcu.amcuweb</groupId>
+            <artifactId>amcu-web-browser</artifactId>
+            <version>${amcu.web.version}</version>
+        </dependency>
+        <!--spring restful 接口测试框架 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+        <!--wiremock测试框架-->
+        <!--<dependency>
+            <groupId>com.github.tomakehurst</groupId>
+            <artifactId>wiremock</artifactId>
+        </dependency>-->
+        <!--http连接池-->
+        <!--<dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+        </dependency>-->
+    </dependencies>
+
+    <!-- 构建工具插件配置 -->
+    <build>
+        <plugins>
+            <plugin><!-- 聚合项目的jar聚合打包,构建可运行的jar -->
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>1.3.3.RELEASE</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+        <finalName>amcu-web-browser-main</finalName>
+    </build>
+
+</project>

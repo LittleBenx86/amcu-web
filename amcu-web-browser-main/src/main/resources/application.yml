@@ -1,0 +1,92 @@
+server:
+  #内嵌tomcat服务器端口
+  port: 80
+  tomcat:
+    uri-encoding: utf-8
+
+spring:
+  session:
+    store-type: none
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/amcu-web?useUnicode=yes&characterEncoding=UTF-8&useSSL=false
+      username: root
+      password: root@220401
+      #连接池初始化配置
+      initialSize: 5
+      minIdle: 5
+      maxActive: 20
+      #配置获取连接等待超时的时间，ms
+      maxWait: 10000
+      #配置检测的间隔时间，检测需要关闭空闲连接，ms
+      timeBetweenEvictionRunsMillis: 60000
+      #配置单个连接在连接池中的最小生存时间，ms
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      #配置监控统计拦截的filters，去掉监控界面会使得sql无法统计，wall用于防火墙
+      filters: stat,wall,slf4j
+      #通过connectProperties属性来打开mergeSql功能（参数不同的sql合并统计）、慢SQL记录（执行时间长的sql）
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      #合并多个DruidDataSource的监控数据
+      useGlobalDataSourceStat: true
+
+#spring security配置
+security:
+  basic:
+    enabled: false
+
+
+#mybatis-plus配置
+mybatis-plus:
+  #mapper xml文件的地址
+  mapper-locations: classpath*:/mapper/*Mapper.xml
+  #type-alias文件的地址
+  type-aliases-package: site.amcu.amcuweb.entity
+  #全局配置
+  global-config:
+    db-config:
+      id-type: auto
+      #数据库表的前缀配置
+      #table-prefix: tbl_
+      #驼峰和下划线的转换
+      table-underline: true
+      #配置数据库类型
+      db-type: mysql
+  configuration:
+    #结果集驼峰和下划线的转换
+    map-underscore-to-camel-case: true
+    #打印sql语句
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    #自动扫描包的机制,防止打包后启动无法正确扫描,导致type-aliases-package,type-handlers-package不起作用
+    vfs-impl: com.baomidou.mybatisplus.autoconfigure.SpringBootVFS
+
+#自定义的系统配置
+sys:
+  properties:
+    browser:
+      response-type: JSON
+      login-page: /login.html
+    social:
+      filter-processes-url: /qqLogin
+      qq:
+        app-id: 100550231
+        app-secret: 69b6ab57b22f3c2fe6a6149274e3295e
+        provider-id: callback.do
+      wechat:
+        app-id: wxd99431bbff8305a0
+        app-secret: 60f78681d063590a469f1b297feff3c4
+        provider-id: weixin
+      github:
+        app-id: 6d65e847cccb9d47bed9
+        app-secret: 1a25d37871fef874af03257b19d5c78419daeac8
+        provider-id: github
+      linkedin:
+        app-id: 8165dhl45kmsty
+        app-secret: 7073QAL7mEDObeE1
+        provider-id: linkedin
+
