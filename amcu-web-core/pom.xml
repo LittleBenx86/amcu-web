@@ -21,6 +21,11 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-oauth2</artifactId>
         </dependency>
+        <!-- java邮件发送依赖 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
         <!-- 引入数据库相关依赖 -->
         <dependency><!--第三方登录绑定用户数据时的数据缓存，替代session-->
             <groupId>org.springframework.boot</groupId>

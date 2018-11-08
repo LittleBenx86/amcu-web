@@ -23,7 +23,7 @@ public interface SecurityConstants {
     public static final String DEFAULT_PARAMETER_NAME_MOBILE     = "mobile";
 
     /** 邮箱验证码的接收手机的http请求携带的参数名称常量 */
-    public static final String DEFAULT_PARAMETER_NAME_EMAIL      = "email";
+    public static final String DEFAULT_PARAMETER_NAME_EMAIL      = "toEmail";
 
     /** 验证码存入session时的前缀 */
     public static final String SESSION_KEY_PREFIX                = "SESSION_KEY_FOR_CODE_";
