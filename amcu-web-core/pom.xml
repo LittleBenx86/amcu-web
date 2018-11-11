@@ -32,6 +32,10 @@
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.springframework.session</groupId>
+            <artifactId>spring-session-data-redis</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
@@ -90,11 +94,11 @@
             <artifactId>commons-io</artifactId>
         </dependency>
         <!--springboot热部署，开发阶段使用，即使使用了springBoot管理框架，也需要添加该热部署插件-->
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <scope>runtime</scope>
-        </dependency>
+        </dependency>-->
         <!-- 切面编程的依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

@@ -68,8 +68,16 @@ public class UserServiceImpl implements UserService {
 
         usr = userMapper.selectOne(new QueryWrapper<User>(usr));
 
-        logger.info("通过登录信息查找用户:" + usr.toString());
+        logger.info("开发阶段:通过登录信息查找用户:" + usr.toString());
 
+        return usr;
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public User findBySocialUserId(Integer userId) {
+        User usr = userMapper.selectById(userId);
+        logger.info("开发阶段:通过第三方登录用户的信息:" + usr.toString());
         return usr;
     }
 

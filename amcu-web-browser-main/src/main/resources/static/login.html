@@ -64,8 +64,20 @@
     <a href="/qqLogin/linkedin">LinkedIn登录</a>
 
     <h3>邮件发送测试</h3>
-    <a href="/code/email?toEmail=tester2@local.test">给tester2@local.test发送验证码</a>
-
+    <form action="/test/codeValidate" method="post">
+        <table>
+            <tr>
+                <td>邮箱验证码:</td>
+                <td>
+                    <input type="text" name="emailCode"/>
+                    <a href="/code/email?toEmail=tester2@local.test">给tester2@local.test发送验证码</a>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"><button type="submit">校验</button></td>
+            </tr>
+        </table>
+    </form>
 
 </body>
 </html>

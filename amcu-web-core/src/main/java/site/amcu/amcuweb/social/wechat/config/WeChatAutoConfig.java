@@ -1,13 +1,17 @@
 package site.amcu.amcuweb.social.wechat.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.social.SocialAutoConfigurerAdapter;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.social.connect.ConnectionFactory;
+import org.springframework.web.servlet.View;
 import site.amcu.amcuweb.properties.SecurityProperties;
 import site.amcu.amcuweb.properties.WeChatProperties;
+import site.amcu.amcuweb.social.SocialBindingConnectedView;
 import site.amcu.amcuweb.social.wechat.connection.WeChatConnectionFactory;
 
 /**
@@ -30,6 +34,18 @@ public class WeChatAutoConfig extends SocialAutoConfigurerAdapter {
         WeChatProperties wechatProperties = securityProperties.getSocial().getWechat();
         return new WeChatConnectionFactory(wechatProperties.getProviderId(), wechatProperties.getAppId(),
                 wechatProperties.getAppSecret());
+    }
+
+    /**
+     * 微信绑定和解绑操作
+     * 固定写法:providerId + Connect/Connected
+     * 绑定使用post,解绑使用delete
+     * @return
+     */
+    @Bean({"connect/weixinConnect", "connect/weixinConnected"})
+    @ConditionalOnMissingBean(name = "weixinConnectedView")
+    public View weixinConnectedView() {
+        return new SocialBindingConnectedView();
     }
 
 }

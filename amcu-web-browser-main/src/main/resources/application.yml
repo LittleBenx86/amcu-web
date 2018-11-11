@@ -3,10 +3,16 @@ server:
   port: 80
   tomcat:
     uri-encoding: utf-8
+  #session失效时间
+  session:
+    #second
+    timeout: 7200
 
 spring:
+  #session管理
   session:
-    store-type: none
+    store-type: redis
+  #数据库连接池
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
@@ -84,6 +90,7 @@ sys:
     browser:
       response-type: JSON
       login-page: /login.html
+    #第三方登录配置
     social:
       filter-processes-url: /qqLogin
       qq:
@@ -102,4 +109,10 @@ sys:
         app-id: 8165dhl45kmsty
         app-secret: 7073QAL7mEDObeE1
         provider-id: linkedin
+    code:
+      email:
+        url: /test/codeValidate
+      image:
+        url: /usr/social-signup/*
+
 

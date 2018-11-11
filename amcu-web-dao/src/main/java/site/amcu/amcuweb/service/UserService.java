@@ -33,6 +33,13 @@ public interface UserService {
     User findByLoginCondition(String condition, int type);
 
     /**
+     * 获取第三方登录用户与当前系统中关联用户的信息
+     * @param userId
+     * @return
+     */
+    User findBySocialUserId(Integer userId);
+
+    /**
      * 对密码进行加密
      * @param password
      */

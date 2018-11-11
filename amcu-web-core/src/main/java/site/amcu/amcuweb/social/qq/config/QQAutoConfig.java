@@ -1,13 +1,17 @@
 package site.amcu.amcuweb.social.qq.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.social.SocialAutoConfigurerAdapter;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.social.connect.ConnectionFactory;
+import org.springframework.web.servlet.View;
 import site.amcu.amcuweb.properties.QQProperties;
 import site.amcu.amcuweb.properties.SecurityProperties;
+import site.amcu.amcuweb.social.SocialBindingConnectedView;
 import site.amcu.amcuweb.social.qq.connection.QQConnectionFactory;
 
 /**
@@ -28,5 +32,17 @@ public class QQAutoConfig extends SocialAutoConfigurerAdapter {
     protected ConnectionFactory<?> createConnectionFactory() {
         QQProperties qqConfig = securityProperties.getSocial().getQq();
         return new QQConnectionFactory(qqConfig.getProviderId(), qqConfig.getAppId(), qqConfig.getAppSecret());
+    }
+
+    /**
+     * qq绑定和解绑操作
+     * 固定写法:providerId + Connect/Connected
+     * 绑定使用post,解绑使用delete
+     * @return
+     */
+    @Bean({"connect/callback.doConnect", "connect/callback.doConnected"})
+    @ConditionalOnMissingBean(name = "callback.doConnectedView")
+    public View qqConnectedView() {
+        return new SocialBindingConnectedView();
     }
 }

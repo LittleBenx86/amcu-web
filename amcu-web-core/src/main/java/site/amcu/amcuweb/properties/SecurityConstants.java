@@ -54,4 +54,7 @@ public interface SecurityConstants {
 
     /** 用户第三方登录(未注册需要前往的注册页面[optional]) */
     public static final String DEFAULT_SOCIAL_SIGNUP_URL          = "/social-signup.html";
+
+    /** session失效配置链接 */
+    public static final String DEFAULT_SESSION_INVALID_URL        = "/session/invalid";
 }

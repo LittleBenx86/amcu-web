@@ -46,7 +46,11 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
     /** url匹配的工具类 */
     private AntPathMatcher pathMatcher = new AntPathMatcher();
 
-    /** 将系统中配置的需要校验的验证码的url根据校验类型放入map */
+    /**
+     * 将系统中配置的需要校验的验证码的url根据校验类型放入map
+     * @param url
+     * @param type
+     */
     private void addUrlToMap(String url, ValidateCodeType type) {
         if(StringUtils.isNotBlank(url)) {
             String[] urls = StringUtils.splitByWholeSeparatorPreserveAllTokens(url, ",");
@@ -64,17 +68,17 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
         /** 1.表单登陆需要图片验证码 */
         urlMap.put(SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_FORM, ValidateCodeType.IMAGE);
         /** 2.其他需要图片验证码的请求 */
-        addUrlToMap(securityProperties.getCode().getImage().getUrl(), ValidateCodeType.IMAGE);
+        this.addUrlToMap(securityProperties.getCode().getImage().getUrl(), ValidateCodeType.IMAGE);
 
         /** 短信验证码匹配 */
         /** 1.手机短信验证码登陆 */
         urlMap.put(SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_MOBILE, ValidateCodeType.SMS);
         /** 2.其他需要短信验证码的请求 */
-        addUrlToMap(securityProperties.getCode().getSms().getUrl(), ValidateCodeType.SMS);
+        this.addUrlToMap(securityProperties.getCode().getSms().getUrl(), ValidateCodeType.SMS);
 
         /** 邮箱验证码匹配 */
         /** 1.其他需要邮箱验证码的请求 */
-        addUrlToMap(securityProperties.getCode().getEmail().getUrl(), ValidateCodeType.EMAIL);
+        this.addUrlToMap(securityProperties.getCode().getEmail().getUrl(), ValidateCodeType.EMAIL);
     }
 
     /**

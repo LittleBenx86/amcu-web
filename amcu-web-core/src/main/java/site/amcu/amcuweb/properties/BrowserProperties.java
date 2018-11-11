@@ -27,6 +27,9 @@ public class BrowserProperties {
     /** 用户第三方登录(未注册需要前往的注册页面[optional]) */
     private String signUpUrl = SecurityConstants.DEFAULT_SOCIAL_SIGNUP_URL;
 
+    /** session管理的核心配置 */
+    private SessionProperties session = new SessionProperties();
+
     public ResponseType getResponseType() {
         return responseType;
     }
@@ -66,4 +69,13 @@ public class BrowserProperties {
     public void setSignUpUrl(String signUpUrl) {
         this.signUpUrl = signUpUrl;
     }
+
+    public SessionProperties getSession() {
+        return session;
+    }
+
+    public void setSession(SessionProperties session) {
+        this.session = session;
+    }
+
 }

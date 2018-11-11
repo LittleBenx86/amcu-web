@@ -1,5 +1,6 @@
 package site.amcu.amcuweb.browser.security;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,6 @@ import site.amcu.amcuweb.utils.SignInRegxUtils;
 @Component
 public class BrowserUserDetailsService implements UserDetailsService, SocialUserDetailsService {
 
-
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
@@ -32,15 +32,23 @@ public class BrowserUserDetailsService implements UserDetailsService, SocialUser
     @Autowired
     private UserService userService;
 
-    private SocialUserDetails buildUser(User user) {
-        return new SocialUser(user.getUsername(),
-                user.getPassword(),
+    /**
+     * 使用SocialUserDetails是为了绑定第三方账号
+     * @param user
+     * @return
+     */
+    private SocialUserDetails buildUser(User user, int type) {
+
+        String name = type == BrowserSocialUserBuildType.BUIL_USER_TYPE_FORM ? user.getUsername() : user.getId().toString();
+        SocialUserDetails usr = new SocialUser(name,
+                user.getPassword() == null ? RandomStringUtils.randomAscii(8) : user.getPassword(),
                 user.isEnabled(),
                 user.isAccountNonExpired(),
                 user.isCredentialsNonExpired(),
                 user.isAccountNonLocked(),
                 user.getAuthorities());
-    }
+        return usr;
+}
 
     /**
      * 表单登录使用的获取用户信息的方法
@@ -60,7 +68,7 @@ public class BrowserUserDetailsService implements UserDetailsService, SocialUser
             return null;
         }
 
-        return this.buildUser(usr);
+        return this.buildUser(usr, BrowserSocialUserBuildType.BUIL_USER_TYPE_SOCIAL);
     }
 
     /**
@@ -71,6 +79,10 @@ public class BrowserUserDetailsService implements UserDetailsService, SocialUser
      */
     @Override
     public SocialUserDetails loadUserByUserId(String userId) throws UsernameNotFoundException {
-        return null;
+
+        logger.info("开发阶段:正在通过第三方登录的用户的id--" + userId);
+        User usr = userService.findBySocialUserId(Integer.parseInt(userId));
+        return this.buildUser(usr, BrowserSocialUserBuildType.BUIL_USER_TYPE_SOCIAL);
     }
+
 }
