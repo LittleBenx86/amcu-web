@@ -40,7 +40,7 @@ public class GitHubAutoConfig extends SocialAutoConfigurerAdapter {
      * 绑定使用post,解绑使用delete
      * @return
      */
-    @Bean({"connect/githubConnect", "connect/githubConnected"})
+    @Bean({"connect/githubConnected"})
     @ConditionalOnMissingBean(name = "githubConnectedView")
     public View githubConnectedView() {
         return new SocialBindingConnectedView();
