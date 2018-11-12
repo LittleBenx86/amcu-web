@@ -5,18 +5,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.social.oauth2.AccessGrant;
-import org.springframework.social.oauth2.GrantType;
-import org.springframework.social.oauth2.OAuth2Parameters;
+
 import org.springframework.social.oauth2.OAuth2Template;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.nio.charset.Charset;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+
 
 /**
  * @Description:    github符合oauth2协议的连接模版
@@ -27,13 +22,11 @@ public class GitHubOAuth2Template extends OAuth2Template {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    private final String authorizeUrl;
 
     public GitHubOAuth2Template(String clientId, String clientSecret, String authorizeUrl, String accessTokenUrl) {
         super(clientId, clientSecret, authorizeUrl, accessTokenUrl);
         /** 默认是false,只有当true的时候才会带上client_id和client_secret */
         this.setUseParametersForClientAuthentication(true);
-        this.authorizeUrl = authorizeUrl + "?client_id=" + clientId;
     }
 
     @Override

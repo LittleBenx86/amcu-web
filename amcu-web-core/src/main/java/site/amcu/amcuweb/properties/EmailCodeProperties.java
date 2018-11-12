@@ -6,5 +6,5 @@ package site.amcu.amcuweb.properties;
  * @Date: 2018/10/27 21:27
  */
 public class EmailCodeProperties extends BasicValidateCodeProperties {
-    //没有特殊的属性需要增加
+    /** 没有特殊的属性需要增加 */
 }

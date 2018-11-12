@@ -93,6 +93,12 @@
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
         </dependency>
+        <!-- ali json快速操作工具 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.29</version>
+        </dependency>
         <!--springboot热部署，开发阶段使用，即使使用了springBoot管理框架，也需要添加该热部署插件-->
         <!--<dependency>
             <groupId>org.springframework.boot</groupId>

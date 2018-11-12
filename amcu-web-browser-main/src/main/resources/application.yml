@@ -109,6 +109,10 @@ sys:
         app-id: 8165dhl45kmsty
         app-secret: 7073QAL7mEDObeE1
         provider-id: linkedin
+      coding:
+        app-id: c54ec0584f97ed7ae716fab1b5d4d542
+        app-secret: 2418c765f53bab7b75b7a268900b9932c256b9d1
+        provider-id: coding
     code:
       email:
         url: /test/codeValidate

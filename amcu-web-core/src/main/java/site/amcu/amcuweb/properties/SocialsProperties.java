@@ -15,6 +15,8 @@ public class SocialsProperties {
 
     private LinkedInProperties linkedin = new LinkedInProperties();
 
+    private CodingProperties coding = new CodingProperties();
+
     /** 本系统使用第三方登录共用的回调地址 */
     private String filterProcessesUrl = "/auth";
 
@@ -56,5 +58,13 @@ public class SocialsProperties {
 
     public void setLinkedin(LinkedInProperties linkedin) {
         this.linkedin = linkedin;
+    }
+
+    public CodingProperties getCoding() {
+        return coding;
+    }
+
+    public void setCoding(CodingProperties coding) {
+        this.coding = coding;
     }
 }
