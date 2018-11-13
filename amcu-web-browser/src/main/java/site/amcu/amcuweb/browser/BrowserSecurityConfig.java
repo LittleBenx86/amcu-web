@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.session.InvalidSessionStrategy;
@@ -58,6 +59,9 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
 
     @Resource
     private InvalidSessionStrategy invalidSessionStrategy;
+
+    @Autowired
+    private LogoutSuccessHandler logoutSuccessHandler;
 
     /**
      * 开启注解权限访问,需要配置该Bean
@@ -127,6 +131,11 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
                             securityProperties.getBrowser().getSignUpUrl(),
                             securityProperties.getBrowser().getSession().getSessionInvalidUrl()
                     ).permitAll()
+                    .and()
+                .logout()
+                    .logoutUrl(SecurityConstants.DEFAULT_USER_LOGOUT_URL)
+                    .logoutSuccessHandler(logoutSuccessHandler)
+                    .deleteCookies("JSESSIONID")
                     .and()
                 .csrf().disable();
     }

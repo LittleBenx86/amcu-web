@@ -30,6 +30,9 @@ public class BrowserProperties {
     /** session管理的核心配置 */
     private SessionProperties session = new SessionProperties();
 
+    /** 配置浏览器端用户退出成功后的重定向url */
+    private String signOutUrl;
+
     public ResponseType getResponseType() {
         return responseType;
     }
@@ -78,4 +81,11 @@ public class BrowserProperties {
         this.session = session;
     }
 
+    public String getSignOutUrl() {
+        return signOutUrl;
+    }
+
+    public void setSignOutUrl(String signOutUrl) {
+        this.signOutUrl = signOutUrl;
+    }
 }

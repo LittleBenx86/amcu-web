@@ -26,10 +26,36 @@
     </form>
     <button class="linkedin-btn" id="li-unbinding-btn">解绑linkedin</button>
     <hr>
+    <form action="/qqLogin/coding" method="post">
+        <button class="coding-btn" id="coding-binding-btn" type="submit">绑定linkedin</button>
+    </form>
+    <button class="coding-btn" id="coding-unbinding-btn">解绑linkedin</button>
+    <hr>
 
     <script type="text/javascript" src="js/jquery/jquery-3.3.1.min.js"></script>
     <script type="text/javascript">
 
+        function unbinding(connectedUrl) {
+            $.ajax({
+                type : "DELETE",
+                url : connectedUrl
+            });
+        }
+
+        $(function () {
+            $("btn#wx-unbinding-btn.weixin-btn").bind('click', function () {
+                unbinding("/connect/weixin");
+            });
+            $("btn#git-unbinding-btn.github-btn").bind('click', function() {
+                unbinding("/connect/github");
+            });
+            $("btn#li-unbinding-btn.linkedin-btn").bind('click', function() {
+                unbinding("/connect/linkedin");
+            });
+            $("btn#coding-unbinding-btn.coding-btn").bind('click', function() {
+                unbinding("/connect/coding");
+            });
+        });
     </script>
 </body>
 </html>

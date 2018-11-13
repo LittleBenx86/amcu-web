@@ -61,7 +61,7 @@ security:
 
 #mybatis-plus配置
 mybatis-plus:
-  #mapper xml文件的地址
+  #mapper xml文件的地址(聚合项目的写法)
   mapper-locations: classpath*:/mapper/*Mapper.xml
   #type-alias文件的地址
   type-aliases-package: site.amcu.amcuweb.entity
@@ -90,6 +90,7 @@ sys:
     browser:
       response-type: JSON
       login-page: /login.html
+      sign-out-url: /signout-success.html
     #第三方登录配置
     social:
       filter-processes-url: /qqLogin

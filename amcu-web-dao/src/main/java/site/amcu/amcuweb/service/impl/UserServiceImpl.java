@@ -17,7 +17,7 @@ import site.amcu.amcuweb.support.SignInTypeSupport;
 import javax.annotation.Resource;
 
 /**
- * @Description:
+ * @Description:    用户数据服务层接口实现
  * @Author: Ben-Zheng
  * @Date: 2018/11/05 10:48
  */

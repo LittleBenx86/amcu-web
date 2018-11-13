@@ -57,4 +57,10 @@ public interface SecurityConstants {
 
     /** session失效配置链接 */
     public static final String DEFAULT_SESSION_INVALID_URL        = "/session/invalid";
+
+    /** 自定义默认的用户退出链接 */
+    public static final String DEFAULT_USER_LOGOUT_URL            = "/signout";
+
+    /** 自定义默认退出成功后重定向的url(页面) */
+    public static final String DEFAULT_LOGOUT_SUCCESS_REDIRECT_URL = "/signout-success.html";
 }

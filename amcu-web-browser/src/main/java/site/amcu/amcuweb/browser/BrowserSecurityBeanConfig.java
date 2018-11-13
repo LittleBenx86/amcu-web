@@ -5,8 +5,10 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.context.SecurityContextHolderStrategy;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.session.InvalidSessionStrategy;
 import org.springframework.security.web.session.SessionInformationExpiredStrategy;
+import site.amcu.amcuweb.browser.logout.BrowserLogoutSuccessHandler;
 import site.amcu.amcuweb.browser.session.BrowserExpiredSessionStrategy;
 import site.amcu.amcuweb.browser.session.BrowserInvalidSessionStrategy;
 import site.amcu.amcuweb.properties.SecurityProperties;
@@ -36,5 +38,12 @@ public class BrowserSecurityBeanConfig {
         return new BrowserExpiredSessionStrategy(securityProperties.getBrowser().getSession().getSessionInvalidUrl());
     }
 
+    /** 配置logout处理的Bean */
+
+    @Bean
+    @ConditionalOnMissingBean(LogoutSuccessHandler.class)
+    public LogoutSuccessHandler logoutSuccessHandler() {
+        return new BrowserLogoutSuccessHandler(securityProperties.getBrowser().getSignOutUrl());
+    }
 
 }

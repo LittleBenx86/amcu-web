@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiModelProperty;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
+import site.amcu.amcuweb.support.UserAccountStatusSupport;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -188,4 +189,32 @@ public class User implements UserDetails, Serializable {
                 ", signupDate=" + signupDate +
                 '}';
     }
+
+    /** 账号状态辅助 */
+    public boolean isActive() {
+        return 0 != this.status % 2 ;
+    }
+
+    public boolean isPasswordNull() {
+        return null == this.password;
+    }
+
+    public boolean isEmailNull() {
+        return null == this.email;
+    }
+
+    public boolean isMobileNull() {
+        return null == this.mobile;
+    }
+
+    public boolean isAmcuer() {
+        return this.status >= UserAccountStatusSupport.ACCOUNT_USER_IS_AMCUER;
+    }
+
+    public boolean isScauer() {
+        return this.status >= UserAccountStatusSupport.ACCOUNT_USER_IS_SCAUER
+                && this.status != UserAccountStatusSupport.ACCOUNT_USER_IS_AMCUER
+                && this.status != UserAccountStatusSupport.ACCOUNT_USER_IS_AMCUER + UserAccountStatusSupport.ACCOUNT_ACTIVE;
+    }
+
 }

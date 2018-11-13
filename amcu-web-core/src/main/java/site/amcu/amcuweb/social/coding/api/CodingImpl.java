@@ -2,7 +2,6 @@ package site.amcu.amcuweb.social.coding.api;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +11,8 @@ import org.springframework.social.oauth2.TokenStrategy;
 import java.util.Map;
 
 /**
- * @Description:
+ * @Description:    最终获取coding的用户信息
+ *                  coding用户没有openid的获取机制
  * @Author: Ben-Zheng
  * @Date: 2018/11/11 18:28
  */
