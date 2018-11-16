@@ -1,0 +1,146 @@
+/**
+    author: Ben Zheng
+ */
+@charset "UTF-8";
+
+section.container {
+    min-height: calc(100vh - 132px);
+}
+
+/*************** 左侧sidebar样式 *******************/
+
+.left-sidebar .info-content #user-info {
+    width: auto;
+    height: 300px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#user-info img.user-avatar {
+    width: 80px;
+    height: 80px;
+}
+
+#user-info span.user-name {
+    display: block;
+    max-width: 120px;
+    height: 26px;
+    text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+#user-info span.user-integration {
+    display: block;
+    max-width: 200px;
+    height: 26px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+#user-info span.user-integration span#integrations {
+    margin-left: 20px;
+    color: red;
+}
+
+#user-info div.for-btn {
+    margin-top: 30px;
+}
+
+#user-info div.for-btn .btn {
+    margin-left: 10px;
+}
+
+/*************** 左侧导航栏 *******************/
+
+.sel-tab-bable .box-header,
+.sel-tab-bable ul li {
+    border-bottom: 1px solid #eee;
+}
+
+.sel-tab-bable .nav-pills > li.active > a {
+    font-weight: 600;
+    background: #3c8dbc;
+    color: white;
+}
+
+/*************** 协会资讯 *******************/
+
+.sys-article .amcu-info-box .box {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.sys-article .amcu-info-box .box-body {
+    padding: 0 10px;
+}
+
+
+ul.amcu-info-content {
+    margin-top: 0;
+    padding: 0;
+    border-top: none;
+    list-style: none;
+}
+
+ul.amcu-info-content li.content-li {
+    margin-top: 0;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+ul.amcu-info-content li .title-wrap ul {
+    font-size: 12px !important;
+    line-height: 36px;
+}
+
+ul.amcu-info-content li .title-wrap ul li a img {
+    width: 36px;
+    height: 36px;
+}
+
+.admin-name,
+.deploy,
+.time {
+    margin-left: 8px;
+}
+
+/*************** 网站公告 *******************/
+
+.sys-article .notice-box .box {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.sys-article .notice-box .box-body {
+    padding: 0 10px;
+}
+
+ul.notice-content {
+    margin-top: 0;
+    padding: 0;
+    border-top: none;
+    list-style: none;
+}
+
+ul.notice-content li.content-li {
+    margin-top: 0;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+ul.notice-content li .title-wrap ul {
+    font-size: 12px !important;
+    line-height: 36px;
+}
+
+ul.notice-content li .title-wrap ul li a img {
+    width: 36px;
+    height: 36px;
+}
+
+
+

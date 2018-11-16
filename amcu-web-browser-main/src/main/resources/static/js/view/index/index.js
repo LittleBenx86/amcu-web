@@ -7,10 +7,9 @@ $(function () {
 
     bindNProgress();
 
-    /******** 侧边栏滚动 ********/
-    $(".right-sidebar").theiaStickySidebar({
-        additionalMarginTop: 0
-    });
+    goTop();
+
+    stickySidebar(".right-sidebar", 0);
 
 });
 

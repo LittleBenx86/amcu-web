@@ -3,7 +3,9 @@
  */
 @charset "utf-8";
 
-/***************首页样式*******************/
+/*************** 首页样式 *******************/
+
+/*************** 轮播图 *******************/
 
 .slider-content .carousel-inner .item a {
     display: block;
@@ -71,13 +73,11 @@
     color: #fff;
 }
 
+/*************** 用户展示样式 *******************/
+
 .info-content #user-info {
     width: auto;
     height: 300px;
-}
-
-
-#user-info {
     text-align: center;
     vertical-align: middle;
 }
@@ -254,4 +254,12 @@ div.tags {
     padding-left: 8px;
 }
 
+a.more {
+    color: #4a4a4a;
+}
+
+a.more:hover {
+    background: none !important;
+    color: #72afd2;
+}
 

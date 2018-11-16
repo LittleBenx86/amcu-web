@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="css/tools/nprogress.css">
     <!-- index -->
     <link rel="stylesheet" href="css/view/nav-common.css">
+    <link rel="stylesheet" href="css/view/sys-info.css">
 
     <!--[if gte IE 9]>
         <script type="text/javascript" src="js/jquery/jquery-1.11.1.min.js"></script>
@@ -34,55 +35,773 @@
 <body>
 
     <header>
-    <nav class="navbar navbar-default" id="navbar" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <a href="index.html" class="navbar-brand logo-brand">
-                    <img class="amcu-logo" id="logo" src="img/logo/logo.png" alt="协会logo">
-                </a>
-                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-menu">
-                    <i class="fa fa-bars" aria-hidden="true"></i>
-                </button>
+        <nav class="navbar navbar-default" id="navbar" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <a href="index.html" class="navbar-brand logo-brand">
+                        <img class="amcu-logo" id="logo" src="img/logo/logo.png" alt="协会logo">
+                    </a>
+                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-menu">
+                        <i class="fa fa-bars" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse" id="navbar-menu">
+                    <ul class="nav navbar-nav navbar-right head-nav">
+                        <li>
+                            <a data-cont="AMCU网站" title="AMCU网站" href="index.html">首页</a>
+                        </li>
+                        <li>
+                            <a data-cont="协会资讯" title="协会资讯" href="info.html" style="color: #0074E8;">协会资讯</a>
+                        </li>
+                        <li>
+                            <a data-cont="博客" title="博客" href="##">博客</a>
+                        </li>
+                        <li class="dropdown">
+                            <a data-cont="合作企业" title="合作企业" class="dropdown-toggle" data-toggle="dropdown" href="#">合作企业<b class="caret"></b></a>
+                            <ul class="dropdown-menu dropdown-menu-left">
+                                <li><a href="#">广州创龙</a></li>
+                                <li><a href="#">广州英码</a></li>
+                                <li><a href="#">广州邦普</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a data-cont="在线工具" title="在线工具" href="##">在线工具</a>
+                        </li>
+                        <li>
+                            <a data-cont="用户中心" title="用户中心" href="##">用户中心</a>
+                        </li>
+                        <li>
+                            <form class="navbar-form navbar-right" role="search">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="search" />
+                                </div>
+                                <button type="button" class="btn btn-primary">搜索</button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="collapse navbar-collapse" id="navbar-menu">
-                <ul class="nav navbar-nav navbar-right head-nav">
-                    <li>
-                        <a data-cont="AMCU网站" title="AMCU网站" href="index.html">首页</a>
-                    </li>
-                    <li>
-                        <a data-cont="协会资讯" title="协会资讯" href="info.html" style="color: #0074E8;">协会资讯</a>
-                    </li>
-                    <li>
-                        <a data-cont="博客" title="博客" href="##">博客</a>
-                    </li>
-                    <li class="dropdown">
-                        <a data-cont="合作企业" title="合作企业" class="dropdown-toggle" data-toggle="dropdown" href="#">合作企业<b class="caret"></b></a>
-                        <ul class="dropdown-menu dropdown-menu-left">
-                            <li><a href="#">广州创龙</a></li>
-                            <li><a href="#">广州英码</a></li>
-                            <li><a href="#">广州邦普</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a data-cont="在线工具" title="在线工具" href="##">在线工具</a>
-                    </li>
-                    <li>
-                        <a data-cont="用户中心" title="用户中心" href="##">用户中心</a>
-                    </li>
-                    <li>
-                        <form class="navbar-form navbar-right" role="search">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="search" />
+        </nav>
+    </header>
+
+    <section class="container">
+        <div class="row row-grid">
+            <div class="left-sidebar col-md-3 col-xs-12">
+                <div class="info-content">
+                    <div class="panel panel-default" id="user-info">
+                        <div class="panel-heading">
+                            用户信息
+                        </div>
+                        <div class="panel-body">
+                            <img class="user-avatar center-block img-circle img-responsive" src="img/avatar/5_1.png">
+                            <span class="user-name">测试人员8888888888888888888</span>
+                            <span class="user-integration">声望:<span id="integrations">6666666</span></span>
+                            <span class="user-auth">
+                                <span class="label label-primary">网站成员</span>
+                                <span class="label label-danger">AMCU成员</span>
+                            </span>
+                            <div class="for-btn">
+                                <button class="btn btn-success"><span class="glyphicon glyphicon-edit"></span>写博客</button>
+                                <button class="btn btn-danger"><span class="glyphicon glyphicon-log-out"></span>退出登录</button>
                             </div>
-                            <button type="button" class="btn btn-primary">搜索</button>
-                        </form>
-                    </li>
-                </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="sel-tab-bable">
+                    <div class="box box-primary">
+                        <div class="box-header">
+                            <h3 class="box-title">导航</h3>
+                        </div>
+                        <ul class="nav nav-pills nav-stacked" id="info-tabs">
+                            <li class="active"><a href="#sys-amcu-info" data-toggle="tab">协会资讯</a></li>
+                            <li><a href="#sys-notice" data-toggle="tab">网站公告</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="sys-article tab-content col-md-9 col-xs-12">
+                <div class="amcu-info-box tab-pane active" id="sys-amcu-info">
+                    <div class="box box-solid">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">协会资讯</h3>
+                        </div>
+                        <div class="box-body">
+                            <ul class="amcu-info-content">
+                                <li class="content-li">
+                                    <div class="row">
+                                        <div class="col-md-12 title-wrap">
+                                            <p class="nowrap bold link-size-16">
+                                                <a class="link-default" href="javascript:void(0);">协会资讯1</a>
+                                            </p>
+                                            <ul class="list-inline">
+                                                <li>
+                                                    <a href="javascript:void(0);">
+                                                        <img class="img-circle" src="img/avatar/5_1.png" alt="">
+                                                        <span class="admin-name">测试人员123</span>
+                                                        <span class="deploy">
+                                                            发布时间:<span class="time">2018-11-15</span>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-star-empty"></i>
+                                                        <span class="collects">100</span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-heart-empty"></i>
+                                                        <span class="likes">100</span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-eye-open"></i>
+                                                        <span class="views">100</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="content-li">
+                                    <div class="row">
+                                        <div class="col-md-12 title-wrap">
+                                            <p class="nowrap bold link-size-16">
+                                                <a class="link-default" href="javascript:void(0);">协会资讯2</a>
+                                            </p>
+                                            <ul class="list-inline">
+                                                <li>
+                                                    <a href="javascript:void(0);">
+                                                        <img class="img-circle" src="img/avatar/5_1.png" alt="">
+                                                        <span class="admin-name">测试人员123</span>
+                                                        <span class="deploy">
+                                                            发布时间:<span class="time">2018-11-15</span>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-star-empty"></i>
+                                                        <span class="collects">100</span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-heart-empty"></i>
+                                                        <span class="likes">100</span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-eye-open"></i>
+                                                        <span class="views">100</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="content-li">
+                                    <div class="row">
+                                        <div class="col-md-12 title-wrap">
+                                            <p class="nowrap bold link-size-16">
+                                                <a class="link-default" href="javascript:void(0);">协会资讯3</a>
+                                            </p>
+                                            <ul class="list-inline">
+                                                <li>
+                                                    <a href="javascript:void(0);">
+                                                        <img class="img-circle" src="img/avatar/5_1.png" alt="">
+                                                        <span class="admin-name">测试人员123</span>
+                                                        <span class="deploy">
+                                                            发布时间:<span class="time">2018-11-15</span>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-star-empty"></i>
+                                                        <span class="collects">100</span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-heart-empty"></i>
+                                                        <span class="likes">100</span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-eye-open"></i>
+                                                        <span class="views">100</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="content-li">
+                                    <div class="row">
+                                        <div class="col-md-12 title-wrap">
+                                            <p class="nowrap bold link-size-16">
+                                                <a class="link-default" href="javascript:void(0);">协会资讯4</a>
+                                            </p>
+                                            <ul class="list-inline">
+                                                <li>
+                                                    <a href="javascript:void(0);">
+                                                        <img class="img-circle" src="img/avatar/5_1.png" alt="">
+                                                        <span class="admin-name">测试人员123</span>
+                                                        <span class="deploy">
+                                                            发布时间:<span class="time">2018-11-15</span>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-star-empty"></i>
+                                                        <span class="collects">100</span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-heart-empty"></i>
+                                                        <span class="likes">100</span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-eye-open"></i>
+                                                        <span class="views">100</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="content-li">
+                                    <div class="row">
+                                        <div class="col-md-12 title-wrap">
+                                            <p class="nowrap bold link-size-16">
+                                                <a class="link-default" href="javascript:void(0);">协会资讯5</a>
+                                            </p>
+                                            <ul class="list-inline">
+                                                <li>
+                                                    <a href="javascript:void(0);">
+                                                        <img class="img-circle" src="img/avatar/5_1.png" alt="">
+                                                        <span class="admin-name">测试人员123</span>
+                                                        <span class="deploy">
+                                                            发布时间:<span class="time">2018-11-15</span>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-star-empty"></i>
+                                                        <span class="collects">100</span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-heart-empty"></i>
+                                                        <span class="likes">100</span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-eye-open"></i>
+                                                        <span class="views">100</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="content-li">
+                                    <div class="row">
+                                        <div class="col-md-12 title-wrap">
+                                            <p class="nowrap bold link-size-16">
+                                                <a class="link-default" href="javascript:void(0);">协会资讯1</a>
+                                            </p>
+                                            <ul class="list-inline">
+                                                <li>
+                                                    <a href="javascript:void(0);">
+                                                        <img class="img-circle" src="img/avatar/5_1.png" alt="">
+                                                        <span class="admin-name">测试人员123</span>
+                                                        <span class="deploy">
+                                                            发布时间:<span class="time">2018-11-15</span>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-star-empty"></i>
+                                                        <span class="collects">100</span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-heart-empty"></i>
+                                                        <span class="likes">100</span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-eye-open"></i>
+                                                        <span class="views">100</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="content-li">
+                                    <div class="row">
+                                        <div class="col-md-12 title-wrap">
+                                            <p class="nowrap bold link-size-16">
+                                                <a class="link-default" href="javascript:void(0);">协会资讯2</a>
+                                            </p>
+                                            <ul class="list-inline">
+                                                <li>
+                                                    <a href="javascript:void(0);">
+                                                        <img class="img-circle" src="img/avatar/5_1.png" alt="">
+                                                        <span class="admin-name">测试人员123</span>
+                                                        <span class="deploy">
+                                                            发布时间:<span class="time">2018-11-15</span>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-star-empty"></i>
+                                                        <span class="collects">100</span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-heart-empty"></i>
+                                                        <span class="likes">100</span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-eye-open"></i>
+                                                        <span class="views">100</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="content-li">
+                                    <div class="row">
+                                        <div class="col-md-12 title-wrap">
+                                            <p class="nowrap bold link-size-16">
+                                                <a class="link-default" href="javascript:void(0);">协会资讯3</a>
+                                            </p>
+                                            <ul class="list-inline">
+                                                <li>
+                                                    <a href="javascript:void(0);">
+                                                        <img class="img-circle" src="img/avatar/5_1.png" alt="">
+                                                        <span class="admin-name">测试人员123</span>
+                                                        <span class="deploy">
+                                                            发布时间:<span class="time">2018-11-15</span>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-star-empty"></i>
+                                                        <span class="collects">100</span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-heart-empty"></i>
+                                                        <span class="likes">100</span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-eye-open"></i>
+                                                        <span class="views">100</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="content-li">
+                                    <div class="row">
+                                        <div class="col-md-12 title-wrap">
+                                            <p class="nowrap bold link-size-16">
+                                                <a class="link-default" href="javascript:void(0);">协会资讯4</a>
+                                            </p>
+                                            <ul class="list-inline">
+                                                <li>
+                                                    <a href="javascript:void(0);">
+                                                        <img class="img-circle" src="img/avatar/5_1.png" alt="">
+                                                        <span class="admin-name">测试人员123</span>
+                                                        <span class="deploy">
+                                                            发布时间:<span class="time">2018-11-15</span>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-star-empty"></i>
+                                                        <span class="collects">100</span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-heart-empty"></i>
+                                                        <span class="likes">100</span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-eye-open"></i>
+                                                        <span class="views">100</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="content-li">
+                                    <div class="row">
+                                        <div class="col-md-12 title-wrap">
+                                            <p class="nowrap bold link-size-16">
+                                                <a class="link-default" href="javascript:void(0);">协会资讯5</a>
+                                            </p>
+                                            <ul class="list-inline">
+                                                <li>
+                                                    <a href="javascript:void(0);">
+                                                        <img class="img-circle" src="img/avatar/5_1.png" alt="">
+                                                        <span class="admin-name">测试人员123</span>
+                                                        <span class="deploy">
+                                                            发布时间:<span class="time">2018-11-15</span>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-star-empty"></i>
+                                                        <span class="collects">100</span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-heart-empty"></i>
+                                                        <span class="likes">100</span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-eye-open"></i>
+                                                        <span class="views">100</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="notice-box tab-pane" id="sys-notice">
+                    <div class="box box-solid">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">网站公告</h3>
+                        </div>
+                        <div class="box-body">
+                            <ul class="notice-content">
+                                <li class="content-li">
+                                    <div class="row">
+                                        <div class="col-md-12 title-wrap">
+                                            <p class="nowrap bold link-size-16">
+                                                <a class="link-default" href="javascript:void(0);">网站公告1</a>
+                                            </p>
+                                            <ul class="list-inline">
+                                                <li>
+                                                    <a href="javascript:void(0);">
+                                                        <img class="img-circle" src="img/avatar/5_1.png" alt="">
+                                                        <span class="admin-name">测试人员123</span>
+                                                        <span class="deploy">
+                                                            发布时间:<span class="time">2018-11-15</span>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-star-empty"></i>
+                                                        <span class="collects">100</span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-heart-empty"></i>
+                                                        <span class="likes">100</span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-eye-open"></i>
+                                                        <span class="views">100</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="content-li">
+                                    <div class="row">
+                                        <div class="col-md-12 title-wrap">
+                                            <p class="nowrap bold link-size-16">
+                                                <a class="link-default" href="javascript:void(0);">网站公告1</a>
+                                            </p>
+                                            <ul class="list-inline">
+                                                <li>
+                                                    <a href="javascript:void(0);">
+                                                        <img class="img-circle" src="img/avatar/5_1.png" alt="">
+                                                        <span class="admin-name">测试人员123</span>
+                                                        <span class="deploy">
+                                                            发布时间:<span class="time">2018-11-15</span>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-star-empty"></i>
+                                                        <span class="collects">100</span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-heart-empty"></i>
+                                                        <span class="likes">100</span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-eye-open"></i>
+                                                        <span class="views">100</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="content-li">
+                                    <div class="row">
+                                        <div class="col-md-12 title-wrap">
+                                            <p class="nowrap bold link-size-16">
+                                                <a class="link-default" href="javascript:void(0);">网站公告1</a>
+                                            </p>
+                                            <ul class="list-inline">
+                                                <li>
+                                                    <a href="javascript:void(0);">
+                                                        <img class="img-circle" src="img/avatar/5_1.png" alt="">
+                                                        <span class="admin-name">测试人员123</span>
+                                                        <span class="deploy">
+                                                            发布时间:<span class="time">2018-11-15</span>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-star-empty"></i>
+                                                        <span class="collects">100</span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-heart-empty"></i>
+                                                        <span class="likes">100</span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-eye-open"></i>
+                                                        <span class="views">100</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="content-li">
+                                    <div class="row">
+                                        <div class="col-md-12 title-wrap">
+                                            <p class="nowrap bold link-size-16">
+                                                <a class="link-default" href="javascript:void(0);">网站公告1</a>
+                                            </p>
+                                            <ul class="list-inline">
+                                                <li>
+                                                    <a href="javascript:void(0);">
+                                                        <img class="img-circle" src="img/avatar/5_1.png" alt="">
+                                                        <span class="admin-name">测试人员123</span>
+                                                        <span class="deploy">
+                                                            发布时间:<span class="time">2018-11-15</span>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-star-empty"></i>
+                                                        <span class="collects">100</span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-heart-empty"></i>
+                                                        <span class="likes">100</span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-eye-open"></i>
+                                                        <span class="views">100</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="content-li">
+                                    <div class="row">
+                                        <div class="col-md-12 title-wrap">
+                                            <p class="nowrap bold link-size-16">
+                                                <a class="link-default" href="javascript:void(0);">网站公告1</a>
+                                            </p>
+                                            <ul class="list-inline">
+                                                <li>
+                                                    <a href="javascript:void(0);">
+                                                        <img class="img-circle" src="img/avatar/5_1.png" alt="">
+                                                        <span class="admin-name">测试人员123</span>
+                                                        <span class="deploy">
+                                                            发布时间:<span class="time">2018-11-15</span>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-star-empty"></i>
+                                                        <span class="collects">100</span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-heart-empty"></i>
+                                                        <span class="likes">100</span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-eye-open"></i>
+                                                        <span class="views">100</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="content-li">
+                                    <div class="row">
+                                        <div class="col-md-12 title-wrap">
+                                            <p class="nowrap bold link-size-16">
+                                                <a class="link-default" href="javascript:void(0);">网站公告1</a>
+                                            </p>
+                                            <ul class="list-inline">
+                                                <li>
+                                                    <a href="javascript:void(0);">
+                                                        <img class="img-circle" src="img/avatar/5_1.png" alt="">
+                                                        <span class="admin-name">测试人员123</span>
+                                                        <span class="deploy">
+                                                            发布时间:<span class="time">2018-11-15</span>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-star-empty"></i>
+                                                        <span class="collects">100</span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-heart-empty"></i>
+                                                        <span class="likes">100</span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-eye-open"></i>
+                                                        <span class="views">100</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="content-li">
+                                    <div class="row">
+                                        <div class="col-md-12 title-wrap">
+                                            <p class="nowrap bold link-size-16">
+                                                <a class="link-default" href="javascript:void(0);">网站公告1</a>
+                                            </p>
+                                            <ul class="list-inline">
+                                                <li>
+                                                    <a href="javascript:void(0);">
+                                                        <img class="img-circle" src="img/avatar/5_1.png" alt="">
+                                                        <span class="admin-name">测试人员123</span>
+                                                        <span class="deploy">
+                                                            发布时间:<span class="time">2018-11-15</span>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-star-empty"></i>
+                                                        <span class="collects">100</span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-heart-empty"></i>
+                                                        <span class="likes">100</span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-eye-open"></i>
+                                                        <span class="views">100</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </nav>
-</header>
+    </section>
 
+    <footer class="main-footer">
+        <div class="container footer-container">
+            <strong>Copyright © 2018 </strong>
+            <a href="javascript:void(0);">AMCU</a>
+            <a class="text-black" href="javascript:void(0);">备案号(还未申请)</a>
+        </div>
+        <div id="gotop">
+            <a class="gotop"></a>
+        </div>
+    </footer>
 
     <!-- jquery -->
     <script type="text/javascript" src="js/jquery/jquery-3.3.1.min.js"></script>
@@ -99,5 +818,7 @@
     <script type="text/javascript" src="js/tools/nprogress.js"></script>
     <!-- decorate -->
     <script type="text/javascript" src="js/view/decorate.js"></script>
+    <!-- sys-info -->
+    <script type="text/javascript" src="js/view/sys-info.js"></script>
 </body>
 </html>

@@ -13,22 +13,49 @@ function bindNProgress() {
     window.onload = function(){
         NProgress.done();
     }
+
+    setTimeout(function() {
+        NProgress.done();
+    }, 1000);
 }
 
 /*************** gotop *******************/
 
-$("#gotop").hide();
+function goTop() {
+    $("#gotop").hide();
 
-$(window).scroll(function() {
-    if ($(window).scrollTop() > 100) {
-        $("#gotop").fadeIn()
-    } else {
-        $("#gotop").fadeOut()
-    }
-});
+    $(window).scroll(function() {
+        if ($(window).scrollTop() > 100) {
+            $("#gotop").fadeIn()
+        } else {
+            $("#gotop").fadeOut()
+        }
+    });
 
-$("#gotop").click(function() {
-    $('html,body').animate({
-        'scrollTop': 0
-    }, 500)
-});
+    $("#gotop").click(function() {
+        $('html,body').animate({
+            'scrollTop': 0
+        }, 500)
+    });
+}
+
+/**
+ * 获取window.locate定点跳转链接url中的参数function
+ * @param name	url中key
+ * @returns
+ */
+function getUrlParam(name) {
+    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if(r!=null)
+        return  unescape(r[2]);
+    return null;
+}
+
+/*************** 侧边栏浮动 *******************/
+
+function stickySidebar(tarSelector, mtop) {
+    $(tarSelector).theiaStickySidebar({
+        additionalMarginTop: mtop
+    });
+}
