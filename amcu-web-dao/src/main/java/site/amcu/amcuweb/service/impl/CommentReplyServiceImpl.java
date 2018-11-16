@@ -14,5 +14,5 @@ import site.amcu.amcuweb.service.CommentReplyService;
 @Service
 @Transactional(propagation = Propagation.NESTED, isolation = Isolation.DEFAULT, readOnly = false)
 public class CommentReplyServiceImpl implements CommentReplyService {
-    
+
 }

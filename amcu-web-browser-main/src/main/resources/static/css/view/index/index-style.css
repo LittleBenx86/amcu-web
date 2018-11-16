@@ -1,0 +1,257 @@
+/**
+    author: Ben Zheng
+ */
+@charset "utf-8";
+
+/***************首页样式*******************/
+
+.slider-content .carousel-inner .item a {
+    display: block;
+    text-align: center;
+}
+
+.slider-content .carousel-inner .item a img {
+    height: 300px;
+    margin: 0 auto;
+    border-radius: 4px;
+}
+
+.carousel-control.left,
+.carousel-control.right {
+    background: none;
+}
+
+.carousel-control .glyphicon-chevron-left, .carousel-control .icon-prev {
+    left: 40%;
+    margin-left: -10px;
+}
+
+.carousel-control .glyphicon-chevron-right, .carousel-control .icon-next {
+    right: 40%;
+    margin-right: -10px;
+}
+
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
+.carousel-indicators li {
+    display: inline-block;
+    position: relative;
+    -ms-flex: 0 1 auto;
+    flex: 0 1 auto;
+    width: 40px;
+    height: 4px;
+    margin: 0 3px 0 3px;
+    text-indent: -999px;
+    background-color: rgba(255,255,255,.5);
+    border: 0;
+    border-radius: 0;
+}
+
+.carousel-indicators .active {
+    width: 40px;
+    height: 4px;
+    margin-right: 3px;
+    margin-left: 3px;
+    background-color: #fff;
+}
+
+.carousel-control {
+    width: 40px;
+    height: 80px;
+    top: 50%;
+    margin-top: -50px;
+}
+
+.carousel-control:hover {
+    background-color: #000;
+    opacity: .3;
+    filter: alpha(opacity=30);
+    color: #fff;
+}
+
+.info-content #user-info {
+    width: auto;
+    height: 300px;
+}
+
+
+#user-info {
+    text-align: center;
+    vertical-align: middle;
+}
+
+#user-info img.user-avatar {
+    width: 80px;
+    height: 80px;
+}
+
+#user-info span.user-name {
+    display: block;
+    max-width: 120px;
+    height: 26px;
+    text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+#user-info span.user-integration {
+    display: block;
+    max-width: 200px;
+    height: 26px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+#user-info span.user-integration span#integrations {
+    margin-left: 20px;
+    color: red;
+}
+
+#user-info div.for-btn {
+    margin-top: 30px;
+}
+#user-info div.for-btn .btn {
+    margin-left: 10px;
+}
+
+/*************** 协会资讯 *******************/
+
+.sys-article .amcu-info-box .box {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.sys-article .amcu-info-box .box-body {
+    padding: 0 10px;
+}
+
+
+ul.amcu-info-content {
+    margin-top: 0;
+    padding: 0;
+    border-top: none;
+    list-style: none;
+}
+
+ul.amcu-info-content li.content-li {
+    margin-top: 0;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+ul.amcu-info-content li .title-wrap ul {
+    font-size: 12px !important;
+    line-height: 36px;
+}
+
+ul.amcu-info-content li .title-wrap ul li a img {
+    width: 36px;
+    height: 36px;
+}
+
+.admin-name,
+.deploy,
+.time {
+    margin-left: 8px;
+}
+
+/*************** 热门文章 *******************/
+
+.sys-article .hot-article-box .box {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.sys-article .hot-article-box .box-body {
+    padding: 0 10px;
+}
+
+
+ul.hot-article-content {
+    margin-top: 0;
+    padding: 0;
+    border-top: none;
+    list-style: none;
+}
+
+ul.hot-article-content li.content-li {
+    margin-top: 0;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+ul.hot-article-content li .title-wrap ul {
+    font-size: 12px !important;
+    line-height: 36px;
+}
+
+ul.hot-article-content li .title-wrap ul li a img {
+    width: 36px;
+    height: 36px;
+}
+
+.usr-name {
+    margin-left: 8px;
+}
+
+/*************** 最新文章 *******************/
+
+.sys-article .new-article-box .box {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.sys-article .new-article-box .box-body {
+    padding: 0 10px;
+}
+
+
+ul.new-article-content {
+    margin-top: 0;
+    padding: 0;
+    border-top: none;
+    list-style: none;
+}
+
+ul.new-article-content li.content-li {
+    margin-top: 0;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+ul.new-article-content li .title-wrap ul {
+    font-size: 12px !important;
+    line-height: 36px;
+}
+
+ul.new-article-content li .title-wrap ul li a img {
+    width: 36px;
+    height: 36px;
+}
+
+.title-font-set {
+    font-size: 14px;
+    color: #333333;
+    line-height: 26px;
+}
+
+.title-font-set:hover {
+    color: #b92c28;
+}
+
+img.group-img {
+    width: 180px;
+    height: 180px;
+}
+
+div.tags {
+    margin: 0 auto;
+    padding-left: 8px;
+}
+
+

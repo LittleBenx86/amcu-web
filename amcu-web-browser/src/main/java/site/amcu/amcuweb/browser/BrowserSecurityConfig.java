@@ -94,7 +94,7 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
      */
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/static/**", "/js/**", "/css/**", "/fonts/**");
+        web.ignoring().antMatchers("/static/**", "/js/**", "/css/**", "/fonts/**", "/img/**");
     }
 
     @Override

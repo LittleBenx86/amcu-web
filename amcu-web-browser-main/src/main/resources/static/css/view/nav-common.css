@@ -1,0 +1,318 @@
+/**
+    author: Ben Zheng
+ */
+@charset "utf-8";
+
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+button,
+input,
+fieldset,
+legend,
+input,
+textarea,
+p,
+blockquote,
+th,
+td,
+article,
+aside,
+details,
+figcaption,
+figure,
+#footer,
+#header,
+hgroup,
+menu,
+nav,
+section {
+    margin: 0;
+    padding: 0;
+}
+
+body,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+form,
+button,
+input,
+textarea,
+p,
+span,
+th,
+td,
+article,
+aside,
+nav,
+section,
+img,
+a {
+    outline: none;
+    transition: all 0.30s ease-in-out;
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+summary {
+    display: block;
+}
+
+html,
+body {
+    color: #444;
+    background-color: #f6f6f6;
+    overflow-x: hidden;
+}
+
+html::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+    background: #CCC;
+}
+
+html::-webkit-scrollbar-button {
+    display: none;
+}
+
+html::-webkit-scrollbar-track-piece {
+    display: none;
+}
+
+html::-webkit-scrollbar-thumb {
+    background: #999;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+    background: #3399CC;
+}
+
+a {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+li {
+    display: list-item;
+    list-style: none;
+    text-align: -webkit-match-parent;
+}
+
+li.active {
+    background: #FFF;
+    opacity: .9;
+    filter: alpha(opacity=90);
+}
+
+body,
+input,
+button,
+textarea,
+select {
+    font-family: "Microsoft YaHei", "微软雅黑", "Lantinghei SC", "Open Sans", Arial, "Hiragino Sans GB", "STHeiti", "WenQuanYi Micro Hei", SimSun, sans-serif;
+}
+
+@font-face {
+    font-family: 'TaurusNormal';
+    src: url('../fonts/TaurusNormal.woff') format('woff'), url('../fonts/TaurusNormal.ttf') format('truetype'), url('../fonts/TaurusNormal.svg') format('svg');
+}
+
+.nowrap {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.bold {
+    font-weight: bold
+}
+
+.link-size-16 {
+    font-size: 16px;
+}
+
+.link-default {
+    color: #3d3d3d;
+    max-width: 98%;
+    display: block;
+    line-height: 24px;
+    height: 24px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 16px;
+}
+
+.link-default:hover {
+    color: #ca0c16;
+}
+
+.link-default-sm {
+    color: #666;
+}
+
+.link-default-sm:hover {
+    color: #ca0c16;
+}
+
+.title-wrap {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+/*************** 导航栏公用样式 *******************/
+
+.navbar {
+    background-color: #fff;
+    width: 100%;
+    border: none;
+    border-radius: 0;
+    min-height: 60px;
+    margin-bottom: 20px;
+    padding: 0;
+    -moz-box-shadow: 0px 0px 2px rgba(0, 0, 0, .1);
+    -webkit-box-shadow: 0px 0px 2px rgba(0, 0, 0, .1);
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, .1);
+}
+
+a.navbar-brand.logo-brand {
+    padding: 0.85rem 0 0 1rem;
+}
+
+img#logo.amcu-logo {
+    width: 65px;
+    height: auto;
+}
+
+.navbar-default .head-nav>li>a:focus,
+.navbar-default .head-nav>li>a:hover {
+    color: #0074E8;
+    background-color: transparent;
+}
+
+.navbar-toggle {
+    color: #2299dd;
+}
+
+/*************** footer公用样式 *******************/
+
+.main-footer {
+    margin-left: 0;
+}
+
+.footer-container {
+    text-align: center;
+}
+
+/*************** bootstrap间距样式 *******************/
+.row.row-grid [class*="col-"] + [class*="col-"] {
+    margin-top: 15px;
+}
+
+@media (min-width: 768px) {
+    .row.row-grid [class*="col-sm-"] + [class*="col-sm-"] {
+        margin-top: 0;
+    }
+}
+
+@media (min-width: 992px) {
+    .row.row-grid [class*="col-md-"] + [class*="col-md-"] {
+        margin-top: 0;
+    }
+}
+
+@media (min-width: 1200px) {
+    .row.row-grid [class*="col-lg-"] + [class*="col-lg-"] {
+        margin-top: 0;
+    }
+}
+
+/*************** 行之间添加垂直间距 *******************/
+/*
+.row-grid + .row-grid {
+    margin-top: 15px;
+}
+*/
+
+/*************** 标签tags公用样式 *******************/
+.tags{}
+.tags a{opacity: .80;filter: alpha(opacity=80);color:#ffffff; display: inline-block;margin: 0 5px 5px 0;padding: 0 6px;line-height: 21px;border-radius: 2px;-moz-border-radius: 2px;-webkit-border-radius: 2px;width: 70px;text-align:center;overflow: hidden;height: 21px;}
+.tags a:nth-child(9n){background-color:#4a4a4a}
+.tags a:nth-child(9n+1){background-color:#428bca}
+.tags a:nth-child(9n+2){background-color:#5cb85c}
+.tags a:nth-child(9n+3){background-color:#d9534f}
+.tags a:nth-child(9n+4){background-color:#567e95}
+.tags a:nth-child(9n+5){background-color:#b433ff}
+.tags a:nth-child(9n+6){background-color:#00aba9}
+.tags a:nth-child(9n+7){background-color:#b37333}
+.tags a:nth-child(9n+8){background-color:#f60}
+
+/*************** gotop公用样式 *******************/
+
+.gotop {
+    cursor: pointer;
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    z-index: 99999;
+    display: block;
+    width: 50px;
+    height: 50px;
+    background: url(../../img/tools/backtop.png) no-repeat 0 0;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+}
+
+.gotop:hover {
+    background: url(../../img/tools/backtop.png) no-repeat 0 -52px;
+}
+
+
+
+
+
+
+
