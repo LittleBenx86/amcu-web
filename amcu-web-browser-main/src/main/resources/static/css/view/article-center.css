@@ -1,6 +1,3 @@
-/**
-    author: Ben Zheng
- */
 @charset "UTF-8";
 
 /*************** 左侧sidebar样式 *******************/
@@ -50,93 +47,77 @@
     margin-left: 10px;
 }
 
-/*************** 左侧导航栏 *******************/
+/*************** 右侧文章样式 *******************/
 
-.sel-tab-bable .box-header,
-.sel-tab-bable ul li {
-    border-bottom: 1px solid #eee;
+.tab-content .box.box-default {
+    border-top-color: white;
 }
 
-.sel-tab-bable .nav-pills > li.active > a {
-    font-weight: 600;
-    background: #3c8dbc;
-    color: white;
-}
-
-/*************** 协会资讯 *******************/
-
-.sys-article .amcu-info-box .box {
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-}
-
-.sys-article .amcu-info-box .box-body {
+.tab-content .box-body {
     padding: 0 10px;
 }
 
+/*************** 热门文章 *******************/
 
-ul.amcu-info-content {
+ul.hot-content {
     margin-top: 0;
     padding: 0;
     border-top: none;
     list-style: none;
 }
 
-ul.amcu-info-content li.content-li {
+ul.hot-content li.content-li {
     margin-top: 0;
     padding: 10px 0;
     border-bottom: 1px solid #eee;
 }
 
-ul.amcu-info-content li .title-wrap ul {
+ul.hot-content li .title-wrap ul {
     font-size: 12px !important;
     line-height: 36px;
 }
 
-ul.amcu-info-content li .title-wrap ul li a img {
+ul.hot-content li .title-wrap ul li a img {
     width: 36px;
     height: 36px;
 }
 
-.admin-name,
-.deploy,
-.time {
-    margin-left: 8px;
-}
+/*************** 最新文章 *******************/
 
-/*************** 网站公告 *******************/
-
-.sys-article .notice-box .box {
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-}
-
-.sys-article .notice-box .box-body {
-    padding: 0 10px;
-}
-
-ul.notice-content {
+ul.new-content {
     margin-top: 0;
     padding: 0;
     border-top: none;
     list-style: none;
 }
 
-ul.notice-content li.content-li {
+ul.new-content li.content-li {
     margin-top: 0;
     padding: 10px 0;
     border-bottom: 1px solid #eee;
 }
 
-ul.notice-content li .title-wrap ul {
+ul.new-content li .title-wrap ul {
     font-size: 12px !important;
     line-height: 36px;
 }
 
-ul.notice-content li .title-wrap ul li a img {
+ul.new-content li .title-wrap ul li a img {
     width: 36px;
     height: 36px;
 }
 
+.title-font-set {
+    font-size: 14px;
+    color: #333333;
+    line-height: 26px;
+}
 
+.title-font-set:hover {
+    color: #b92c28;
+}
 
+img.group-img {
+    width: 180px;
+    height: 180px;
+}

@@ -1,0 +1,106 @@
+/*
+ * bootstrap-tagsinput v0.8.0
+ *
+ */
+.bootstrap-tagsinput {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  display: inline-block;
+  padding: 4px 6px;
+  color: #555;
+  vertical-align: middle;
+  border-radius: 4px;
+  width: 100%;
+  line-height: 22px;
+  cursor: text;
+}
+
+.bootstrap-tagsinput input {
+  border: none;
+  box-shadow: none;
+  outline: none;
+  background-color: transparent;
+  padding: 0 6px;
+  margin: 0;
+  width: auto;
+  max-width: inherit;
+}
+
+.bootstrap-tagsinput.form-control input::-moz-placeholder {
+  color: #777;
+  opacity: 1;
+}
+
+.bootstrap-tagsinput.form-control input:-ms-input-placeholder {
+  color: #777;
+}
+
+.bootstrap-tagsinput.form-control input::-webkit-input-placeholder {
+  color: #777;
+}
+
+.bootstrap-tagsinput input:focus {
+  border: none;
+  box-shadow: none;
+}
+
+.bootstrap-tagsinput .badge {
+  margin-right: 2px;
+  color: white;
+  /*background-color:#4DA511;*/
+  padding:5px 8px;
+  border-radius:3px;
+  /*border:1px solid #41A863;*/
+}
+
+.bootstrap-tagsinput .badge:nth-child(6n) {
+  background-color: #7AF5D2;
+  border: 1px solid #B5EAC9;
+}
+
+.bootstrap-tagsinput .badge:nth-child(6n+1) {
+  background-color: #428bca;
+  border: 1px solid #93B7F3;
+}
+
+.bootstrap-tagsinput .badge:nth-child(6n+2) {
+  background-color: #D2220A;
+  border: 1px solid #F13D3D;
+}
+
+.bootstrap-tagsinput .badge:nth-child(6n+3) {
+  background-color: #F8BA25;
+  border: 1px solid #FFE793;
+}
+
+.bootstrap-tagsinput .badge:nth-child(6n+4) {
+  background-color: #b433ff;
+  border: 1px solid #DD00BB;
+}
+
+.bootstrap-tagsinput .badge:nth-child(6n+5) {
+  background-color: #4DA511;
+  border: 1px solid #41A863;
+}
+
+.bootstrap-tagsinput .badge [data-role="remove"] {
+  margin-left: 8px;
+  cursor: pointer;
+}
+
+.bootstrap-tagsinput .badge [data-role="remove"]:after {
+  content: "×";
+  padding: 0px 4px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius:50%;
+  font-size:13px
+}
+
+.bootstrap-tagsinput .badge [data-role="remove"]:hover:after {
+  background-color:rgba(0, 0, 0, 0.62);
+}
+
+.bootstrap-tagsinput .badge [data-role="remove"]:hover:active {
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}

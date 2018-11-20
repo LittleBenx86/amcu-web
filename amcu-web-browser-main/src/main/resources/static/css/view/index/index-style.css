@@ -13,10 +13,13 @@
 }
 
 .slider-content .carousel-inner .item a img {
+    display: block;
     height: 300px;
+    width: 100%;
     margin: 0 auto;
     border-radius: 4px;
 }
+
 
 .carousel-control.left,
 .carousel-control.right {

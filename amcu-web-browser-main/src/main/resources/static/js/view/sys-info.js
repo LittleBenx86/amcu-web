@@ -12,6 +12,8 @@ $(function() {
     $("#info-tabs a").click(function (e) {
         e.preventDefault();
         $(this).tab('show');
+        console.info(this.tagName.toString() == 'A');
+        console.info(this.attributes[0].value == '#sys-amcu-info');
     });
     
     showTarTabView(getUrlParam('type'));

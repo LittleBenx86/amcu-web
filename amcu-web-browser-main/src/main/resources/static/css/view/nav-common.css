@@ -100,7 +100,28 @@ body {
     color: #444;
     background-color: #f6f6f6;
     overflow-x: hidden;
+}
+
+html {
     overflow-y: scroll;
+}
+
+.content-wrapper {
+    background-color: #f6f6f6 !important;
+}
+
+:root {
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+:root body {
+    position: absolute;
+}
+
+body {
+    width: 100vw;
+    overflow: hidden;
 }
 
 html::-webkit-scrollbar {
@@ -156,7 +177,7 @@ select {
 
 @font-face {
     font-family: 'TaurusNormal';
-    src: url('../fonts/TaurusNormal.woff') format('woff'), url('../fonts/TaurusNormal.ttf') format('truetype'), url('../fonts/TaurusNormal.svg') format('svg');
+    src: url('../../fonts/TaurusNormal.woff') format('woff'), url('../../fonts/TaurusNormal.ttf') format('truetype'), url('../../fonts/TaurusNormal.svg') format('svg');
 }
 
 .nowrap {
@@ -203,6 +224,70 @@ select {
     text-overflow: ellipsis;
 }
 
+.bread-nav-w {
+    background-color: white;
+    border-left: 5px solid #3c8dbc;
+}
+
+.ul-nav-w {
+    background-color: white;
+}
+
+.ul-nav-border {
+    border-bottom: 1px solid #eee;
+}
+
+.form-search {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.margin-bottom-none {
+    margin-bottom: 0;
+}
+
+.li-ver-md {
+    vertical-align: middle;
+}
+
+.carousel-img {
+    margin: 0 auto;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0
+}
+
+.mr-t-4 {
+    margin-top: 4px !important;
+}
+
+.mr-t-6 {
+    margin-top: 6px !important;
+}
+
+.mr-t-8 {
+    margin-top: 8px !important;
+}
+
+.mr-t-10 {
+    margin-top: 10px !important;
+}
+
+.mr-l-8 {
+    margin-left: 8px !important;
+}
+
+textarea {
+    resize: none;
+}
 
 /*************** 导航栏公用样式 *******************/
 
@@ -217,6 +302,53 @@ select {
     -moz-box-shadow: 0px 0px 2px rgba(0, 0, 0, .1);
     -webkit-box-shadow: 0px 0px 2px rgba(0, 0, 0, .1);
     box-shadow: 0px 0px 2px rgba(0, 0, 0, .1);
+}
+
+/*************** 移动端侧边折叠按钮样式 *******************/
+
+.navbar-toggle.x .icon-bar:nth-of-type(1) {
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    -webkit-transform-origin: 10% 10%;
+    -ms-transform-origin: 10% 10%;
+    transform-origin: 10% 10%;
+}
+
+.navbar-toggle.x .icon-bar:nth-of-type(2) {
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+
+.navbar-toggle.x .icon-bar:nth-of-type(3) {
+    -webkit-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    -webkit-transform-origin: 10% 90%;
+    -ms-transform-origin: 10% 90%;
+    transform-origin: 10% 90%;
+}
+
+.navbar-toggle.x.collapsed .icon-bar:nth-of-type(1) {
+    -webkit-transform: rotate(0);
+    -ms-transform: rotate(0);
+    transform: rotate(0);
+}
+
+.navbar-toggle.x.collapsed .icon-bar:nth-of-type(2) {
+    opacity: 1;
+    filter: alpha(opacity=100);
+}
+
+.navbar-toggle.x.collapsed .icon-bar:nth-of-type(3) {
+    -webkit-transform: rotate(0);
+    -ms-transform: rotate(0);
+    transform: rotate(0);
+}
+
+button.navbar-toggle.x,
+button.navbar-toggle.x:hover {
+    background-color: transparent !important;
 }
 
 a.navbar-brand.logo-brand {
@@ -234,11 +366,40 @@ img#logo.amcu-logo {
     background-color: transparent;
 }
 
-.navbar-toggle {
-    color: #2299dd;
+.cur-usr-box {
+    background-color: #3c8dbc;
+}
+
+.cur-usr-box .box-header {
+    height: 175px;
+    padding: 10px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.cur-usr-box p {
+    z-index: 5;
+    color: #fff;
+    color: rgba(255,255,255,0.8);
+    font-size: 17px;
+    margin-top: 10px;
+}
+
+.cur-usr-box p small {
+    display: block;
+    font-size: 12px;
+}
+
+.cur-usr-image {
+    width: 80px;
+    height: 80px;
 }
 
 /*************** footer公用样式 *******************/
+
+.container.top-rel-ontainer {
+    min-height: calc(100vh - 132px);
+}
 
 .main-footer {
     margin-left: 0;
@@ -248,7 +409,42 @@ img#logo.amcu-logo {
     text-align: center;
 }
 
+/*************** 设备样式匹配 *******************/
+
+@media screen and (max-width: 767px) {
+    .container {
+        padding-right: 8px!important;
+        padding-left: 8px!important;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .mr-l-39p {
+        margin-left: 0 !important;
+    }
+
+    .w-180 {
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .container {
+        width: 1200px;
+    }
+
+    .w-180 {
+        width: 180px;
+    }
+
+    .mr-l-39p {
+        margin-left: calc(23vw) !important;
+    }
+}
+
+
 /*************** bootstrap间距样式 *******************/
+
 .row.row-grid [class*="col-"] + [class*="col-"] {
     margin-top: 15px;
 }
@@ -279,17 +475,98 @@ img#logo.amcu-logo {
 */
 
 /*************** 标签tags公用样式 *******************/
-.tags{}
-.tags a{opacity: .80;filter: alpha(opacity=80);color:#ffffff; display: inline-block;margin: 0 5px 5px 0;padding: 0 6px;line-height: 21px;border-radius: 2px;-moz-border-radius: 2px;-webkit-border-radius: 2px;width: 70px;text-align:center;overflow: hidden;height: 21px;}
-.tags a:nth-child(9n){background-color:#4a4a4a}
-.tags a:nth-child(9n+1){background-color:#428bca}
-.tags a:nth-child(9n+2){background-color:#5cb85c}
-.tags a:nth-child(9n+3){background-color:#d9534f}
-.tags a:nth-child(9n+4){background-color:#567e95}
-.tags a:nth-child(9n+5){background-color:#b433ff}
-.tags a:nth-child(9n+6){background-color:#00aba9}
-.tags a:nth-child(9n+7){background-color:#b37333}
-.tags a:nth-child(9n+8){background-color:#f60}
+
+.tags{
+
+}
+
+.tags a {
+    opacity: .80;
+    filter: alpha(opacity=80);
+    color:#ffffff;
+    display: inline-block;
+    margin: 0 5px 5px 0;
+    padding: 0 6px;
+    line-height: 21px;
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    width: 70px;
+    text-align:center;
+    overflow: hidden;
+    height: 21px;
+}
+
+.tags a:nth-child(9n) {
+    background-color:#4a4a4a
+}
+.tags a:nth-child(9n+1) {
+    background-color:#428bca
+}
+
+.tags a:nth-child(9n+2) {
+    background-color:#5cb85c
+}
+
+.tags a:nth-child(9n+3) {
+    background-color:#d9534f
+}
+
+.tags a:nth-child(9n+4) {
+    background-color:#567e95
+}
+.tags a:nth-child(9n+5) {
+    background-color:#b433ff
+}
+
+.tags a:nth-child(9n+6) {
+    background-color:#00aba9
+}
+
+.tags a:nth-child(9n+7) {
+    background-color:#b37333
+}
+
+.tags a:nth-child(9n+8) {
+    background-color:#f60
+}
+
+.diy-tag-style a .badge {
+    margin-right: 2px;
+    color: white;
+    padding: 5px 8px;
+    border-radius: 3px;
+}
+
+.diy-tag-style a:nth-child(6n) .badge {
+    background-color: #7AF5D2;
+    border: 1px solid #B5EAC9;
+}
+
+.diy-tag-style a:nth-child(6n+1) .badge {
+    background-color: #428bca;
+    border: 1px solid #93B7F3;
+}
+
+.diy-tag-style a:nth-child(6n+2) .badge {
+    background-color: #D2220A;
+    border: 1px solid #F13D3D;
+}
+
+.diy-tag-style a:nth-child(6n+3) .badge {
+    background-color: #F8BA25;
+    border: 1px solid #FFE793;
+}
+
+.diy-tag-style a:nth-child(6n+4) .badge {
+    background-color: #b433ff;
+    border: 1px solid #DD00BB;
+}
+
+.diy-tag-style a:nth-child(6n+5) .badge {
+    background-color: #4DA511;
+    border: 1px solid #41A863;
+}
 
 /*************** gotop公用样式 *******************/
 
@@ -311,6 +588,147 @@ img#logo.amcu-logo {
     background: url(../../img/tools/backtop.png) no-repeat 0 -52px;
 }
 
+/*************** 文章排版公用样式 *******************/
+.article-entry {
+    min-height: 500px;
+}
+
+.single-content {
+    font-size: 15px;
+    font-size: 1.5rem;
+    line-height: 1.8;
+}
+
+.single-content p,
+.single-content ul,
+.single-content ol,
+.single-content dd,
+.single-content pre,
+.single-content hr {
+    margin: 0 0 5px 0;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+    word-wrap: break-word;
+    word-break: break-all;
+    text-justify: inter-ideograph;
+}
+
+.single-content em {
+    font-style: italic;
+}
+
+.single-content code {
+    background: #f1f1f1;
+    color: #555;
+    margin: 0 2px;
+    padding: 2px 4px;
+    border-radius: 2px;
+}
+
+.single-content h2 {
+    font-size: 17px;
+    font-size: 1.7rem;
+    line-height: 190%;
+    margin: 10px -21px;
+    padding: 0 44px;
+    border-left: 5px solid #e40000;
+    border-bottom: 1px solid #e40000;
+}
+
+.single-content h3 {
+    font-size: 16px;
+    font-size: 1.6rem;
+    line-height: 190%;
+    margin: 2px -21px 10px -21px;
+    padding: 0 44px;
+    border-left: 5px solid #2f889a;
+    border-bottom: 1px solid #2f889a;
+}
+
+.single-content h4 {
+    font-size: 16px;
+    font-size: 1.6rem;
+    line-height: 280%;
+    margin-top: -90px;
+    padding: 90px 30px 5px 30px;
+}
+
+.single-content .directory {
+    float: left;
+    height: 30px;
+    margin: 8px -21px;
+    border-left: 5px solid #2f889a;
+}
+
+.single-content fieldset {
+    padding: 5px 15px;
+    margin: 0 0 10px 0;
+    border: 1px solid #ddd;
+}
+
+.single-content legend {
+    font-weight: bold;
+    padding: 5px;
+}
+
+.single-content p {
+    text-indent: 2em;
+}
+
+.single-content ul li,
+.single-content ol li {
+    margin: 0 35px 0 50px;
+    line-height: 190%;
+}
+
+.single-content ul li {
+    list-style: square;
+}
+
+.single-content ol li {
+    list-style: decimal;
+}
+
+.single-content sup {
+    bottom: 1ex;
+}
+
+.single-content sup, .single-content sub {
+    font-size: 75%;
+    height: 0;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+
+blockquote {
+    width: 100%;
+    color: #8b8b8b;
+    margin: 0 auto;
+    padding: 10px;
+    clear: both;
+    border: 1px dashed red;
+}
+
+.single-content img, .comment-list p img {
+    max-width: 100%;
+    width: auto\9;
+    height: auto;
+    vertical-align: middle;
+    display: block;
+}
+
+/*************** tab内搜索公用样式 *******************/
+
+.tab-content .box.box-default {
+    border-top-color: white;
+}
+
+.tab-content .box-body {
+    padding: 0 10px;
+}
 
 
 

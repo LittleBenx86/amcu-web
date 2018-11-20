@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="renderer" content="webkit">
     <meta http-equiv="x-ua-compatible" content="IE=edge">
-    <meta name="viewpoint" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="description" content="AMCU是华南农业大学单片机开发爱好者的交流平台">
     <meta name="keywords" content="AMCU,MCU,大学生,单片机开发者社区,电子专业,硬件工程师,Android工程师,开发者,Java工程师">
-    <title>华南农业大学单片机协会--单片机开发者社区</title>
+    <title>单片机开发者社区--华南农业大学单片机协会</title>
     <!-- icon -->
     <link rel="icon" href="img/favicon.ico" type="image/x-icon">
     <!-- Boostrap -->
@@ -18,9 +18,10 @@
     <link rel="stylesheet" href="css/tools/font-awesome.min.css">
     <link rel="stylesheet" href="css/tools/normalize.css">
     <link rel="stylesheet" href="css/tools/nprogress.css">
-    <!-- index -->
+    <!-- article -->
     <link rel="stylesheet" href="css/view/nav-common.css">
     <link rel="stylesheet" href="css/view/index/index-style.css">
+
 
     <!--[if gte IE 9]>
         <script type="text/javascript" src="js/jquery/jquery-1.11.1.min.js"></script>
@@ -40,20 +41,22 @@
                     <a href="index.html" class="navbar-brand logo-brand">
                         <img class="amcu-logo" id="logo" src="img/logo/logo.png" alt="协会logo">
                     </a>
-                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-menu">
-                        <i class="fa fa-bars" aria-hidden="true"></i>
+                    <button class="navbar-toggle x collapsed" type="button" data-toggle="collapse" data-target="#navbar-menu">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
                     </button>
                 </div>
                 <div class="collapse navbar-collapse" id="navbar-menu">
                     <ul class="nav navbar-nav navbar-right head-nav">
                         <li>
-                            <a data-cont="AMCU网站" title="AMCU网站" href="index.html" style="color: #0074E8;">首页</a>
+                            <a data-cont="AMCU网站" title="AMCU网站" href="javascript:void(0)" style="color: #0074E8;">首页</a>
                         </li>
                         <li>
-                            <a data-cont="协会资讯" title="协会资讯" href="##">协会资讯</a>
+                            <a data-cont="协会资讯" title="协会资讯" href="info.html">协会资讯</a>
                         </li>
                         <li>
-                            <a data-cont="博客" title="博客" href="##">博客</a>
+                            <a data-cont="文章" title="文章" href="article-center.html">文章</a>
                         </li>
                         <li class="dropdown">
                             <a data-cont="合作企业" title="合作企业" class="dropdown-toggle" data-toggle="dropdown" href="#">合作企业<b class="caret"></b></a>
@@ -70,11 +73,12 @@
                             <a data-cont="用户中心" title="用户中心" href="##">用户中心</a>
                         </li>
                         <li>
-                            <form class="navbar-form navbar-right" role="search">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="search" />
-                                </div>
-                                <button type="button" class="btn btn-primary">搜索</button>
+                            <form class="navbar-form navbar-right input-group form-search w-180" role="search">
+                                <input id="kw-a" class="form-control" name="kw" type="text" placeholder="search"/>
+                                <input id="type-a" name="t" value="article" type="hidden" />
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i>搜索</button>
+                                </span>
                             </form>
                         </li>
                     </ul>
@@ -83,7 +87,7 @@
         </nav>
     </header>
 
-    <section class="container top-relative-container">
+    <div class="container top-rel-ontainer">
         <div class="row row-grid">
             <div class="slider-content col-md-9 col-xs-12">
                 <div id="focusslide" class="carousel slide" data-ride="carousel">
@@ -98,7 +102,7 @@
                         </div>
                         <div class="item">
                             <a href="javascript:void(0)" title="AMCU网站建设" >
-                                <img src="https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1542326569&di=4075d7f3ff0cb2fa8e70c27bb59f25b4&src=http://pic1.win4000.com/wallpaper/2017-10-22/59ebfaa2497a7.jpg" alt="AMCU网站建设" class="img-slide center-block"></a>
+                                <img src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=4212936654,2832012218&fm=26&gp=0.jpg" alt="AMCU网站建设" class="img-slide center-block"></a>
                         </div>
                     </div>
                     <a class="left carousel-control" href="#focusslide" role="button" data-slide="prev" rel="nofollow">
@@ -110,29 +114,27 @@
                 </div>
             </div>
             <div class="info-content col-md-3 col-xs-12">
-                    <div class="panel panel-default" id="user-info">
-                        <div class="panel-heading">
-                            用户信息
-                        </div>
-                        <div class="panel-body">
-                            <img class="user-avatar center-block img-circle img-responsive" src="img/avatar/5_1.png">
-                            <span class="user-name">测试人员8888888888888888888</span>
-                            <span class="user-integration">声望:<span id="integrations">6666666</span></span>
-                            <span class="user-auth">
-                                <span class="label label-primary">网站成员</span>
-                                <span class="label label-danger">AMCU成员</span>
-                            </span>
-                            <div class="for-btn">
-                                <button class="btn btn-success"><span class="glyphicon glyphicon-edit"></span>写博客</button>
-                                <button class="btn btn-danger"><span class="glyphicon glyphicon-log-out"></span>退出登录</button>
-                            </div>
+                <div class="panel panel-default" id="user-info">
+                    <div class="panel-heading">
+                        用户信息
+                    </div>
+                    <div class="panel-body">
+                        <img class="user-avatar center-block img-circle img-responsive" src="img/avatar/5_1.png">
+                        <span class="user-name">测试人员8888888888888888888</span>
+                        <span class="user-integration">声望:<span id="integrations">6666666</span></span>
+                        <span class="user-auth">
+                            <span class="label label-primary">网站成员</span>
+                            <span class="label label-danger">AMCU成员</span>
+                        </span>
+                        <div class="for-btn">
+                            <button class="btn btn-success"><span class="glyphicon glyphicon-edit"></span>写博客</button>
+                            <button class="btn btn-danger"><span class="glyphicon glyphicon-log-out"></span>退出登录</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="row row-grid">
+        <div class="row">
             <div class="sys-article col-md-9 col-xs-12">
                 <div class="amcu-info-box">
                     <div class="box box-solid">
@@ -663,43 +665,43 @@
                         <div class="box-body">
                             <ul class="new-article-content">
                                 <li class="content-li">
-                                <div class="row">
-                                    <div class="col-md-12 title-wrap">
-                                        <p class="nowrap bold link-size-16">
-                                            <a class="link-default" href="javascript:void(0);">最新博客1</a>
-                                        </p>
-                                        <ul class="list-inline">
-                                            <li>
-                                                <a href="javascript:void(0);">
-                                                    <img class="img-circle" src="img/avatar/5_1.png" alt="">
-                                                    <span class="usr-name">测试人员123</span>
-                                                    <span class="deploy">
+                                    <div class="row">
+                                        <div class="col-md-12 title-wrap">
+                                            <p class="nowrap bold link-size-16">
+                                                <a class="link-default" href="javascript:void(0);">最新博客1</a>
+                                            </p>
+                                            <ul class="list-inline">
+                                                <li>
+                                                    <a href="javascript:void(0);">
+                                                        <img class="img-circle" src="img/avatar/5_1.png" alt="">
+                                                        <span class="usr-name">测试人员123</span>
+                                                        <span class="deploy">
                                                             发布时间:<span class="time">2018-11-15</span>
                                                         </span>
-                                                </a>
-                                            </li>
-                                            <li class="pull-right">
-                                                <a class="link-default-sm" href="javascript:void(0);">
-                                                    <i class="glyphicon glyphicon-star-empty"></i>
-                                                    <span class="collects">100</span>
-                                                </a>
-                                            </li>
-                                            <li class="pull-right">
-                                                <a class="link-default-sm" href="javascript:void(0);">
-                                                    <i class="glyphicon glyphicon-heart-empty"></i>
-                                                    <span class="likes">100</span>
-                                                </a>
-                                            </li>
-                                            <li class="pull-right">
-                                                <a class="link-default-sm" href="javascript:void(0);">
-                                                    <i class="glyphicon glyphicon-eye-open"></i>
-                                                    <span class="views">100</span>
-                                                </a>
-                                            </li>
-                                        </ul>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-star-empty"></i>
+                                                        <span class="collects">100</span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-heart-empty"></i>
+                                                        <span class="likes">100</span>
+                                                    </a>
+                                                </li>
+                                                <li class="pull-right">
+                                                    <a class="link-default-sm" href="javascript:void(0);">
+                                                        <i class="glyphicon glyphicon-eye-open"></i>
+                                                        <span class="views">100</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
+                                </li>
                                 <li class="content-li">
                                     <div class="row">
                                         <div class="col-md-12 title-wrap">
@@ -1085,7 +1087,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
     <footer class="main-footer">
         <div class="container footer-container">
@@ -1111,6 +1113,8 @@
     <script type="text/javascript" src="js/tools/theia-sticky-sidebar.min.js"></script>
     <!-- nprogress -->
     <script type="text/javascript" src="js/tools/nprogress.js"></script>
+    <!-- jqthumb -->
+    <script type="text/javascript" src="js/tools/jqthumb.min.js"></script>
     <!-- decorate -->
     <script type="text/javascript" src="js/view/decorate.js"></script>
     <!-- index -->

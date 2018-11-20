@@ -1,0 +1,109 @@
+@charset "UTF-8";
+
+/*************** 用户展示样式 *******************/
+
+.info-content #user-info {
+    width: auto;
+    height: 300px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#user-info img.user-avatar {
+    width: 80px;
+    height: 80px;
+}
+
+#user-info span.user-name {
+    display: block;
+    max-width: 120px;
+    height: 26px;
+    text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+#user-info span.user-integration {
+    display: block;
+    max-width: 200px;
+    height: 26px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+#user-info span.user-integration span#integrations {
+    margin-left: 20px;
+    color: red;
+}
+
+#user-info div.for-btn {
+    margin-top: 30px;
+}
+
+#user-info div.for-btn .btn {
+    margin-left: 10px;
+}
+
+/*************** 个人文章/收藏文章 *******************/
+
+ul.article-content {
+    margin-top: 0;
+    padding: 0;
+    border-top: none;
+    list-style: none;
+}
+
+ul.article-content li.content-li {
+    margin-top: 0;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+ul.article-content li .title-wrap ul {
+    font-size: 12px !important;
+    line-height: 36px;
+}
+
+ul.article-content li .title-wrap ul li a img {
+    width: 36px;
+    height: 36px;
+}
+
+/*************** 文章时间线/个人文章标签云 *******************/
+
+.article-time-line,
+.per-tags {
+    max-height: 200px;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: auto;
+}
+
+.article-time-line::-webkit-scrollbar,
+.per-tags::-webkit-scrollbar {
+    width: 4px;
+}
+
+.article-time-line::-webkit-scrollbar-track,
+.per-tags::-webkit-scrollbar-track {
+    background-color: rgba(255, 255, 255, 0.1);
+    -webkit-border-radius: 2em;
+    -moz-border-radius: 2em;
+    border-radius:2em;
+}
+
+.article-time-line::-webkit-scrollbar-thumb,
+.per-tags::-webkit-scrollbar-thumb {
+    background-color: #337ab7;
+    -webkit-border-radius: 2em;
+    -moz-border-radius: 2em;
+    border-radius: 2em;
+}
+
+.article-time-line li.content-li {
+    margin-top: 0;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
