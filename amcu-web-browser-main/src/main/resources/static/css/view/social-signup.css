@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+b {
+    color: #3c8dbc;
+}
+
+.social-info {
+    margin: 0 auto;
+    text-align: center;
+    vertical-align: middle;
+    width: 90%;
+}
+
+img#avatar.social-usr {
+    width: 80px;
+    height: 80px;
+    margin-top: 16px;
+    margin-bottom: 10px;
+}
+
+.reg-binding-selc {
+    width: 90%;
+    margin: 0 auto;
+}
