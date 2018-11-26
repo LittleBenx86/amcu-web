@@ -217,7 +217,7 @@
     })();
 
     /**
-     * (Internal) renders the progress bar markup based on the `template`
+     * (Internal) renders the progress bar markup based on the `templates`
      * setting.
      */
 

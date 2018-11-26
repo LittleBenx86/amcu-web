@@ -206,6 +206,18 @@ select {
     font-size: 16px;
 }
 
+.link-default-img {
+    color: #3d3d3d;
+    max-width: 100%;
+    display: block;
+    line-height: 50px;
+    height: 50px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 8px;
+}
+
 .link-default:hover {
     color: #ca0c16;
 }
@@ -281,8 +293,16 @@ hr {
     margin-top: 10px !important;
 }
 
+.mr-b-10 {
+    margin-bottom: 10px;
+}
+
 .mr-l-8 {
     margin-left: 8px !important;
+}
+
+.mr-r-5 {
+    margin-right: 5px !important;
 }
 
 textarea {
@@ -410,6 +430,12 @@ img#logo.amcu-logo {
 }
 
 /*************** 设备样式匹配 *******************/
+@media screen and (max-width: 991px) {
+    .mr-l-39p {
+        margin-left: calc(16vw) !important;
+        float: left !important;
+    }
+}
 
 @media screen and (max-width: 767px) {
     .container {
@@ -419,12 +445,38 @@ img#logo.amcu-logo {
 }
 
 @media screen and (min-width: 768px) {
+
     .mr-l-39p {
-        margin-left: 0 !important;
+        margin-left: calc(16vw) !important;
+        float: left !important;
     }
 
     .w-180 {
         width: 100%;
+    }
+}
+
+@media screen and (min-width: 996px) and (max-width: 1139px) {
+    .mr-l-39p {
+        margin-left: calc(23vw) !important;
+    }
+}
+
+@media screen and (min-width: 1140px) and (max-width: 1180px) {
+    .mr-l-39p {
+        margin-left: calc(22vw) !important;
+    }
+}
+
+@media screen and (min-width: 1181px) and (max-width: 1190px) {
+    .mr-l-39p {
+        margin-left: calc(22vw) !important;
+    }
+}
+
+@media screen and (min-width: 1191px) and (max-width: 1199px) {
+    .mr-l-39p {
+        margin-left: calc(21vw) !important;
     }
 }
 
@@ -437,11 +489,67 @@ img#logo.amcu-logo {
         width: 180px;
     }
 
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1230px) {
     .mr-l-39p {
-        margin-left: calc(23vw) !important;
+        margin-left: calc(40vw) !important;
     }
 }
 
+@media screen and (min-width: 1231px) and (max-width: 1260px) {
+    .mr-l-39p {
+        margin-left: calc(39vw) !important;
+    }
+}
+
+@media screen and (min-width: 1261px) and (max-width: 1294px) {
+    .mr-l-39p {
+        margin-left: calc(38vw) !important;
+    }
+}
+
+@media screen and (min-width: 1295px) and (max-width: 1366px) {
+    .mr-l-39p {
+        margin-left: calc(36vw) !important;
+    }
+}
+
+@media screen and (min-width: 1367px) and (max-width: 1447px) {
+    .mr-l-39p {
+        margin-left: calc(34vw) !important;
+    }
+}
+
+@media screen and (min-width: 1448px) and (max-width: 1537px) {
+    .mr-l-39p {
+        margin-left: calc(32vw) !important;
+    }
+}
+
+@media screen and (min-width: 1538px) and (max-width: 1640px) {
+    .mr-l-39p {
+        margin-left: calc(30vw) !important;
+    }
+}
+
+@media screen and (min-width: 1641px) and (max-width: 1756px) {
+    .mr-l-39p {
+        margin-left: calc(28vw) !important;
+    }
+}
+
+@media screen and (min-width: 1757px) and (max-width: 1892px) {
+    .mr-l-39p {
+        margin-left: calc(26vw) !important;
+    }
+}
+
+@media screen and (min-width: 1893px) {
+    .mr-l-39p {
+        margin-left: calc(24vw) !important;
+    }
+}
 
 /*************** bootstrap间距样式 *******************/
 
@@ -730,8 +838,48 @@ blockquote {
     padding: 0 10px;
 }
 
+/*************** 第三方登陆logo *******************/
 
+.oauth2 a {
+    display: inline-block;
+    margin-right: 5px;
+    width: 19px;
+    height: 19px;
+}
 
+.qq {
+    background-image: url("../../img/avatar/qq.ico");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.wx {
+    background-image: url("../../img/avatar/wx.ico");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.linkedin {
+    background-image: url("../../img/avatar/linkedin.ico");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.github {
+    background-image: url("../../img/avatar/github.ico");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.coding {
+    background-image: url("../../img/avatar/coding.ico");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.user-nav-on-show {
+    max-width: 116px;
+}
 
 
 

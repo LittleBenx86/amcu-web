@@ -2,32 +2,217 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>华南农业大学单片机协会用户注册页面</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="description" content="AMCU是华南农业大学单片机开发爱好者的交流平台">
+    <meta name="keywords" content="AMCU,MCU,大学生,单片机爱好者社区,电子专业,硬件工程师,Android工程师,开发者,Java工程师,一起来玩单片机啊!">
+    <title>用户注册--华南农业大学单片机协会</title>
+
+    <!-- icon -->
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    <!-- Boostrap -->
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+    <!-- adminLTE -->
+    <link rel="stylesheet" href="css/adminLTE/AdminLTE.min.css">
+    <!-- tools -->
+    <link rel="stylesheet" href="css/tools/font-awesome.min.css">
+    <link rel="stylesheet" href="css/tools/normalize.css">
+    <link rel="stylesheet" href="css/tools/nprogress.css">
+    <link rel="stylesheet" href="css/tools/formValidation.min.css">
+    <link rel="stylesheet" href="css/tools/toastr.min.css">
+    <!-- index -->
+    <link rel="stylesheet" href="css/view/nav-common.css">
+    <link rel="stylesheet" href="css/view/signup.css">
+
+    <!--[if gte IE 9]>
+    <script type="text/javascript" src="js/ie-exts/html5shiv.min.js"></script>
+    <script type="text/javascript" src="js/ie-exts/respond.min.js"></script>
+    <script type="text/javascript" src="js/ie-exts/selectivizr-min.js"></script>
+    <![endif]-->
+    <!--[if lt IE 9]>
+    <script>window.location.href='upgrade-browser.html';</script>
+    <![endif]-->
 </head>
 <body>
-    <h2>注册测试</h2>
-    <form action="/auth/signup" method="post">
-        <table>
-            <tr>
-                <td>用户名:</td>
-                <td><input type="text" name="username"></td>
-            </tr>
-            <tr>
-                <td>手机号:</td>
-                <td><input type="text" name="mobile"></td>
-            </tr>
-            <tr>
-                <td>邮箱号:</td>
-                <td><input type="text" name="email"></td>
-            </tr>
-            <tr>
-                <td>密码:</td>
-                <td><input type="password" name="password"></td>
-            </tr>
-            <tr>
-                <td colspan="2"><button type="submit">注册</button></td>
-            </tr>
-        </table>
-    </form>
+    <header>
+        <nav class="navbar navbar-default" id="navbar" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <a href="index.html" class="navbar-brand logo-brand">
+                        <img class="amcu-logo" id="logo" src="img/logo/logo.png" alt="协会logo">
+                    </a>
+                    <button class="navbar-toggle x collapsed" type="button" data-toggle="collapse" data-target="#navbar-menu">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse" id="navbar-menu">
+                    <ul class="nav navbar-nav navbar-right head-nav">
+                        <li>
+                            <a data-cont="AMCU网站" title="AMCU网站" href="index.html" style="color: #0074E8;">首页</a>
+                        </li>
+                        <li>
+                            <a data-cont="协会资讯" title="协会资讯" href="info.html">协会资讯</a>
+                        </li>
+                        <li>
+                            <a data-cont="文章" title="文章" href="article-center.html">文章</a>
+                        </li>
+                        <li class="dropdown">
+                            <a data-cont="合作企业" title="合作企业" class="dropdown-toggle" data-toggle="dropdown" href="#">合作企业<b class="caret"></b></a>
+                            <ul class="dropdown-menu dropdown-menu-left">
+                                <li><a href="#">广州创龙</a></li>
+                                <li><a href="#">广州英码</a></li>
+                                <li><a href="#">广州邦普</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a data-cont="在线工具" title="在线工具" href="##">在线工具</a>
+                        </li>
+                        <li>
+                            <a data-cont="用户中心" title="用户中心" href="##">用户中心</a>
+                        </li>
+                        <li>
+                            <form class="navbar-form navbar-right input-group form-search w-180" role="search">
+                                <input id="kw-a" class="form-control" name="kw" type="text" placeholder="search"/>
+                                <input id="type-a" name="t" value="article" type="hidden" />
+                                <span class="input-group-btn">
+                                            <button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i>搜索</button>
+                                        </span>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div id="canvas-area" style="z-index: 1;">
+        <div style="z-index: 1000;" class="container top-rel-ontainer">
+            <div class="row">
+                <div class="col-md-offset-1 col-xs-offset-1 col-md-10 col-xs-10">
+                    <div class="box box-primary">
+                        <div class="box-body">
+                            <div class="new-reg">
+                                <h3>新用户注册</h3>
+                                <span>
+                                    欢迎注册成为
+                                    <a href="/index.html">
+                                        <b>AMCU</b>
+                                    </a>
+                                    网站的新成员, 一起来玩单片机啊!
+                                </span>
+                            </div>
+                            <div class="reg-binding-selc mr-t-10">
+                                <div class="nav-tabs-custom margin-bottom-none">
+                                    <ul class="nav nav-tabs ul-nav-w ul-nav-border" id="search-tabs">
+                                        <li class="active"><a href="#new-account" data-toggle="tab">新建账户</a></li>
+                                    </ul>
+                                </div>
+                                <div class="tab-content mr-t-10">
+                                    <div class="box box-default tab-pane active" id="new-account">
+                                        <div class="box-body">
+                                            <form action="/auth/signup" method="post" class="n-form" id="auth-signup-form">
+                                                <ul>
+                                                    <li class="form-group">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon" id="n-usr-addone">
+                                                                <span class="fa fa-user"></span>
+                                                            </span>
+                                                            <input id="n-name" class="form-control" aria-describedby="n-usr-addone" type="text" name="username" placeholder="用户名"/>
+                                                        </div>
+                                                    </li>
+                                                    <li class="form-group">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon" id="n-mail-addone">
+                                                                <span class="fa fa-envelope"></span>
+                                                            </span>
+                                                            <input id="n-mail" class="form-control" aria-describedby="n-mail-addone" type="text" name="email" placeholder="如 test123@163.com"/>
+                                                        </div>
+                                                    </li>
+                                                    <li class="form-group">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon" id="n-pw-addone">
+                                                                <span class="fa fa-key"></span>
+                                                            </span>
+                                                            <input id="n-pw" class="form-control" aria-describedby="n-pw-addone" type="password" name="password" placeholder="密码" maxlength="16"/>
+                                                        </div>
+                                                    </li>
+                                                    <li class="form-group">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon" id="c-pw-addone">
+                                                                <span class="fa fa-check-square-o"></span>
+                                                            </span>
+                                                            <input id="n-confirm-pw" class="form-control" aria-describedby="c-pw-addone" type="password" name="confirmPassword" placeholder="确认密码" maxlength="16"/>
+                                                        </div>
+                                                    </li>
+                                                    <li class="form-group">
+                                                        <div class="input-group">
+                                                            <input id="n-email-code" class="form-control mr-r-5" type="text" name="emailCode" style="width: 48%;" placeholder="邮箱验证码"/>
+                                                            <button id="sent-email-code" class="btn btn-warning" type="button">
+                                                                获取邮箱验证码
+                                                            </button>
+                                                        </div>
+                                                    </li>
+                                                    <li class="form-group">
+                                                        <input id="c-readme" type="checkbox" name="agree"/>
+                                                        <a href="javascript:void(0)">
+                                                            <b>同意《AMCU单片机爱好者社区用户注册守则》</b>
+                                                        </a>
+                                                    </li>
+                                                    <li class="form-group" style="border-top: 1px #eeeeee solid; width: 100%; height: 30px;">
+                                                        <div class="col-md-offset-5 col-xs-offset-4 col-md-4 col-xs-4" >
+                                                            <button class="btn btn-primary mr-t-4" type="submit" id="n-usr-reg">确认注册</button>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <footer class="main-footer">
+        <div class="container footer-container">
+            <strong>Copyright © 2018 </strong>
+            <a href="javascript:void(0);">AMCU</a>
+            <a class="text-black" href="javascript:void(0);">备案号(还未申请)</a>
+        </div>
+        <div id="gotop">
+            <a class="gotop"></a>
+        </div>
+    </footer>
+
+    <!-- jquery -->
+    <script type="text/javascript" src="js/jquery/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery/jquery-qrcode.min.js"></script>
+    <!-- Boostrap -->
+    <script type="text/javascript" src="js/boostrap/bootstrap.min.js"></script>
+    <!-- adminLTE -->
+    <script type="text/javascript" src="js/adminLTE/adminlte.min.js"></script>
+    <!-- vue -->
+    <script type="text/javascript" src="js/vue/vue.min.js"></script>
+    <!-- tools -->
+    <script type="text/javascript" src="js/tools/ResizeSensor.min.js"></script>
+    <script type="text/javascript" src="js/tools/theia-sticky-sidebar.min.js"></script>
+    <script type="text/javascript" src="js/tools/nprogress.js"></script>
+    <script type="text/javascript" src="js/view/decorate.js"></script>
+    <script type="text/javascript" color="0,0,0" opacity='0.6' count="120" src="js/tools/canvas-nest.js"></script>
+    <script type="text/javascript" src="js/tools/formValidation.min.js"></script>
+    <script type="text/javascript" src="js/tools/framework/form-validate-bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/tools/toastr.min.js"></script>
+    <!-- social-signup -->
+    <script type="text/javascript" src="js/view/auth-signup.js"></script>
+
 </body>
 </html>

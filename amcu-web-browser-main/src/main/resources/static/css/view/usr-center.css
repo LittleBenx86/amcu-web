@@ -1,0 +1,49 @@
+@charset "UTF-8";
+
+/*************** 左侧sidebar样式 *******************/
+
+.left-sidebar .info-content #user-info {
+    width: auto;
+    max-height: 300px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#user-info img.user-avatar {
+    width: 80px;
+    height: 80px;
+}
+
+#user-info span.user-name {
+    display: block;
+    max-width: 120px;
+    height: 26px;
+    text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+#user-info span.user-integration {
+    display: block;
+    max-width: 200px;
+    height: 26px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+#user-info span.user-integration span#integrations {
+    margin-left: 20px;
+    color: red;
+}
+
+#user-info div.for-btn {
+    margin-top: 16px;
+}
+
+#user-info div.for-btn .btn {
+    margin-left: 10px;
+}
+

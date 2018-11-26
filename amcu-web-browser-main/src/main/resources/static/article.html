@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="css/tools/normalize.css">
     <link rel="stylesheet" href="css/tools/nprogress.css">
     <link rel="stylesheet" href="css/tools/share.min.css">
+    <link rel="stylesheet" href="css/tools/toastr.min.css">
     <!-- simditor -->
     <link rel="stylesheet" href="css/simditor/simditor.css">
     <link rel="stylesheet" href="css/simditor/simditor-html.css">
@@ -55,7 +56,7 @@
                     </button>
                 </div>
                 <div class="collapse navbar-collapse pull-left mr-l-39p mr-t-4" id="navbar-menu">
-                    <ul class="nav navbar-nav head-nav navbar-right">
+                    <ul class="nav navbar-nav head-nav navbar-left">
                         <li>
                             <a data-cont="AMCU网站" title="AMCU网站" href="index.html">首页</a>
                         </li>
@@ -82,42 +83,59 @@
                     </ul>
                 </div>
                 <div class="navbar-custom-menu pull-right mr-t-4" id="user-nav-wrapper">
-                    <ul class="nav navbar-nav" id="user-nav">
-                        <li class="dropdown user user-menu" id="user-menu">
-                            <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                <img src="img/avatar/5_1.png" class="user-image" alt="测试人员123">
-                                <span class="visible-lg-inline">测试人员123</span>
-                            </a>
-                            <ul class="dropdown-menu mr-t-10">
-                                <li>
-                                    <div class="box box-primary cur-usr-box margin-bottom-none">
-                                        <div class="box-header">
-                                            <img src="img/avatar/5_1.png" class="cur-usr-image center-block img-circle" alt="">
-                                            <p>
-                                                <span>测试人员123</span>
-                                                <small>xxx@163.com</small>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="box-footer">
-                                        <div class="pull-left">
-                                            <a href="javascript:void(0)" class="btn btn-success btn-flat"><i class="glyphicon glyphicon-user"></i>个人中心</a>
-                                        </div>
-                                        <div class="pull-right">
-                                            <a href="javascript:void(0)" class="btn btn-danger btn-flat"><i class="glyphicon glyphicon-log-out"></i>退出登录</a>
-                                        </div>
-                                    </div>
+                        <ul class="nav navbar-nav user-nav-on-show" id="user-nav">
+                            <template v-if="isLogin">
+                                <li class="dropdown user user-menu" id="user-menu">
+                                    <a href="javascript:void(0)" class="dropdown-toggle link-default-img" data-toggle="dropdown" aria-expanded="false">
+                                        <img :src="curUsrAvatar" class="user-image" alt="测试人员123">
+                                        <span class="visible-lg-inline">{{ curUsername }}</span>
+                                    </a>
+                                    <ul class="dropdown-menu mr-t-10">
+                                        <li>
+                                            <div class="box box-primary cur-usr-box margin-bottom-none">
+                                                <div class="box-header">
+                                                    <img :src="curUsrAvatar" class="cur-usr-image center-block img-circle" alt="">
+                                                    <p>
+                                                        <span>{{ curUsername }}</span>
+                                                        <small>{{ curUserEmail }}</small>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="box-footer">
+                                                <div class="pull-left">
+                                                    <a :href="curUserCenterUrl" class="btn btn-default">
+                                                        <i class="glyphicon glyphicon-user" style="margin-right: 5px;"></i>个人中心
+                                                    </a>
+                                                </div>
+                                                <div class="pull-right">
+                                                    <a href="/signout" class="btn btn-danger">
+                                                        <i class="glyphicon glyphicon-log-out" style="margin-right: 5px;"></i>退出登录
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
                                 </li>
-                            </ul>
-                        </li>
-                    </ul>
+                            </template>
+                            <template v-else>
+                                <li class="user user-menu">
+                                    <a href="/index.html">
+                                        <span>登录</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/auth-signup.html">
+                                        <span>注册</span>
+                                    </a>
+                                </li>
+                            </template>
+                        </ul>
                 </div>
             </div>
         </nav>
     </header>
 
     <div class="container top-rel-ontainer" style="transform: none">
-
         <div class="row">
             <div class="left-sidebar col-md-3">
                 <!-- 作者信息 -->
@@ -703,15 +721,14 @@
     <script type="text/javascript" src="js/adminLTE/adminlte.min.js"></script>
     <!-- vue -->
     <script type="text/javascript" src="js/vue/vue.min.js"></script>
-    <!-- sticky sidebar -->
+    <script type="text/javascript" src="js/vue/vue-resource.min.js"></script>
+    <!-- tools -->
     <script type="text/javascript" src="js/tools/ResizeSensor.min.js"></script>
     <script type="text/javascript" src="js/tools/theia-sticky-sidebar.min.js"></script>
-    <!-- nprogress -->
     <script type="text/javascript" src="js/tools/nprogress.js"></script>
-    <!-- decorate -->
     <script type="text/javascript" src="js/view/decorate.js"></script>
-    <!-- share -->
     <script type="text/javascript" src="js/tools/social-share.min.js"></script>
+    <script type="text/javascript" src="js/tools/toastr.min.js"></script>
     <!-- articles -->
     <script type="text/javascript" src="js/view/article.js"></script>
 </body>

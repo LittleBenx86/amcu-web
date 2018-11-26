@@ -9,11 +9,14 @@ import org.springframework.security.web.authentication.SavedRequestAwareAuthenti
 import org.springframework.stereotype.Component;
 import site.amcu.amcuweb.properties.ResponseType;
 import site.amcu.amcuweb.properties.SecurityProperties;
+import site.amcu.amcuweb.vo.CommonResponse;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @Description:    浏览器web端用户登录身份验证成功处理器(需要加入到过滤器链配置中覆盖原本的处理器)
@@ -48,8 +51,10 @@ public class BrowserAuthenticationSuccessHandler extends SavedRequestAwareAuthen
         logger.info("开发阶段测试:登陆成功");
 
         if(ResponseType.JSON.equals(securityProperties.getBrowser().getResponseType())) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("userId", authentication.getName());
             response.setContentType("application/json;charset=UTF-8");
-            response.getWriter().write(objectMapper.writeValueAsString(authentication));
+            response.getWriter().write(objectMapper.writeValueAsString(new CommonResponse(200, "", map)));
         } else {
             /** 父类的方法:进行跳转 */
             super.onAuthenticationSuccess(request, response, authentication);

@@ -15,18 +15,5 @@
         <module name="amcu-web-entity" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="amcu-web" target="1.8" />
-      <module name="amcu-web-app" target="1.8" />
-      <module name="amcu-web-app-main" target="1.8" />
-      <module name="amcu-web-bcore" target="1.8" />
-      <module name="amcu-web-browser" target="1.8" />
-      <module name="amcu-web-browser-main" target="1.8" />
-      <module name="amcu-web-core" target="1.8" />
-      <module name="amcu-web-dao" target="1.8" />
-      <module name="amcu-web-entity" target="1.8" />
-      <module name="amcuweb" target="1.8" />
-      <module name="amcuwebcore" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>

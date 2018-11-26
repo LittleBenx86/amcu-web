@@ -3,6 +3,8 @@ package site.amcu.amcuweb.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.security.core.GrantedAuthority;
@@ -85,10 +87,12 @@ public class User implements UserDetails, Serializable {
         this.username = username;
     }
 
+    @JsonIgnore
     public String getPassword() {
         return password;
     }
 
+    @JsonIgnore
     public void setPassword(String password) {
         this.password = password;
     }
@@ -191,27 +195,27 @@ public class User implements UserDetails, Serializable {
     }
 
     /** 账号状态辅助 */
-    public boolean isActive() {
+    public boolean checkActive() {
         return 0 != this.status % 2 ;
     }
 
-    public boolean isPasswordNull() {
+    public boolean checkPasswordNull() {
         return null == this.password;
     }
 
-    public boolean isEmailNull() {
+    public boolean checkEmailNull() {
         return null == this.email;
     }
 
-    public boolean isMobileNull() {
+    public boolean checkMobileNull() {
         return null == this.mobile;
     }
 
-    public boolean isAmcuer() {
+    public boolean checkAmcuer() {
         return this.status >= UserAccountStatusSupport.ACCOUNT_USER_IS_AMCUER;
     }
 
-    public boolean isScauer() {
+    public boolean checkScauer() {
         return this.status >= UserAccountStatusSupport.ACCOUNT_USER_IS_SCAUER
                 && this.status != UserAccountStatusSupport.ACCOUNT_USER_IS_AMCUER
                 && this.status != UserAccountStatusSupport.ACCOUNT_USER_IS_AMCUER + UserAccountStatusSupport.ACCOUNT_ACTIVE;

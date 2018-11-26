@@ -19,6 +19,14 @@ function bindNProgress() {
     }, 1000);
 }
 
+$(window).ajaxStart(function () {
+    NProgress.start();
+});
+
+$(window).ajaxStop(function () {
+    NProgress.done();
+});
+
 /*************** gotop *******************/
 
 function goTop() {
@@ -59,3 +67,11 @@ function stickySidebar(tarSelector, mtop) {
         additionalMarginTop: mtop
     });
 }
+
+$(function(){
+
+    bindNProgress();
+
+    goTop();
+
+});

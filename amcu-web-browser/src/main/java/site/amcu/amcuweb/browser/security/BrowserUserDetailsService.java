@@ -1,6 +1,7 @@
 package site.amcu.amcuweb.browser.security;
 
 import org.apache.commons.lang.RandomStringUtils;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,11 +59,16 @@ public class BrowserUserDetailsService implements UserDetailsService, SocialUser
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
-        logger.info("开发阶段:正在登录的用户--" + username);
-        int type = SignInRegxUtils.getSignInTypeByRegx(username);
-        logger.info("开发阶段:username类型:" + type);
-        User usr = userService.findByLoginCondition(username, type);
+        User usr = null;
+        if(StringUtils.isNumeric(username)) {
+            logger.info("开发阶段:正在通过remember-me免密登录的用户id--" + username);
+            usr = userService.findBySocialUserId(Integer.parseInt(username));
+        } else {
+            logger.info("开发阶段:正在登录的用户--" + username);
+            int type = SignInRegxUtils.getSignInTypeByRegx(username);
+            logger.info("开发阶段:username类型:" + type);
+            usr = userService.findByLoginCondition(username, type);
+        }
 
         if(null == usr) {
             return null;

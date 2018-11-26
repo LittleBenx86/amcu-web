@@ -77,8 +77,25 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findBySocialUserId(Integer userId) {
         User usr = userMapper.selectById(userId);
-        logger.info("开发阶段:通过第三方登录用户的信息:" + usr.toString());
         return usr;
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public boolean findByUsername(String username) {
+        User usr = userMapper.selectOne(new QueryWrapper<User>().lambda().eq(User::getUsername, username));
+        if(null == usr)
+            return false;
+        return true;
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public boolean findByEmail(String email) {
+        User usr = userMapper.selectOne(new QueryWrapper<User>().lambda().eq(User::getEmail, email));
+        if(null == usr)
+            return false;
+        return true;
     }
 
     @Override
@@ -86,6 +103,5 @@ public class UserServiceImpl implements UserService {
         String encodePassword = passwordEncoder.encode(password);
         return encodePassword;
     }
-
 
 }

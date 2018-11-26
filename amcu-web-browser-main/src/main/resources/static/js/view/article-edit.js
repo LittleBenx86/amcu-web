@@ -5,10 +5,6 @@
 
 $(function() {
 
-    bindNProgress();
-
-    goTop();
-
     /******** simditor编辑器 ********/
     var  toolbars = ['title', 'bold', 'mark', 'italic', 'underline', 'fontScale',
                     'color', 'ol', 'ul', 'blockquote', 'code', 'table',

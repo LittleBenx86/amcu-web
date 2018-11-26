@@ -73,7 +73,7 @@ $(function () {
     datasetStrokeWidth      : 2,
     // Boolean - Whether to fill the dataset with a color
     datasetFill             : true,
-    // String - A legend template
+    // String - A legend templates
     legendTemplate          : '<ul class=\'<%=name.toLowerCase()%>-legend\'><% for (var i=0; i<datasets.length; i++){%><li><span style=\'background-color:<%=datasets[i].lineColor%>\'></span><%=datasets[i].label%></li><%}%></ul>',
     // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
     maintainAspectRatio     : true,
@@ -153,9 +153,9 @@ $(function () {
     responsive           : true,
     // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
     maintainAspectRatio  : false,
-    // String - A legend template
+    // String - A legend templates
     legendTemplate       : '<ul class=\'<%=name.toLowerCase()%>-legend\'><% for (var i=0; i<segments.length; i++){%><li><span style=\'background-color:<%=segments[i].fillColor%>\'></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>',
-    // String - A tooltip template
+    // String - A tooltip templates
     tooltipTemplate      : '<%=value %> <%=label%> users'
   };
   // Create pie or douhnut chart

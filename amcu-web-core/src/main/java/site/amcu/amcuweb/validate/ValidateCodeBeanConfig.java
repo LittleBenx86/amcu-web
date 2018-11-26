@@ -8,6 +8,7 @@ import site.amcu.amcuweb.properties.SecurityProperties;
 import site.amcu.amcuweb.validate.email.DefaultEmailCodeSender;
 import site.amcu.amcuweb.validate.email.EmailCodeSender;
 import site.amcu.amcuweb.validate.email.LocalEmailCodeSender;
+import site.amcu.amcuweb.validate.email.WY163EmailCodeSender;
 import site.amcu.amcuweb.validate.image.ImageCodeGenerator;
 import site.amcu.amcuweb.validate.sms.DefaultSmsCodeSender;
 import site.amcu.amcuweb.validate.sms.SmsCodeSender;
@@ -50,8 +51,7 @@ public class ValidateCodeBeanConfig {
     @ConditionalOnMissingBean(name = "emailCodeSender")
     public EmailCodeSender emailCodeSender() {
         /** 可替换不同的发送器实现,以维护或替换 */
-       //return new DefaultEmailCodeSender();
-        return new LocalEmailCodeSender();
+        return new WY163EmailCodeSender();
     }
 
 }

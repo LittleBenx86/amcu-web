@@ -40,6 +40,20 @@ public interface UserService {
     User findBySocialUserId(Integer userId);
 
     /**
+     * 校验用户名是否已经注册
+     * @param username
+     * @return
+     */
+    boolean findByUsername(String username);
+
+    /**
+     * 校验邮箱是否已经注册
+     * @param email
+     * @return
+     */
+    boolean findByEmail(String email);
+
+    /**
      * 对密码进行加密
      * @param password
      */

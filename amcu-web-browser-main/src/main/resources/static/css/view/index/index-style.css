@@ -118,7 +118,16 @@
 #user-info div.for-btn {
     margin-top: 30px;
 }
+
 #user-info div.for-btn .btn {
+    margin-left: 10px;
+}
+
+#user-info div.unsignin-btn {
+    margin-top: 50px;
+}
+
+#user-info div.unsignin-btn .btn {
     margin-left: 10px;
 }
 

@@ -1,9 +1,14 @@
 package site.amcu.amcuweb.site.amcu.amcuweb.browser.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,6 +23,8 @@ import site.amcu.amcuweb.entity.User;
 import site.amcu.amcuweb.service.UserService;
 import site.amcu.amcuweb.support.RoleSupport;
 import site.amcu.amcuweb.utils.SignInRegxUtils;
+import site.amcu.amcuweb.vo.CommonResponse;
+import site.amcu.amcuweb.vo.Response;
 import site.amcu.amcuweb.vo.SocialUserInfoVO;
 
 import javax.annotation.Resource;
@@ -26,6 +33,8 @@ import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @Description:
@@ -43,13 +52,27 @@ public class UserBasicController {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    private ObjectMapper objectMapper = new ObjectMapper();
+
     @RolesAllowed({"USER"})
-    @GetMapping("/usr/me")
-    public Object getCurrentUser(Authentication authentication, HttpServletRequest request) throws Exception {
-        SecurityContext context = SecurityContextHolder.getContext();
-        Authentication auth = context.getAuthentication();
-        SocialUserDetails userDetails = (SocialUserDetails) auth.getPrincipal();
-        return userDetails;
+    @GetMapping("/usr/signin-usr")
+    public ResponseEntity<Response> getCurrentUser(@RequestParam(value = "userId") String userId, HttpServletRequest request) throws Exception {
+
+        SocialUserDetails principal;
+        ResponseEntity<Response> resp = null;
+
+        if(SecurityContextHolder.getContext().getAuthentication() != null &&
+                SecurityContextHolder.getContext().getAuthentication().isAuthenticated() &&
+                !SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString().equalsIgnoreCase("anonymousUser")) {
+            principal = (SocialUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            if(null != principal && userId.equals(principal.getUserId())){
+                User usr = userService.findBySocialUserId(Integer.parseInt(userId));
+                 resp = ResponseEntity.ok().body(new Response(true, "", usr));
+            }
+        }
+        return resp == null ?
+                ResponseEntity.status(HttpStatus.valueOf(500)).body(new Response(false, "登录异常,信息获取失败!")) :
+                resp;
     }
 
     @PermitAll
@@ -94,6 +117,31 @@ public class UserBasicController {
         }
 
         return info;
+    }
+
+    @PermitAll
+    @PostMapping("/usr/check")
+    public Object validateUsernameOrEmailExist(@RequestParam(value = "username", required = false) String username,
+                                               @RequestParam(value = "email", required = false) String email) {
+        boolean flag = false;
+        String result = null;
+        Map<String, Boolean> map = new HashMap<>();
+
+        if(StringUtils.isNotBlank(username)) {
+           flag = userService.findByUsername(username);
+        } else if(StringUtils.isNotBlank(email)) {
+            flag = userService.findByEmail(email);
+        }
+
+        map.put("valid", !flag);
+
+        try {
+            result = objectMapper.writeValueAsString(map);
+        } catch (JsonProcessingException e) {
+            logger.error(e.getMessage());
+        }
+
+        return result;
     }
 
 }

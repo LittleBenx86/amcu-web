@@ -5,10 +5,6 @@
 
 $(function() {
 
-    bindNProgress();
-
-    goTop();
-
     $("#info-tabs a").click(function (e) {
         e.preventDefault();
         $(this).tab('show');

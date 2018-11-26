@@ -6,7 +6,7 @@
     <meta http-equiv="x-ua-compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="description" content="AMCU是华南农业大学单片机开发爱好者的交流平台">
-    <meta name="keywords" content="AMCU,MCU,大学生,单片机开发者社区,电子专业,硬件工程师,Android工程师,开发者,Java工程师">
+    <meta name="keywords" content="AMCU,MCU,大学生,单片机爱好者社区,电子专业,硬件工程师,Android工程师,开发者,Java工程师">
     <title>公告--华南农业大学单片机协会</title>
     <!-- icon -->
     <link rel="icon" href="img/favicon.ico" type="image/x-icon">
@@ -110,24 +110,40 @@
                         </div>
                     </div>
                 </div>
-                <div class="sel-tab-bable">
-                    <div class="box box-primary">
-                        <div class="box-header">
-                            <h3 class="box-title">导航</h3>
-                        </div>
-                        <ul class="nav nav-pills nav-stacked" id="info-tabs">
-                            <li class="active"><a href="#sys-amcu-info" data-toggle="tab">协会资讯</a></li>
-                            <li><a href="#sys-notice" data-toggle="tab">网站公告</a></li>
-                        </ul>
+                <div class="box box-primary hidden-xs">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">关注AMCU</h3>
+                    </div>
+                    <div class="box-body">
+                        <strong>
+                            <i class="fa fa-wechat margin-r-5"></i>AMCU微信公众号
+                        </strong>
+                        <p class="text-muted">公众号:<strong>华农单协</strong>
+                            <img class="group-img center-block" src="img/avatar/wx_amcu.jpg" alt="华农单协">
+                        </p>
+                        <p>关注了可能能成为大佬哦!</p>
                     </div>
                 </div>
             </div>
             <div class="sys-article tab-content col-md-9 col-xs-12">
+                <!-- 导航栏 -->
+                <div>
+                    <ul class="breadcrumb bread-nav-w">
+                        <li><a href="/index.html">首页</a></li>
+                        <li><a href="javascript:void(0)">公告</a></li>
+                        <li><a href="javascript:void(0)" id="cur-type">协会资讯</a></li>
+                    </ul>
+                </div>
+
+                <div class="nav-tabs-custom margin-bottom-none">
+                    <ul class="nav nav-tabs ul-nav-w ul-nav-border" id="article-tabs">
+                        <li class="active"><a href="#sys-amcu-info" data-toggle="tab">协会资讯</a></li>
+                        <li><a href="#sys-notice" data-toggle="tab">网站公告</a></li>
+                    </ul>
+                </div>
+
                 <div class="amcu-info-box tab-pane active" id="sys-amcu-info">
                     <div class="box box-solid">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">协会资讯</h3>
-                        </div>
                         <div class="box-body">
                             <ul class="amcu-info-content">
                                 <li class="content-li">
@@ -516,9 +532,6 @@
                 </div>
                 <div class="notice-box tab-pane" id="sys-notice">
                     <div class="box box-solid">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">网站公告</h3>
-                        </div>
                         <div class="box-body">
                             <ul class="notice-content">
                                 <li class="content-li">

@@ -9,6 +9,7 @@ server:
     timeout: 7200
 
 spring:
+  #mvc 视图解析
   #session管理
   session:
     store-type: redis
@@ -43,15 +44,22 @@ spring:
   #邮件配置(本地邮箱服务器测试)
   mail:
     default-encoding: UTF-8
-    host: 127.0.0.1
+    #host: 127.0.0.1
+    host: smtp.163.com
     port: 25
-    username: tester1@local.test
+    username: scauamcu@163.com
     #填写授权码(非密码)
-    password: 123456
+    #password: 123456
+    password: oauth401amcu
     protocol: smtp
+    properties:
+      mail:
+        smtp:
+          auth: true
     #自行配制
     sys-config:
-      host-addr:  tester1@local.test
+      #host-addr:  tester1@local.test
+      host-addr: scauamcu@163.com
 
 #spring security配置
 security:
@@ -89,8 +97,10 @@ sys:
   properties:
     browser:
       response-type: JSON
-      login-page: /login.html
+      login-page: /index.html
       sign-out-url: /signout-success.html
+      session:
+        session-invalid-url: /index
     #第三方登录配置
     social:
       filter-processes-url: /qqLogin
@@ -114,10 +124,15 @@ sys:
         app-id: c54ec0584f97ed7ae716fab1b5d4d542
         app-secret: 2418c765f53bab7b75b7a268900b9932c256b9d1
         provider-id: coding
+    #校验码的拦截url
     code:
       email:
-        url: /test/codeValidate
+        url: /auth/signup
       image:
         url: /usr/social-signup/*
+    sign-in-regx:
+        username-regx:  ^(?!_)(?!\d)(?!.*?_$)[\(\)a-zA-Z0-9_\u4e00-\u9fa5\uac00-\ud7ff\u0800-\u4e00]+$
+        mobile-regx: ^((13[0-9])|(14[5,7])|(15[0-3,5-9])|(17[0,3,5-8])|(18[0-9])|166|198|199|(147))\d{8}$
+        email-regx: ^\w[-\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\.)+[A-Za-z]{2,14}$
 
 
