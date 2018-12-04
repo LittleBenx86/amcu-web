@@ -1,4 +1,4 @@
-package site.amcu.amcuweb.site.amcu.amcuweb.browser.controller;
+package site.amcu.amcuweb.browser.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -1,4 +1,4 @@
-package site.amcu.amcuweb.site.amcu.amcuweb.browser.controller;
+package site.amcu.amcuweb.browser.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
