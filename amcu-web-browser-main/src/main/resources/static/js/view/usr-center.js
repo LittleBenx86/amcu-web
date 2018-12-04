@@ -47,44 +47,27 @@ $(function(){
     });
 
     $(".avatar-save").on("click", function() {
-        var img_lg = $('#imageHead');
-        var width = img_lg.offsetWidth;
-        var height = img_lg.offsetHeight;
-        var scale = 2;
-        var canvas = document.createElement("canvas");
-        canvas.width = width * scale;
-        canvas.height = height * scale;
-        var content = canvas.getContext('2d');
-        content.scale(scale, scale);
-        var rect = img_lg.get(0).getBoundingClientRect();
-        content.translate(-rect.left, -rect.top);
-        var opts = {
-            dpi : window.devicePixelRatio * 2,
-            scale : scale,
-            logging : false,         /** html2canvas日志 */
-            useCORS : true,          /** 跨域配置 */
-            width : width,
-            height : height,
-            canvas : canvas,
-        }
 
-        /** 截图小的显示框内的内容 */
-        html2canvas(img_lg[0], opts).then(function(canvas) {
-            var dataUrl = canvas.toDataURL("image/png");
-            var formData = new FormData();
-            var params = {"mediaType" : 3};
-            if(dataUrl) {
-                var blobBin = dataURLtoBlob(dataUrl);
-                var fileType = blobBin.type.split("/")[1];
-                params.fileType = fileType;
-                formData.append("file", blobBin);
-            }
-            var dataWithType = new Blob([JSON.stringify(params)], {
-                type : "application/json"
-            });
-            formData.append("data", dataWithType);
-            avatarUploadAjax(formData);
+        var $image = $('img.cropper-hidden');
+        var data = {option:{}};
+        data.option.width = 184;
+        data.option.height = 184;
+        data.option.fillColor = '#fff';
+        var result = $image.cropper('getCroppedCanvas', data.option, undefined);
+        var dataUrl = result.toDataURL("image/png");
+        var formData = new FormData();
+        var params = {"mediaType" : 3};
+        if(dataUrl) {
+            var blobBin = dataURLtoBlob(dataUrl);
+            var fileType = blobBin.type.split("/")[1];
+            params.fileType = fileType;
+            formData.append("file", blobBin);
+        }
+        var dataWithType = new Blob([JSON.stringify(params)], {
+            type : "application/json"
         });
+        formData.append("data", dataWithType);
+        avatarUploadAjax(formData);
     });
 
     /******** 函数定义 ********/
@@ -101,8 +84,12 @@ $(function(){
             dataType: 'json',
             processData: false,
             contentType: false,
-            success: function(res) {
-                console.info(res);
+            success: function(result) {
+                console.info(result.success + ":" + result.respBody)
+                if(result.success){
+                    $("img.usr-avatar").src = result.respBody;
+                }
+
             }
         });
     }
