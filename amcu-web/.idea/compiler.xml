@@ -15,5 +15,8 @@
         <module name="amcu-web-entity" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="files-server" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

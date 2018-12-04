@@ -5,11 +5,9 @@
 
 $(function() {
 
-    $("#info-tabs a").click(function (e) {
+    $("#article-tabs a").click(function (e) {
         e.preventDefault();
         $(this).tab('show');
-        console.info(this.tagName.toString() == 'A');
-        console.info(this.attributes[0].value == '#sys-amcu-info');
     });
     
     showTarTabView(getUrlParam('type'));
@@ -18,7 +16,7 @@ $(function() {
 
     /******** 函数定义 ********/
     function showTarTabView(type) {
-        $("#info-tabs a[href='#" + type + "']").tab('show');
+        $("#article-tabs a[href='#" + type + "']").tab('show');
     }
 
 });

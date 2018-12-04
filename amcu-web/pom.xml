@@ -58,7 +58,7 @@
     <module>../amcu-web-app</module>
     <module>../amcu-web-browser-main</module>
     <module>../amcu-web-app-main</module>
-      <module>../amcu-web-entity</module>
+    <module>../amcu-web-entity</module>
     <module>../amcu-web-dao</module>
   </modules>
 
