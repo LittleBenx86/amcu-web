@@ -1,6 +1,5 @@
 package site.amcu.amcuweb.browser.controller;
 
-import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang.StringUtils;
@@ -10,25 +9,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.web.ProviderSignInUtils;
 import org.springframework.social.security.SocialUserDetails;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.ServletWebRequest;
 import site.amcu.amcuweb.browser.security.BrowserSocialUserBuildType;
 import site.amcu.amcuweb.entity.User;
 import site.amcu.amcuweb.service.UserService;
 import site.amcu.amcuweb.support.RoleSupport;
 import site.amcu.amcuweb.utils.SignInRegxUtils;
-import site.amcu.amcuweb.vo.CommonResponse;
 import site.amcu.amcuweb.vo.Response;
 import site.amcu.amcuweb.vo.SocialUserInfoVO;
 
 import javax.annotation.Resource;
-import javax.annotation.security.DenyAll;
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
@@ -54,6 +49,13 @@ public class UserBasicController {
 
     private ObjectMapper objectMapper = new ObjectMapper();
 
+    /**
+     *  获取已登录用户的信息
+     * @param userId
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @RolesAllowed({"USER"})
     @GetMapping("/usr/signin-usr")
     public ResponseEntity<Response> getCurrentUser(@RequestParam(value = "userId") String userId, HttpServletRequest request) throws Exception {
@@ -67,14 +69,40 @@ public class UserBasicController {
             principal = (SocialUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             if(null != principal && userId.equals(principal.getUserId())){
                 User usr = userService.findBySocialUserId(Integer.parseInt(userId));
-                 resp = ResponseEntity.ok().body(new Response(true, "", usr));
+                if(usr != null)
+                    resp = ResponseEntity.ok().body(new Response(true, "", HttpStatus.OK.value(), usr));
             }
         }
         return resp == null ?
-                ResponseEntity.status(HttpStatus.valueOf(500)).body(new Response(false, "登录异常,信息获取失败!")) :
+                ResponseEntity.ok().body(new Response(false, "登录异常,信息获取失败!", HttpStatus.INTERNAL_SERVER_ERROR.value())) :
                 resp;
     }
 
+    /**
+     *  获取其他用户的信息
+     * @param userId
+     * @return
+     */
+    @PermitAll
+    @GetMapping("/usr/other-usr")
+    public ResponseEntity<Response> getTarUser(@RequestParam(value = "tuid", required = true) String userId) {
+        ResponseEntity<Response> resp = null;
+        if(userId != null && !userId.equalsIgnoreCase("") && StringUtils.isNumeric(userId)) {
+            User usr = userService.findBySocialUserId(Integer.parseInt(userId));
+            if(null != usr)
+                resp = ResponseEntity.ok().body(new Response(true, "", HttpStatus.OK.value(), usr));
+        }
+        return resp == null ?
+                ResponseEntity.ok().body(new Response(false, "该用户信息获取失败!", HttpStatus.INTERNAL_SERVER_ERROR.value())) :
+                resp;
+    }
+
+    /**
+     *  github,Coding等第三方用户的绑定/所有第三方首次登陆时的账号注册or绑定
+     * @param type
+     * @param usr
+     * @param request
+     */
     @PermitAll
     @PostMapping("/usr/social-signup/{type}")
     public void socialUserRegistOrBinding(@PathVariable(name = "type") Integer type,
@@ -91,6 +119,12 @@ public class UserBasicController {
         }
     }
 
+    /**
+     *  获取第三方账户的信息
+     * @param authentication
+     * @param request
+     * @return
+     */
     @PermitAll
     @GetMapping("/usr/social-info")
     public SocialUserInfoVO getSocialUserInfo(Authentication authentication, HttpServletRequest request) {
@@ -119,6 +153,12 @@ public class UserBasicController {
         return info;
     }
 
+    /**
+     *  用户名/邮箱地址查重
+     * @param username
+     * @param email
+     * @return
+     */
     @PermitAll
     @PostMapping("/usr/check")
     public Object validateUsernameOrEmailExist(@RequestParam(value = "username", required = false) String username,

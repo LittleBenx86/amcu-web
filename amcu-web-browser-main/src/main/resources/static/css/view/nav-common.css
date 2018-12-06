@@ -242,6 +242,10 @@ hr {
     padding: 0
 }
 
+.mr-t-0 {
+    margin-top: 0 !important;
+}
+
 .mr-t-4 {
     margin-top: 4px !important;
 }
@@ -256,6 +260,10 @@ hr {
 
 .mr-t-10 {
     margin-top: 10px !important;
+}
+
+.mr-b-0 {
+    margin-bottom: 0 !important;
 }
 
 .mr-b-10 {
@@ -972,6 +980,15 @@ blockquote {
     opacity: .75;
     filter: alpha(opacity=75);
     z-index: 20140628;
+}
+
+.title-bar {
+    border-left: 5px solid #3c8dbc;
+    line-height: 36px;
+    padding: 5px 20px;
+    background: #f8f8f8;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 

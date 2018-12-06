@@ -9,6 +9,7 @@ import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.util.UrlUtils;
 import org.springframework.util.Assert;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import site.amcu.amcuweb.vo.SimpleResponse;
 
 import javax.servlet.http.HttpServletRequest;
@@ -54,21 +55,17 @@ public class AbstractSessionStrategy {
         }
 
         String sourceUrl = request.getRequestURI();
+        logger.warn("session失效触发链接" + sourceUrl);
+        String message = "invalid";
         String targetUrl;
 
-        if(StringUtils.endsWithIgnoreCase(sourceUrl, ".html")) {
-            targetUrl = destinationUrl + ".html";
-            logger.warn("session失效，跳转到" + targetUrl);
-            redirectStrategy.sendRedirect(request, response, targetUrl);
-        } else {
-            String message = "session已经失效";
-            if(this.isConcurrency()) {
-                message = message + "，有可能是并发登录（同一用户多处登陆）导致的！";
-            }
-            response.setStatus(HttpStatus.UNAUTHORIZED.value());
-            response.setContentType("application/json;charset=UTF-8");
-            response.getWriter().write(objectMapper.writeValueAsString(new SimpleResponse(message)));
+        if(this.isConcurrency()) {
+            message = "mutli-invalid";
         }
+        targetUrl = destinationUrl + ".html?smsg=" + message;
+        logger.warn("session失效，跳转到" + targetUrl);
+        redirectStrategy.sendRedirect(request, response, targetUrl);
+
     }
 
     /**

@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+.info-tips {
+    width: 100%;
+    height: 460px;
+    margin: 0 auto;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.ss-title-2 {
+    position: relative;
+    top: 100px;
+}
+
+.ss-title-3 {
+    position: relative;
+    top: 150px;
+}
+
+.jump-index {
+    position: relative;
+    top: 200px;
+}

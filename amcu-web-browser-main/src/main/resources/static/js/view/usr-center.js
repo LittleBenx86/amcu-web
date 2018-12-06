@@ -3,6 +3,94 @@
  * date: 2018-11-28
  */
 
+/******** vue数据控制 ********/
+
+var usrCenterVM = new Vue({
+    el : "#vUsrCenter",
+    data : {
+        isCurUser: false,
+        isLogin : false,
+        isAMCUer : false,
+        isADMIN : false,
+        hasPriorityView : false,
+        hasFollowing : false,
+        curUserId : null,
+        tarUserId : null,
+        curUserAvatar : "img/avatar/5_1.png",
+        tarUserAvatar : "img/avatar/5_1.png",
+        curUsername : "测试人员",
+        tarUsername : "测试作者",
+    },
+    methods : {
+        getCurLoginUserInfo : function(userId) {
+           axios.get('/usr/signin-usr?userId=' + userId).then(function(result){
+                if(200 == result.status){
+                    usrCenterVM.isLogin = true;
+                    usrCenterVM.isCurUser = true;
+                    usrCenterVM.curUserId = userId;
+                    usrCenterVM.curUserAvatar = (result.data.respBody.avatar == null ?
+                        usrCenterVM.curUserAvatar :
+                        result.data.respBody.avatar);
+                    usrCenterVM.curUsername = result.data.respBody.username;
+                    usrCenterVM.curIntegrations = 0;
+                    usrCenterVM.hasPriorityView = true;
+                }
+            }, function(xhr){
+                toastr.error("用户信息获取异常,请重新登录");
+                timeoutRelocateToIndex(1500);
+            });
+        },
+        getTarUserInfo : function(tuid) {
+            var _this = this;
+            axios.get('/usr/other-usr?tuid=' + tuid).then(function(result){
+                if(200 == result.status){
+                    if(200 == result.data.statusCode){
+                        _this.isLogin = false;
+                        _this.isCurUser = false;
+                        _this.tarUserAvatar = (result.data.respBody.avatar == null ?
+                            _this.tarUserAvatar :
+                            result.data.respBody.avatar);
+                        _this.tarUsername = result.data.respBody.username;
+                        _this.hasPriorityView = false;
+                    } else if(500 == result.data.statusCode) {
+                        toastr.error(result.data.msg + "\n请检查请求链接!", "提示");
+                        timeoutRelocateToIndex(1500);
+                    }
+                }
+            }, function(xhr){
+                relocateToIndexImmediately();
+            });
+        }
+    },
+    created : function() {
+       var tuid = getUrlParam("tuid");
+       if(null == tuid || undefined === tuid || isNaN(tuid)) {
+           axios.get('/auth/usr-enduring').then(function(result){
+               if(200 === result.status){
+                   if(200 === result.data.statusCode){
+                       usrCenterVM.$options.methods.getCurLoginUserInfo(result.data.respBody.userId);
+                   } else if(500 === result.data.statusCode) {
+                       usrCenterVM.isLogin = false;
+                       toastr.error(result.data.msg + "\n请重新登录!");
+                   } else if(404 === result.data.statusCode) {
+                       usrCenterVM.isLogin = false;
+                       toastr.error(result.data.msg + "\n请重新登录!", "提示");
+                       timeoutRelocateToIndex(1500);
+                   }
+               }
+           }, function(xhr) {
+               toastr.error("用户信息获取异常,请重新登录");
+               timeoutRelocateToIndex(1500);
+           });
+       } else {
+           this.tarUserId = tuid;
+           this.getTarUserInfo(tuid);
+       }
+    }
+});
+
+/******** dom初始化 ********/
+
 $(function(){
     $("#info-tabs a").click(function (e) {
         e.preventDefault();
@@ -25,6 +113,8 @@ $(function(){
     showTarTabView(getUrlParam('type'));
 
     stickySidebar(".left-sidebar", 10);
+
+    /******** 头像剪裁保存 ********/
 
     $("input#avatarInput.avatar-input").on('change', function (e) {
         /** 2M */
@@ -70,6 +160,49 @@ $(function(){
         avatarUploadAjax(formData);
     });
 
+    /******** oauth账号绑定解绑 ********/
+
+    $("#qqBinding").on("click", function(){
+        //binding("");
+    });
+
+    $("#wxBinding").on("click", function(){
+        binding("/connect/weixin");
+    });
+
+    $("#lkBinding").on("click", function(){
+        binding("/connect/linkedin");
+    });
+
+    $("#githubBinding").on("click", function(){
+        binding("/qqLogin/github");
+    });
+
+    $("#codingBinding").on("click", function(){
+        binding("/qqLogin/coding");
+    });
+
+
+    $("#qqUnbinding").on("click", function(){
+        //unbinding("");
+    });
+
+    $("#wxUnbinding").on("click", function(){
+        unbinding("/connect/weixin");
+    });
+
+    $("#lkUnbinding").on("click", function(){
+        unbinding("/connect/linkedin");
+    });
+
+    $("#githubUnbinding").on("click", function(){
+        unbinding("/connect/github");
+    });
+
+    $("#codingUnbinding").on("click", function(){
+        unbinding("/connect/coding");
+    });
+
     /******** 函数定义 ********/
     function showTarTabView(type) {
         $("#info-tabs a[href='#" + type + "']").tab('show');
@@ -104,6 +237,20 @@ $(function(){
             u8arr[n] = bstr.charCodeAt(n);
         }
         return new Blob([u8arr], {type: mime});
+    }
+
+    function binding(connectUrl) {
+        $.ajax({
+            type : "POST",
+            url : connectUrl,
+        });
+    }
+
+    function unbinding(connectedUrl) {
+        $.ajax({
+            type : "DELETE",
+            url : connectedUrl,
+        });
     }
 
 });

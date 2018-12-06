@@ -100,7 +100,7 @@ sys:
       login-page: /index.html
       sign-out-url: /signout-success.html
       session:
-        session-invalid-url: /index
+        session-invalid-url: /session/invalid
     #第三方登录配置
     social:
       filter-processes-url: /qqLogin

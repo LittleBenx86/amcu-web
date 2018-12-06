@@ -68,6 +68,22 @@ function stickySidebar(tarSelector, mtop) {
     });
 }
 
+/*************** 侧边栏浮动 *******************/
+
+function relocateToIndexImmediately() {
+    window.location.replace("/");
+}
+
+function timeoutRelocateToIndex(timeout) {
+    var regx = /^[0-9]+$/;
+    if(regx.test(timeout))
+        setTimeout(function(){ window.location.replace("/"); }, timeout);
+    else
+        relocateToIndexImmediately();
+}
+
+
+
 $(function(){
 
     toastr.options = {

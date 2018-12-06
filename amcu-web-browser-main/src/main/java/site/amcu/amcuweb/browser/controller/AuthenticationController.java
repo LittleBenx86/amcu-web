@@ -60,16 +60,16 @@ public class AuthenticationController {
             if(null != principal ){
                 res.put("userId", principal.getUserId());
                 try {
-                    resp = ResponseEntity.ok().body(new Response(true, "", res));
+                    resp = ResponseEntity.ok().body(new Response(true, "", HttpStatus.OK.value(), res));
                 } catch (Exception e) {
-                    resp = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                            .body(new Response(false, "当前用户信息数据格式化异常!"));
+                    resp = ResponseEntity.ok()
+                            .body(new Response(false, "当前用户信息数据格式化异常!", HttpStatus.INTERNAL_SERVER_ERROR.value()));
                 }
             }
         }
         return resp == null ?
-                ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                        .body(new Response(false, "当前用户信息获取失败!")) :
+                ResponseEntity.ok()
+                        .body(new Response(false, "未登录", HttpStatus.valueOf(404).value())) :
                 resp;
     }
 
