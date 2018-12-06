@@ -21,9 +21,9 @@ public class SocialBindingConnectedView extends AbstractView {
         response.setContentType("text/html;charset=UTF-8");
 
         if(null == model.get("connections")) {
-            response.getWriter().write("<h3>解绑成功</h3>");
+            response.getWriter().write("<h3>解绑成功</h3><br><a href='/usr-center.html?type=oauth2-info'>点击此处返回</a>");
         } else {
-            response.getWriter().write("<h3>绑定成功</h3>");
+            response.getWriter().write("<h3>绑定成功</h3><br><a href='/usr-center.html?type=oauth2-info'>点击此处返回</a>");
         }
 
     }

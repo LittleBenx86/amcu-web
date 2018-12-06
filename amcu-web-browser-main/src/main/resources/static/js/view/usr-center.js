@@ -1,4 +1,5 @@
 /**
+ * 用户个人中心
  * author: Ben Zheng
  * date: 2018-11-28
  */
@@ -12,6 +13,11 @@ var usrCenterVM = new Vue({
         isLogin : false,
         isAMCUer : false,
         isADMIN : false,
+        isQQBinded : false,
+        isWxBinded : false,
+        isLkBinded : false,
+        isGithubBinded : false,
+        isCodingBinded : false,
         hasPriorityView : false,
         hasFollowing : false,
         curUserId : null,
@@ -20,24 +26,46 @@ var usrCenterVM = new Vue({
         tarUserAvatar : "img/avatar/5_1.png",
         curUsername : "测试人员",
         tarUsername : "测试作者",
+
     },
     methods : {
         getCurLoginUserInfo : function(userId) {
            axios.get('/usr/signin-usr?userId=' + userId).then(function(result){
-                if(200 == result.status){
-                    usrCenterVM.isLogin = true;
-                    usrCenterVM.isCurUser = true;
-                    usrCenterVM.curUserId = userId;
-                    usrCenterVM.curUserAvatar = (result.data.respBody.avatar == null ?
-                        usrCenterVM.curUserAvatar :
-                        result.data.respBody.avatar);
-                    usrCenterVM.curUsername = result.data.respBody.username;
-                    usrCenterVM.curIntegrations = 0;
-                    usrCenterVM.hasPriorityView = true;
+                if(200 === result.status){
+                    if(200 === result.data.statusCode) {
+                        usrCenterVM.isLogin = true;
+                        usrCenterVM.isCurUser = true;
+                        usrCenterVM.curUserId = userId;
+                        usrCenterVM.curUserAvatar = (result.data.respBody.avatar == null ?
+                            usrCenterVM.curUserAvatar :
+                            result.data.respBody.avatar);
+                        usrCenterVM.curUsername = result.data.respBody.username;
+                        usrCenterVM.curIntegrations = 0;
+                        usrCenterVM.hasPriorityView = true;
+
+                        usrCenterVM.$options.methods.getOAuthBindingInfo();
+
+                    } else if(500 === result.data.statusCode) {
+                        toastr.error(result.data.msg + "\n请重新登录!", "提示");
+                        this.isLogin = false;
+                    }
                 }
             }, function(xhr){
                 toastr.error("用户信息获取异常,请重新登录");
                 timeoutRelocateToIndex(1500);
+            });
+        },
+        getOAuthBindingInfo : function() {
+            axios.get("/connect").then(function(result){
+                var data = result.data;
+                usrCenterVM.isQQBinded = data["callback.do"];
+                usrCenterVM.isWxBinded = data["weixin"];
+                usrCenterVM.isLkBinded = data["linkedin"];
+                usrCenterVM.isGithubBinded = data["github"];
+                usrCenterVM.isCodingBinded = data["coding"];
+
+            }, function(xhr){
+
             });
         },
         getTarUserInfo : function(tuid) {
@@ -60,7 +88,8 @@ var usrCenterVM = new Vue({
             }, function(xhr){
                 relocateToIndexImmediately();
             });
-        }
+        },
+
     },
     created : function() {
        var tuid = getUrlParam("tuid");
@@ -95,17 +124,17 @@ $(function(){
     $("#info-tabs a").click(function (e) {
         e.preventDefault();
         $(this).tab('show');
-        if(this.attributes[0].value == '#usr-info') {
+        if(this.attributes[0].value === '#usr-info') {
             $("a#cur-type").text("个人信息");
-        } else if(this.attributes[0].value == '#account-info') {
+        } else if(this.attributes[0].value === '#account-info') {
             $("a#cur-type").text("账号信息");
-        } else if(this.attributes[0].value == '#oauth2-info') {
+        } else if(this.attributes[0].value === '#oauth2-info') {
             $("a#cur-type").text("第三方账号绑定");
-        } else if(this.attributes[0].value == '#auth-info') {
+        } else if(this.attributes[0].value === '#auth-info') {
             $("a#cur-type").text("单片机协会认证信息");
-        } else if(this.attributes[0].value == '#following-info') {
+        } else if(this.attributes[0].value === '#following-info') {
             $("a#cur-type").text("关注作者");
-        } else if(this.attributes[0].value == '#follower-info') {
+        } else if(this.attributes[0].value === '#follower-info') {
             $("a#cur-type").text("粉丝信息");
         }
     });
@@ -160,49 +189,6 @@ $(function(){
         avatarUploadAjax(formData);
     });
 
-    /******** oauth账号绑定解绑 ********/
-
-    $("#qqBinding").on("click", function(){
-        //binding("");
-    });
-
-    $("#wxBinding").on("click", function(){
-        binding("/connect/weixin");
-    });
-
-    $("#lkBinding").on("click", function(){
-        binding("/connect/linkedin");
-    });
-
-    $("#githubBinding").on("click", function(){
-        binding("/qqLogin/github");
-    });
-
-    $("#codingBinding").on("click", function(){
-        binding("/qqLogin/coding");
-    });
-
-
-    $("#qqUnbinding").on("click", function(){
-        //unbinding("");
-    });
-
-    $("#wxUnbinding").on("click", function(){
-        unbinding("/connect/weixin");
-    });
-
-    $("#lkUnbinding").on("click", function(){
-        unbinding("/connect/linkedin");
-    });
-
-    $("#githubUnbinding").on("click", function(){
-        unbinding("/connect/github");
-    });
-
-    $("#codingUnbinding").on("click", function(){
-        unbinding("/connect/coding");
-    });
-
     /******** 函数定义 ********/
     function showTarTabView(type) {
         $("#info-tabs a[href='#" + type + "']").tab('show');
@@ -237,20 +223,6 @@ $(function(){
             u8arr[n] = bstr.charCodeAt(n);
         }
         return new Blob([u8arr], {type: mime});
-    }
-
-    function binding(connectUrl) {
-        $.ajax({
-            type : "POST",
-            url : connectUrl,
-        });
-    }
-
-    function unbinding(connectedUrl) {
-        $.ajax({
-            type : "DELETE",
-            url : connectedUrl,
-        });
     }
 
 });

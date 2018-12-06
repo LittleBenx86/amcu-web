@@ -2,16 +2,20 @@ package site.amcu.amcuweb.browser;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.context.SecurityContextHolderStrategy;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.session.InvalidSessionStrategy;
 import org.springframework.security.web.session.SessionInformationExpiredStrategy;
+import org.springframework.web.filter.HiddenHttpMethodFilter;
 import site.amcu.amcuweb.browser.logout.BrowserLogoutSuccessHandler;
 import site.amcu.amcuweb.browser.session.BrowserExpiredSessionStrategy;
 import site.amcu.amcuweb.browser.session.BrowserInvalidSessionStrategy;
 import site.amcu.amcuweb.properties.SecurityProperties;
+
+import java.util.Arrays;
 
 /**
  * @Description:    浏览器端的Bean配置类
@@ -36,6 +40,13 @@ public class BrowserSecurityBeanConfig {
     @ConditionalOnMissingBean(SessionInformationExpiredStrategy.class)
     public SessionInformationExpiredStrategy sessionInformationExpiredStrategy() {
         return new BrowserExpiredSessionStrategy(securityProperties.getBrowser().getSession().getSessionInvalidUrl());
+    }
+
+    @Bean
+    public FilterRegistrationBean hiddenHttpMethodFilter() {
+        FilterRegistrationBean filterRegBean = new FilterRegistrationBean(new HiddenHttpMethodFilter());
+        filterRegBean.setUrlPatterns(Arrays.asList("/*"));
+        return filterRegBean;
     }
 
     /** 配置logout处理的Bean */

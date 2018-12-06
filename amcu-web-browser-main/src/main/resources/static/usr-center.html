@@ -337,68 +337,111 @@
                             <div class="box-body">
                                 <h3 class="title-bar">OAuth Account Binding/Unbinding</h3>
                                 <div class="edu-profile mr-t-10">
-                                    <form class="form-horizontal">
-                                        <div class="form-group">
-                                            <label class="col-md-2 control-label">QQ:</label>
-                                            <div class="col-md-9">
-                                                <img src="img/avatar/qq.ico" />
-                                                <div class="pull-right">
-                                                    <span style="color: red;">未绑定</span>
-                                                    <span style="color: green;">已绑定</span>
-                                                    <a class="btn btn-primary" id="qqBinding" href="javascript:void(0)">绑定</a>
-                                                    <a class="btn btn-danger" id="qqUnbinding" href="javascript:void(0)">解绑</a>
-                                                </div>
+                                    <div class="row mr-b-10">
+                                        <label class="col-md-2 control-label"><span class="pull-right">QQ:</span></label>
+                                        <div class="col-md-9">
+                                            <img src="img/avatar/qq.ico" />
+                                            <div class="pull-right">
+                                                <template v-if="isQQBinded == false">
+                                                    <form action="/connect/qq" method="post">
+                                                        <span style="color: red;">未绑定</span>
+                                                        <button class="btn btn-primary" id="qqBinding" type="button">绑定</button>
+                                                    </form>
+                                                </template>
+                                                <template v-else>
+                                                    <form action="/connect/qq" method="POST">
+                                                        <span style="color: green;">已绑定</span>
+                                                        <input type="hidden" name="_method" value="DELETE" />
+                                                        <button class="btn btn-danger" id="qqUnbinding" type="button">解绑</button>
+                                                    </form>
+                                                </template>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="col-md-2 control-label">WeChat:</label>
-                                            <div class="col-md-9">
-                                                <img src="img/avatar/wx.ico" />
-                                                <div class="pull-right">
-                                                    <span style="color: red;">未绑定</span>
-                                                    <span style="color: green;">已绑定</span>
-                                                    <a class="btn btn-primary" id="wxBinding" href="javascript:void(0)">绑定</a>
-                                                    <a class="btn btn-danger"  id="wxUnbinding" href="javascript:void(0)">解绑</a>
-                                                </div>
+                                    </div>
+                                    <div class="row mr-b-10">
+                                        <label class="col-md-2 control-label"><span class="pull-right">WeChat:</span></label>
+                                        <div class="col-md-9">
+                                            <img src="img/avatar/wx.ico" />
+                                            <div class="pull-right">
+                                                <template v-if="isWxBinded == false">
+                                                    <form action="/connect/weixin" method="post">
+                                                        <span style="color: red;">未绑定</span>
+                                                        <button class="btn btn-primary" id="wxBinding" type="submit">绑定</button>
+                                                    </form>
+                                                </template>
+                                                <template v-else>
+                                                    <form action="/connect/weixin" method="POST">
+                                                        <span style="color: green;">已绑定</span>
+                                                        <input type="hidden" name="_method" value="DELETE" />
+                                                        <button class="btn btn-danger" id="wxUnbinding" type="submit">解绑</button>
+                                                    </form>
+                                                </template>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="col-md-2 control-label">LinkedIn:</label>
-                                            <div class="col-md-9">
-                                                <img src="img/avatar/linkedin.ico" />
-                                                <div class="pull-right">
-                                                    <span style="color: red;">未绑定</span>
-                                                    <span style="color: green;">已绑定</span>
-                                                    <a class="btn btn-primary" id="lkBinding" href="javascript:void(0)">绑定</a>
-                                                    <a class="btn btn-danger" id="lkUnbinding" href="javascript:void(0)">解绑</a>
-                                                </div>
+                                    </div>
+                                    <div class="row mr-b-10">
+                                        <label class="col-md-2 control-label"><span class="pull-right">LinkedIn:</span></label>
+                                        <div class="col-md-9">
+                                            <img src="img/avatar/linkedin.ico" />
+                                            <div class="pull-right">
+                                                <template v-if="isLkBinded == false">
+                                                    <form action="/connect/linkedin" method="post">
+                                                        <span style="color: red;">未绑定</span>
+                                                        <button class="btn btn-primary" id="li-binding-btn" type="submit">绑定</button>
+                                                    </form>
+                                                </template>
+                                                <template v-else>
+                                                    <form action="/connect/linkedin" method="POST">
+                                                        <span style="color: green;">已绑定</span>
+                                                        <input type="hidden" name="_method" value="DELETE" />
+                                                        <button class="btn btn-danger" id="lkUnbinding" type="submit">解绑</button>
+                                                    </form>
+                                                </template>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="col-md-2 control-label">Github:</label>
-                                            <div class="col-md-9">
-                                                <img src="img/avatar/github.ico" />
-                                                <div class="pull-right">
-                                                    <span style="color: red;">未绑定</span>
-                                                    <span style="color: green;">已绑定</span>
-                                                    <a class="btn btn-primary" id="githubBinding" href="javascript:void(0)">绑定</a>
-                                                    <a class="btn btn-danger" id="githubUnbinding" href="javascript:void(0)">解绑</a>
-                                                </div>
+                                    </div>
+                                    <div class="row mr-b-10">
+                                        <label class="col-md-2"><span class="pull-right">Github:</span></label>
+                                        <div class="col-md-9">
+                                            <img src="img/avatar/github.ico" />
+                                            <div class="pull-right">
+                                                <template v-if="isGithubBinded == false">
+                                                    <form action="/qqLogin/github" method="post">
+                                                        <span style="color: red;">未绑定</span>
+                                                        <button class="btn btn-primary" id="githubBinding" type="submit">绑定</button>
+                                                    </form>
+                                                </template>
+                                                <template v-else>
+                                                    <form action="/connect/github" method="POST">
+                                                        <span style="color: green;">已绑定</span>
+                                                        <input type="hidden" name="_method" value="DELETE" />
+                                                        <button class="btn btn-danger" id="githubUnbinding" type="submit">解绑</button>
+                                                    </form>
+                                                </template>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="col-md-2 control-label">Coding:</label>
-                                            <div class="col-md-9">
-                                                <img src="img/avatar/coding.ico" />
-                                                <div class="pull-right">
-                                                    <span style="color: red;">未绑定</span>
-                                                    <span style="color: green;">已绑定</span>
-                                                    <a class="btn btn-primary" id="codingBinding" href="javascript:void(0)">绑定</a>
-                                                    <a class="btn btn-danger" id="codingUnbinding" href="javascript:void(0)">解绑</a>
-                                                </div>
+                                    </div>
+                                    <div class="row mr-b-10">
+                                        <label class="col-md-2 control-label"><span class="pull-right">Coding:</span></label>
+                                        <div class="col-md-9">
+                                            <img src="img/avatar/coding.ico" />
+                                            <div class="pull-right">
+                                                <template v-if="isCodingBinded == false">
+                                                    <form action="/qqLogin/coding" method="post">
+                                                        <span style="color: red;">未绑定</span>
+                                                        <button class="btn btn-primary" id="codingBinding" type="submit">绑定</button>
+                                                    </form>
+                                                </template>
+                                                <template v-else>
+                                                    <form action="/connect/coding" method="POST">
+                                                        <span style="color: green;">已绑定</span>
+                                                        <input type="hidden" name="_method" value="DELETE" />
+                                                        <button class="btn btn-danger" id="codingUnbinding" type="submit">解绑</button>
+                                                    </form>
+                                                </template>
                                             </div>
                                         </div>
-                                    </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
