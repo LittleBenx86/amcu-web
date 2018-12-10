@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.web.ProviderSignInUtils;
 import org.springframework.social.security.SocialUserDetails;
@@ -17,8 +19,17 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.ServletWebRequest;
 import site.amcu.amcuweb.browser.security.BrowserSocialUserBuildType;
 import site.amcu.amcuweb.entity.User;
+import site.amcu.amcuweb.entity.UserEdu;
+import site.amcu.amcuweb.entity.UserIntegrationLog;
+import site.amcu.amcuweb.entity.UserPersonalInfo;
+import site.amcu.amcuweb.service.UserEduService;
+import site.amcu.amcuweb.service.UserIntegrationLogService;
+import site.amcu.amcuweb.service.UserPersonalInfoService;
 import site.amcu.amcuweb.service.UserService;
 import site.amcu.amcuweb.support.RoleSupport;
+import site.amcu.amcuweb.support.UserAccountStatusSupport;
+import site.amcu.amcuweb.support.UserIntegrationTypeSupport;
+import site.amcu.amcuweb.support.UserIntegrationTypeValueSupport;
 import site.amcu.amcuweb.utils.SignInRegxUtils;
 import site.amcu.amcuweb.vo.Response;
 import site.amcu.amcuweb.vo.SocialUserInfoVO;
@@ -42,8 +53,20 @@ public class UserBasicController {
     @Autowired
     private ProviderSignInUtils providerSignInUtils;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Resource
     private UserService userService;
+
+    @Autowired
+    private UserPersonalInfoService personalInfoService;
+
+    @Autowired
+    private UserEduService userEduService;
+
+    @Autowired
+    private UserIntegrationLogService integrationLogService;
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -85,7 +108,7 @@ public class UserBasicController {
      */
     @PermitAll
     @GetMapping("/usr/other-usr")
-    public ResponseEntity<Response> getTarUser(@RequestParam(value = "tuid", required = true) String userId) {
+    public ResponseEntity<Response> getTarUser(@RequestParam(value = "tuid") String userId) {
         ResponseEntity<Response> resp = null;
         if(userId != null && !userId.equalsIgnoreCase("") && StringUtils.isNumeric(userId)) {
             User usr = userService.findBySocialUserId(Integer.parseInt(userId));
@@ -110,7 +133,30 @@ public class UserBasicController {
         if(BrowserSocialUserBuildType.CREATE_NEW_USER_BY_SOCIAL == type) {
             usr.setSignupDate(new Date());
             usr.setRole(RoleSupport.DEFAULT_COMMON_USER_ROLE);
+            usr.setStatus(UserAccountStatusSupport.ACCOUNT_ACTIVE);
             Integer id = userService.socialUserRegist(usr);
+
+            UserPersonalInfo info = new UserPersonalInfo();
+            info.setArticles(0);
+            info.setFollowers(0);
+            info.setFollowings(0);
+            info.setIntegration(UserIntegrationTypeValueSupport.FIRST_SIGNUP_WEB.getIntegrationsValue());
+            info.setRank(0);
+            info.setWilling(0);
+            info.setUserId(id);
+
+            UserEdu ue = new UserEdu();
+            ue.setUserId(id);
+
+            UserIntegrationLog log = new UserIntegrationLog();
+            log.setUserId(id);
+            log.setType(UserIntegrationTypeSupport.FIRST_SIGNUP_WEB);
+            log.setIntegration(UserIntegrationTypeValueSupport.FIRST_SIGNUP_WEB.getIntegrationsValue());
+            log.setObtainTime(new Date());
+
+            personalInfoService.createUserPersonalInfo(info);
+            userEduService.createUserEdu(ue);
+            integrationLogService.createAnIntegrationLog(log);
             providerSignInUtils.doPostSignUp(id.toString(), new ServletWebRequest(request));
         } else if(BrowserSocialUserBuildType.BINDING_USER_ON_EXISTS == type) {
             int t = SignInRegxUtils.getSignInTypeByRegx(usr.getUsername());
@@ -182,6 +228,103 @@ public class UserBasicController {
         }
 
         return result;
+    }
+
+
+    @RolesAllowed({"USER"})
+    @PostMapping("/usr/old-email-modify-valid")
+    public ResponseEntity<Response> oldEmailModifyValid() {
+        return ResponseEntity.ok().body(new Response(true, "验证成功", HttpStatus.OK.value()));
+    }
+
+    @RolesAllowed({"USER"})
+    @PostMapping("/usr/new-email-confirm-valid")
+    public ResponseEntity<Response> newEmailValid(@RequestParam(value="newEmail") String email) {
+        logger.info("更换的邮箱地址为:" + email);
+        return ResponseEntity.ok().body(new Response(true, "验证成功", HttpStatus.OK.value()));
+    }
+
+    @RolesAllowed({"USER"})
+    @PostMapping("/usr/name-modify")
+    public ResponseEntity<Response> usernameModify(@RequestParam(value = "username") String username,
+                                                   Authentication authentication) {
+        User usr = new User();
+        if(authentication != null && authentication.isAuthenticated()
+                && !authentication.getPrincipal().toString().equalsIgnoreCase("anonymousUser")) {
+            SocialUserDetails socialUserDetails = (SocialUserDetails) authentication.getPrincipal();
+            usr.setId(Integer.parseInt(socialUserDetails.getUserId()));
+        }
+        usr.setUsername(username);
+        userService.updateUserInfoById(usr);
+        return ResponseEntity.ok().body(new Response(true, "验证成功", HttpStatus.OK.value()));
+    }
+
+    @RolesAllowed({"USER"})
+    @PostMapping("/usr/pwd-modify/{type}")
+    public ResponseEntity<Response> passwordModifyWithType(@PathVariable(value = "type") String type,
+                                                           @RequestParam(value = "oldPassword", required = false) String oPwd,
+                                                           @RequestParam(value = "newPassword") String nPwd,
+                                                           @RequestParam(value = "confirmPassword") String cPwd,
+                                                           Authentication authentication) {
+        Response resp = null;
+        User usr = null;
+        boolean isMatches = false;
+        if(authentication != null && authentication.isAuthenticated()
+                && !authentication.getPrincipal().toString().equalsIgnoreCase("anonymousUser")) {
+            SocialUserDetails socialUserDetails = (SocialUserDetails) authentication.getPrincipal();
+            usr = userService.findBySocialUserId(Integer.parseInt(socialUserDetails.getUserId()));
+        }
+
+        if(StringUtils.isNumeric(type)) {
+            if (StringUtils.equals("1", type)){
+
+                if(null != usr) {
+                    isMatches = passwordEncoder.matches(oPwd, usr.getPassword());
+                    if(!isMatches){
+                        return ResponseEntity.ok().body(new Response(false, "原密码错误!", HttpStatus.INTERNAL_SERVER_ERROR.value()));
+                    }
+
+                    isMatches = StringUtils.equalsIgnoreCase(nPwd, cPwd);
+                    if(!isMatches) {
+                        return ResponseEntity.ok().body(new Response(false, "两次新密码输入不一致!", HttpStatus.INTERNAL_SERVER_ERROR.value()));
+                    }
+                }
+
+            } else if(StringUtils.equals("2", type)) {
+                isMatches = StringUtils.equalsIgnoreCase(nPwd, cPwd);
+                if(!isMatches) {
+                    return ResponseEntity.ok().body(new Response(false, "两次新密码输入不一致!", HttpStatus.INTERNAL_SERVER_ERROR.value()));
+                }
+            } else {
+                return ResponseEntity.ok().body(new Response(false, "请求链接出错!", HttpStatus.INTERNAL_SERVER_ERROR.value()));
+            }
+        } else {
+            return ResponseEntity.ok().body(new Response(false, "请求链接出错!", HttpStatus.INTERNAL_SERVER_ERROR.value()));
+        }
+
+        User u = new User();
+        u.setId(usr.getId());
+        u.setPassword(this.passwordEncoder.encode(nPwd));
+        int rows = userService.updateUserInfoById(u);
+        if(rows == 1)
+            resp = new Response(true, "密码已更新!\n需要重新登录!", HttpStatus.OK.value());
+        else
+            resp = new Response(false, "密码更新失败!", HttpStatus.INTERNAL_SERVER_ERROR.value());
+
+        return ResponseEntity.ok().body(resp);
+    }
+
+    @RolesAllowed({"USER"})
+    @PostMapping("/usr/avatar-modify")
+    public void userAvatarModify(@RequestParam(value = "avatar") String avatar, Authentication authentication) {
+        User usr = new User();
+        if(authentication != null && authentication.isAuthenticated()
+                && !authentication.getPrincipal().toString().equalsIgnoreCase("anonymousUser")) {
+            SocialUserDetails socialUserDetails = (SocialUserDetails) authentication.getPrincipal();
+            usr.setId(Integer.parseInt(socialUserDetails.getUserId()));
+        }
+        usr.setAvatar(avatar);
+        userService.updateUserInfoById(usr);
     }
 
 }

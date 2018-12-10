@@ -25,8 +25,6 @@ import javax.annotation.Resource;
 @Transactional(propagation = Propagation.NESTED, isolation = Isolation.DEFAULT, readOnly = false)
 public class UserServiceImpl implements UserService {
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
-
     @Resource
     private UserMapper userMapper;
 
@@ -37,6 +35,12 @@ public class UserServiceImpl implements UserService {
     public int addNewUser(User user) {
         user.setPassword(this.encodePassword(user.getPassword()));
         int num = userMapper.insert(user);
+        return num;
+    }
+
+    @Override
+    public int updateUserInfoById(User user) {
+        int num = userMapper.updateById(user);
         return num;
     }
 
@@ -67,8 +71,6 @@ public class UserServiceImpl implements UserService {
         }
 
         usr = userMapper.selectOne(new QueryWrapper<User>(usr));
-
-        logger.info("开发阶段:通过登录信息查找用户:" + usr.toString());
 
         return usr;
     }

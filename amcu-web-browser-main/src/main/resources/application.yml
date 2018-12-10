@@ -127,7 +127,7 @@ sys:
     #校验码的拦截url
     code:
       email:
-        url: /auth/signup
+        url: /auth/signup,/usr/old-email-modify-valid,/usr/new-email-confirm-valid,/usr/pwd-modify/2
       image:
         url: /usr/social-signup/*
     sign-in-regx:

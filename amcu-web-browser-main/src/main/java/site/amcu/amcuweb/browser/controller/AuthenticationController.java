@@ -1,26 +1,28 @@
 package site.amcu.amcuweb.browser.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.social.security.SocialUserDetails;
 import org.springframework.web.bind.annotation.*;
 import site.amcu.amcuweb.entity.User;
+import site.amcu.amcuweb.entity.UserEdu;
+import site.amcu.amcuweb.entity.UserIntegrationLog;
+import site.amcu.amcuweb.entity.UserPersonalInfo;
 import site.amcu.amcuweb.properties.SecurityConstants;
+import site.amcu.amcuweb.service.UserEduService;
+import site.amcu.amcuweb.service.UserIntegrationLogService;
+import site.amcu.amcuweb.service.UserPersonalInfoService;
 import site.amcu.amcuweb.service.UserService;
 import site.amcu.amcuweb.support.RoleSupport;
-import site.amcu.amcuweb.vo.CommonResponse;
+import site.amcu.amcuweb.support.UserAccountStatusSupport;
+import site.amcu.amcuweb.support.UserIntegrationTypeSupport;
+import site.amcu.amcuweb.support.UserIntegrationTypeValueSupport;
 import site.amcu.amcuweb.vo.Response;
 
 import javax.annotation.security.PermitAll;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,22 +35,60 @@ import java.util.Map;
 @RestController
 public class AuthenticationController {
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
-
-    private ObjectMapper om = new ObjectMapper();
-
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private UserPersonalInfoService personalInfoService;
+
+    @Autowired
+    private UserEduService userEduService;
+
+    @Autowired
+    private UserIntegrationLogService integrationLogService;
+
+    /**
+     * 用户注册
+     * @param user
+     */
+    @PermitAll
     @PostMapping(SecurityConstants.DEFAULT_SIGNUP_PROCESSING_URL_FORM)
     public void authRegist(User user) {
         user.setRole(RoleSupport.DEFAULT_COMMON_USER_ROLE);
         user.setSignupDate(new Date());
-        logger.info(user.toString());
+        user.setStatus(UserAccountStatusSupport.ACCOUNT_ACTIVE);
         int num = userService.addNewUser(user);
-        logger.info("增加注册的用户数量:" + num);
+        if(1 == num) {
+            UserPersonalInfo info = new UserPersonalInfo();
+            info.setArticles(0);
+            info.setFollowers(0);
+            info.setFollowings(0);
+            info.setIntegration(UserIntegrationTypeValueSupport.FIRST_SIGNUP_WEB.getIntegrationsValue());
+            info.setRank(0);
+            info.setWilling(0);
+            info.setUserId(user.getId());
+
+            UserEdu ue = new UserEdu();
+            ue.setUserId(user.getId());
+
+            UserIntegrationLog log = new UserIntegrationLog();
+            log.setUserId(user.getId());
+            log.setType(UserIntegrationTypeSupport.FIRST_SIGNUP_WEB);
+            log.setIntegration(UserIntegrationTypeValueSupport.FIRST_SIGNUP_WEB.getIntegrationsValue());
+            log.setObtainTime(new Date());
+
+            personalInfoService.createUserPersonalInfo(info);
+            userEduService.createUserEdu(ue);
+            integrationLogService.createAnIntegrationLog(log);
+        }
     }
 
+    /**
+     * 获取在session中的用户信息
+     * @param auth
+     * @param request
+     * @return
+     */
     @PermitAll
     @GetMapping("/auth/usr-enduring")
     public ResponseEntity<Response> getPersistentUserFromSession(Authentication auth, HttpServletRequest request) {

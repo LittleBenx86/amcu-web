@@ -8,10 +8,10 @@ package site.amcu.amcuweb.support;
 public interface UserAccountStatusSupport {
 
     /** 账号冻结 */
-    public final static int ACCOUNT_FREEAED             = 0;
+    public final static int ACCOUNT_FREEAED               = 0;
 
     /** 账号正常使用 */
-    public final static int ACCOUNT_ACTIVE              = 1;
+    public final static int ACCOUNT_ACTIVE                = 1;
 
     /** 账号的所有者为SCAU的学生 */
     public final static int ACCOUNT_USER_IS_SCAUER      = 2;

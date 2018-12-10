@@ -18,6 +18,13 @@ public interface UserService {
     int addNewUser(User user);
 
     /**
+     * 根据id更新用户的账户信息
+     * @param user
+     * @return
+     */
+    int updateUserInfoById(User user);
+
+    /**
      * 使用第三方登录(首次)的用户添加为新用户
      * @param user
      * @return  返回主键

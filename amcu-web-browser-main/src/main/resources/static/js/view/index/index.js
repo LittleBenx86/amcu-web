@@ -160,19 +160,21 @@ $(function () {
 
     /******** modal事件 ********/
 
+    var $signinModal = $("#signin-modal");
+
     $("img#code").click(function(){
         this.src = '/code/image?width=120&height=36&ver=' + new Date();
     });
 
-    $("#signin-modal").on("show.bs.modal", function() {
+    $signinModal.on("show.bs.modal", function() {
         $("img#code").attr("src",'/code/image?width=120&height=36&ver=' + new Date());
     });
 
-    $('#signin-modal').on('shown.bs.modal', function() {
+    $signinModal.on('shown.bs.modal', function() {
         formValidate();
     });
 
-    $("#signin-modal").on("hidden.bs.modal", function() {
+    $signinModal.on("hidden.bs.modal", function() {
         $('#index-signin-form').formValidation('resetForm', true);
         $('#index-signin-form').formValidation('destroy');
     });

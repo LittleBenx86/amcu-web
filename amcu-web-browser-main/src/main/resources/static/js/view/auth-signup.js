@@ -1,8 +1,8 @@
 $(function () {
 
-    var sentCodeBtn = $("#sent-email-code");
-    var seconds = 60;
-    sentCodeBtn.click(function() {
+    let sentCodeBtn = $("#sent-email-code");
+    let seconds = 60;
+    sentCodeBtn.on("click", function() {
         sendEmailCodeFrom163($("input#n-mail").val());
     });
 
@@ -107,7 +107,7 @@ $(function () {
         }
     }).on('success.form.fv', function(e) {
         e.preventDefault();
-        var $form = $(e.target);
+        let $form = $(e.target);
 
         $.ajax({
             url : $form.attr('action'),
@@ -115,10 +115,11 @@ $(function () {
             type : "POST",
             dataType : 'JSON',
             success : function(result, status, xhr) {
-                console.info(result);
+                toastr.success("注册成功\n回到首页登录吧!", "提示");
+                timeoutRelocateToIndex(1200);
             },
             error : function(xhr, status, error) {
-                if(500 == xhr.status){
+                if(500 === xhr.status){
                     toastr.error(xhr.responseJSON.content);
                 }
             }
@@ -126,7 +127,7 @@ $(function () {
     });
 
     $('#auth-signup-form').find('[name="password"]').on('keyup', function() {
-        var isEmpty = $(this).val() == '';
+        let isEmpty = $(this).val() == '';
         $('#auth-signup-form').formValidation('enableFieldValidators', 'password', !isEmpty)
             .formValidation('enableFieldValidators', 'confirmPassword', !isEmpty);
         if ($(this).val().length >= 6) {
@@ -138,7 +139,7 @@ $(function () {
     /******** 函数定义 ********/
 
     function sentCodeCountdown() {
-        if(0 == seconds) {
+        if(0 === seconds) {
             sentCodeBtn.removeClass("disabled");
             sentCodeBtn.removeClass("btn-default");
             sentCodeBtn.addClass("btn-warning");
@@ -154,7 +155,7 @@ $(function () {
 
     function sendEmailCodeFrom163(emailAddr) {
 
-        if(null == emailAddr || "" == emailAddr || undefined == emailAddr) {
+        if(null == emailAddr || "" === emailAddr || undefined === emailAddr) {
             toastr.warning("请先填写邮箱地址");
             return;
         }
@@ -174,10 +175,10 @@ $(function () {
             dataType : 'JSON',
             timeout: 60000,
             success : function(result, status, xhr) {
-
+                toastr.success("验证码发送成功", "提示");
             },
             error : function(xhr, status, error) {
-                if(status != "timeout" && status != "parsererror")
+                if(status !== "timeout" && status !== "parsererror")
                     toastr.error("验证码发送失败!", xhr);
             }
         });

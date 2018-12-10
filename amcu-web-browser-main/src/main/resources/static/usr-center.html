@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="css/tools/nprogress.css">
     <link rel="stylesheet" href="css/tools/toastr.min.css">
     <link rel="stylesheet" href="css/tools/cropper.min.css">
+    <link rel="stylesheet" href="css/tools/formValidation.min.css">
     <!-- usr-center -->
     <link rel="stylesheet" href="css/view/nav-common.css">
     <link rel="stylesheet" href="css/view/usr-center.css">
@@ -99,17 +100,17 @@
                                 用户信息
                             </div>
                             <div class="box-body">
-                                <template v-if="isCurUser && isLogin">
+                                <template v-cloak v-if="isCurUser && isLogin">
                                     <img class="user-avatar center-block img-circle img-responsive" :src="curUserAvatar"  data-toggle="modal" data-target="#avatar-modify-modal" title="点击修改头像"/>
                                     <span class="user-name">{{ curUsername }}</span>
                                     <span class="user-auth">
                                         <span class="label label-primary">网站成员</span>
-                                        <span v-if="isAMCUer" class="label label-danger">AMCU成员</span>
-                                        <span v-if="isADMIN" class="label label-warning">ADMIN</span>
+                                        <span v-cloak v-if="isAMCUer" class="label label-danger">AMCU成员</span>
+                                        <span v-cloak v-if="isADMIN" class="label label-warning">ADMIN</span>
                                     </span>
                                     <div class="row mr-t-10 mr-b-10">
                                         <div class="col-md-6 col-xs-6 mr-t-4">
-                                            <span>博客数量:100</span>
+                                            <span>文章数量:100</span>
                                         </div>
                                         <div class="col-md-6 col-xs-6 mr-t-4">
                                             <span>声望积分:100</span>
@@ -131,19 +132,19 @@
                                         </a>
                                     </div>
                                 </template>
-                                <template v-if="tarUserId != null">
+                                <template v-cloak v-if="tarUserId != null">
                                     <img class="user-avatar center-block img-circle img-responsive" :src="tarUserAvatar"/>
                                     <span class="user-name">{{ tarUsername }}</span>
                                     <span class="user-auth">
                                         <span class="label label-primary">网站成员</span>
-                                        <span v-if="isAMCUer" class="label label-danger">AMCU成员</span>
-                                        <span v-if="isADMIN" class="label label-warning">ADMIN</span>
+                                        <span v-cloak v-if="isAMCUer" class="label label-danger">AMCU成员</span>
+                                        <span v-cloak v-if="isADMIN" class="label label-warning">ADMIN</span>
                                     </span>
                                     <div class="for-btn">
-                                        <button v-if="hasFollowing == false" class="btn btn-warning" id="followingBtn">
+                                        <button v-cloak v-if="hasFollowing == false" class="btn btn-warning" id="followingBtn">
                                             <span class="fa fa-plus" style="margin-right: 5px;"></span>FOLLOW
                                         </button>
-                                        <button v-else class="btn btn-danger" id="unfollowingBtn">
+                                        <button v-cloak v-else class="btn btn-danger" id="unfollowingBtn">
                                             <span class="fa fa-times" style="margin-right: 5px;"></span>UNFOLLOW
                                         </button>
                                     </div>
@@ -157,8 +158,8 @@
                                 <h3 class="box-title">导航</h3>
                             </div>
                             <ul class="nav nav-pills nav-stacked" id="info-tabs">
-                                <li class="active"><a href="#usr-info" data-toggle="tab">个人信息</a></li>
-                                <li><a href="#account-info" data-toggle="tab">账号信息</a></li>
+                                <li class="active"><a href="#account-info" data-toggle="tab">账号信息</a></li>
+                                <li><a href="#usr-info" data-toggle="tab">个人信息</a></li>
                                 <li><a href="#oauth2-info" data-toggle="tab">第三方账号绑定</a></li>
                                 <li><a href="#auth-info" data-toggle="tab">单片机协会认证信息</a></li>
                                 <li><a href="#following-info" data-toggle="tab">关注作者</a></li>
@@ -174,10 +175,10 @@
                         <ul class="breadcrumb bread-nav-w">
                             <li><a href="/">首页</a></li>
                             <li><a href="javascript:void(0)">用户中心</a></li>
-                            <li><a href="javascript:void(0)" id="cur-type">个人信息</a></li>
+                            <li><a href="javascript:void(0)" id="cur-type">账号信息</a></li>
                         </ul>
                     </div>
-                    <div class="info-box tab-pane active" id="usr-info">
+                    <div class="info-box tab-pane" id="usr-info">
                         <div class="box box-primary">
                             <div class="box-header with-border">
                                 <h3 class="box-title">个人信息</h3>
@@ -189,19 +190,19 @@
                                         <div class="form-group">
                                             <label class="col-md-2 control-label">真实姓名:</label>
                                             <div class="col-md-6">
-                                                <input class="form-control" type="text" value="测试姓名" readonly/>
+                                                <span class="form-control" readonly v-cloak>{{ realname }}</span>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-md-2 control-label">当前职业:</label>
                                             <div class="col-md-6">
-                                                <input class="form-control" type="text" value="测试职业" readonly/>
+                                                <span class="form-control" readonly v-cloak>{{ career }}</span>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-md-2 control-label">个人简介:</label>
                                             <div class="col-md-8">
-                                                <textarea class="form-control" readonly>这个网站做的真不容易啊!</textarea>
+                                                <textarea class="form-control" readonly v-cloak="">{{ simpleProfile }}</textarea>
                                             </div>
                                         </div>
                                     </form>
@@ -210,33 +211,33 @@
                                 <div class="edu-profile mr-t-10">
                                     <form class="form-horizontal">
                                         <div class="form-group">
-                                            <label class="col-md-2 control-label">省/市/区:</label>
+                                            <label class="col-md-2 control-label">学校所在省/市/区:</label>
                                             <div class="col-md-6">
-                                                <input class="form-control" type="text" value="广东省-广州市-天河区" readonly/>
+                                                <span class="form-control" readonly v-cloak="">{{ universityAddress }}</span>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-md-2 control-label">在读/毕业学校:</label>
                                             <div class="col-md-6">
-                                                <input class="form-control" type="text" value="华南农业大学" readonly/>
+                                                <span class="form-control" readonly v-cloak="">{{ university }}</span>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-md-2 control-label">所在学院:</label>
+                                            <label class="col-md-2 control-label" v-cloak="">所在学院:</label>
                                             <div class="col-md-6">
-                                                <input class="form-control" type="text" value="数学与信息学院" readonly/>
+                                                <span class="form-control" readonly v-cloak="">{{ collage }}</span>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-md-2 control-label">所修专业:</label>
                                             <div class="col-md-6">
-                                                <input class="form-control" type="text" value="软件工程" readonly/>
+                                                <span class="form-control" readonly v-cloak="">{{ major }}</span>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-md-2 control-label">年级:</label>
                                             <div class="col-md-6">
-                                                <input class="form-control" type="text" value="大四" readonly/>
+                                                <span class="form-control" readonly v-cloak="">{{ grade }}</span>
                                             </div>
                                         </div>
                                     </form>
@@ -244,10 +245,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="info-box tab-pane" id="account-info">
+                    <div class="info-box tab-pane active" id="account-info">
                         <div class="box box-primary">
                             <div class="box-header with-border">
                                 <h3 class="box-title">账号信息</h3>
+                                <a v-cloak v-if="isAccountModify == false" class="pull-right" @click="modifyAccountEvent">
+                                    <span class="fa fa-pencil-square-o"></span>开始修改
+                                </a>
+                                <a v-cloak v-else class="pull-right" @click="modifyAccountEvent">
+                                    <span class="fa fa-times"></span>取消修改
+                                </a>
                             </div>
                             <div class="box-body">
                                 <h3 class="title-bar">Account Profile</h3>
@@ -256,25 +263,40 @@
                                         <div class="form-group">
                                             <label class="col-md-2 control-label">用户昵称:</label>
                                             <div class="col-md-6">
-                                                <input class="form-control" type="text" value="测试人员" readonly/>
+                                                <span class="form-control" v-cloak readonly>{{ curUsername }}</span>
+                                            </div>
+                                            <div class="col-md-1" v-if="isAccountModify" v-cloak>
+                                                <a class="edit" data-toggle="modal" data-target="#editNicknameModal" >
+                                                    <h4 class="mr-t-8"><b class="fa fa-pencil-square-o"></b></h4>
+                                                </a>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-md-2 control-label">E-mail:</label>
                                             <div class="col-md-6">
-                                                <input class="form-control" type="text" value="xxxxxx@163.com" readonly/>
+                                                <span class="form-control" v-cloak readonly>{{ curUserEmail }}</span>
+                                            </div>
+                                            <div class="col-md-1" v-if="isAccountModify" v-cloak>
+                                                <a class="edit" data-toggle="modal" data-target="#editEmailModal" >
+                                                    <h4 class="mr-t-8"><b class="fa fa-pencil-square-o"></b></h4>
+                                                </a>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-md-2 control-label">Mobile:</label>
                                             <div class="col-md-6">
-                                                <input class="form-control" type="text" value="134xxxxxxxx" readonly/>
+                                                <span class="form-control" v-cloak readonly>{{ curUserMobile }}</span>
+                                            </div>
+                                            <div class="col-md-1" v-if="isAccountModify" v-cloak>
+                                                <a class="edit" @click="mobileFunctionInDeveloping">
+                                                    <h4 class="mr-t-8"><b class="fa fa-pencil-square-o"></b></h4>
+                                                </a>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-md-2 control-label">注册日期:</label>
                                             <div class="col-md-6">
-                                                <input class="form-control" type="text" value="2018-12-05 10:10:10" readonly/>
+                                                <span class="form-control" v-cloak readonly>{{ curUserSignupDate }}</span>
                                             </div>
                                         </div>
                                     </form>
@@ -282,49 +304,76 @@
                                 <h3 class="title-bar">Password Modify</h3>
                                 <div class="edu-profile mr-t-10">
                                     <span>Modify by Old Password</span>
+                                    <a v-cloak v-if="startPasswordModifyByOldPassword == false" class="pull-right" @click="modifyPasswordByOldPasswordEvent">
+                                        <span class="fa fa-pencil-square-o"></span>开始修改
+                                    </a>
+                                    <a v-cloak v-else class="pull-right" @click="modifyPasswordByOldPasswordEvent">
+                                        <span class="fa fa-times"></span>取消修改
+                                    </a>
                                     <hr>
-                                    <form class="form-horizontal">
+                                    <form class="form-horizontal" id="modifyPwdByOldPwdForm" :class="{hidden : !this.startPasswordModifyByOldPassword}" v-cloak method="POST" action="/usr/pwd-modify/1">
                                         <div class="form-group">
                                             <label class="col-md-2 control-label">原密码:</label>
                                             <div class="col-md-6">
-                                                <input class="form-control" type="password" value="123456" readonly/>
+                                                <input class="form-control" type="password" name="oldPassword"/>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-md-2 control-label">新密码:</label>
                                             <div class="col-md-6">
-                                                <input class="form-control" type="password" value="123456" readonly/>
+                                                <input class="form-control" type="password" name="newPassword"/>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-md-2 control-label">确认新密码:</label>
                                             <div class="col-md-6">
-                                                <input class="form-control" type="password" value="123456" readonly/>
+                                                <input class="form-control" type="password" name="confirmPassword"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-offset-2  col-md-4 col-xs-4" >
+                                                <button class="btn btn-primary" type="submit">确认修改</button>
                                             </div>
                                         </div>
                                     </form>
                                     <span>Modify by E-mail Validation Code</span>
+                                    <a v-cloak v-if="startPasswordModifyByEmail == false" class="pull-right" @click="modifyPasswordByEmailEvent">
+                                        <span class="fa fa-pencil-square-o"></span>开始修改
+                                    </a>
+                                    <a v-cloak v-else class="pull-right" @click="modifyPasswordByEmailEvent">
+                                        <span class="fa fa-times"></span>取消修改
+                                    </a>
                                     <hr>
-                                    <form class="form-horizontal">
-                                        <div class="form-group">
-                                            <label class="col-md-2 control-label">邮箱验证码:</label>
-                                            <div class="col-md-6">
-                                                <input class="form-control" type="text" value="123456" readonly/>
+                                    <form class="form-horizontal" id="modifyPwdByEmailForm" :class="{hidden : !this.startPasswordModifyByEmail}" v-cloak method="POST" action="/usr/pwd-modify/2">
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">邮箱验证码:</label>
+                                                <div class="col-md-6">
+                                                    <div class="input-group">
+                                                        <input class="form-control mr-r-5" type="text" name="emailCode" style="width: 48%;"/>
+                                                        <button v-cloak class="btn btn-warning" :class="{disabled : !this.canPwdEmailBtnClick}" type="button" @click="countDown4PwdSentEmail">
+                                                            {{ pwdEmailBtnContent }}
+                                                        </button>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-2 control-label">新密码:</label>
-                                            <div class="col-md-6">
-                                                <input class="form-control" type="password" value="123456" readonly/>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">新密码:</label>
+                                                <div class="col-md-6">
+                                                    <input class="form-control" type="password" name="newPassword"/>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-md-2 control-label">确认新密码:</label>
-                                            <div class="col-md-6">
-                                                <input class="form-control" type="password" value="123456" readonly/>
+                                            <div class="form-group">
+                                                <label class="col-md-2 control-label">确认新密码:</label>
+                                                <div class="col-md-6">
+                                                    <input class="form-control" type="password" name="confirmPassword"/>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </form>
+                                            <div class="form-group">
+                                                <div class="col-md-offset-2 col-md-4 col-xs-4" >
+                                                    <button class="btn btn-primary" type="submit">确认修改</button>
+                                                </div>
+                                            </div>
+                                        </form>
                                 </div>
                             </div>
                         </div>
@@ -336,19 +385,19 @@
                             </div>
                             <div class="box-body">
                                 <h3 class="title-bar">OAuth Account Binding/Unbinding</h3>
-                                <div class="edu-profile mr-t-10">
+                                <div class="oauth-profile mr-t-10">
                                     <div class="row mr-b-10">
                                         <label class="col-md-2 control-label"><span class="pull-right">QQ:</span></label>
                                         <div class="col-md-9">
                                             <img src="img/avatar/qq.ico" />
                                             <div class="pull-right">
-                                                <template v-if="isQQBinded == false">
+                                                <template v-if="isQQBinded == false" v-cloak>
                                                     <form action="/connect/qq" method="post">
                                                         <span style="color: red;">未绑定</span>
                                                         <button class="btn btn-primary" id="qqBinding" type="button">绑定</button>
                                                     </form>
                                                 </template>
-                                                <template v-else>
+                                                <template v-else v-cloak>
                                                     <form action="/connect/qq" method="POST">
                                                         <span style="color: green;">已绑定</span>
                                                         <input type="hidden" name="_method" value="DELETE" />
@@ -363,13 +412,13 @@
                                         <div class="col-md-9">
                                             <img src="img/avatar/wx.ico" />
                                             <div class="pull-right">
-                                                <template v-if="isWxBinded == false">
+                                                <template v-if="isWxBinded == false" v-cloak>
                                                     <form action="/connect/weixin" method="post">
                                                         <span style="color: red;">未绑定</span>
                                                         <button class="btn btn-primary" id="wxBinding" type="submit">绑定</button>
                                                     </form>
                                                 </template>
-                                                <template v-else>
+                                                <template v-else v-cloak>
                                                     <form action="/connect/weixin" method="POST">
                                                         <span style="color: green;">已绑定</span>
                                                         <input type="hidden" name="_method" value="DELETE" />
@@ -384,13 +433,13 @@
                                         <div class="col-md-9">
                                             <img src="img/avatar/linkedin.ico" />
                                             <div class="pull-right">
-                                                <template v-if="isLkBinded == false">
+                                                <template v-if="isLkBinded == false" v-cloak>
                                                     <form action="/connect/linkedin" method="post">
                                                         <span style="color: red;">未绑定</span>
                                                         <button class="btn btn-primary" id="li-binding-btn" type="submit">绑定</button>
                                                     </form>
                                                 </template>
-                                                <template v-else>
+                                                <template v-else v-cloak>
                                                     <form action="/connect/linkedin" method="POST">
                                                         <span style="color: green;">已绑定</span>
                                                         <input type="hidden" name="_method" value="DELETE" />
@@ -405,13 +454,13 @@
                                         <div class="col-md-9">
                                             <img src="img/avatar/github.ico" />
                                             <div class="pull-right">
-                                                <template v-if="isGithubBinded == false">
+                                                <template v-if="isGithubBinded == false" v-cloak>
                                                     <form action="/qqLogin/github" method="post">
                                                         <span style="color: red;">未绑定</span>
                                                         <button class="btn btn-primary" id="githubBinding" type="submit">绑定</button>
                                                     </form>
                                                 </template>
-                                                <template v-else>
+                                                <template v-else v-cloak>
                                                     <form action="/connect/github" method="POST">
                                                         <span style="color: green;">已绑定</span>
                                                         <input type="hidden" name="_method" value="DELETE" />
@@ -426,13 +475,13 @@
                                         <div class="col-md-9">
                                             <img src="img/avatar/coding.ico" />
                                             <div class="pull-right">
-                                                <template v-if="isCodingBinded == false">
+                                                <template v-if="isCodingBinded == false" v-cloak>
                                                     <form action="/qqLogin/coding" method="post">
                                                         <span style="color: red;">未绑定</span>
                                                         <button class="btn btn-primary" id="codingBinding" type="submit">绑定</button>
                                                     </form>
                                                 </template>
-                                                <template v-else>
+                                                <template v-else v-cloak>
                                                     <form action="/connect/coding" method="POST">
                                                         <span style="color: green;">已绑定</span>
                                                         <input type="hidden" name="_method" value="DELETE" />
@@ -440,6 +489,11 @@
                                                     </form>
                                                 </template>
                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mr-b-10">
+                                        <div class="col-md-offset-2 col-md-8">
+                                            <span style="color: red;">注:github和coding的账号需要通过授权登录,注册再绑定现有的账户</span>
                                         </div>
                                     </div>
                                 </div>
@@ -452,7 +506,35 @@
                                 <h3 class="box-title">单片机协会认证信息</h3>
                             </div>
                             <div class="box-body">
-
+                                <h3 class="title-bar">AMCUer Identification and Authentication</h3>
+                                <div class="amcu-profile mr-t-10">
+                                    <form class="form-horizontal">
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">单片机成员:</label>
+                                            <div class="col-md-6">
+                                                <input class="form-control" type="text" value="测试人员" readonly/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">第几届成员:</label>
+                                            <div class="col-md-6">
+                                                <input class="form-control" type="text" value="第7届" readonly/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">所在协会部门:</label>
+                                            <div class="col-md-6">
+                                                <input class="form-control" type="text" value="培训部" readonly/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">部门工作:</label>
+                                            <div class="col-md-6">
+                                                <input class="form-control" type="text" value="干事" readonly/>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -480,68 +562,199 @@
                 <!-- 右侧信息主体-end -->
             </div>
         </div>
-    </div>
-    <div class="modal fade" id="avatar-modify-modal" role="dialog" tabindex="-1">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <form class="avatar-form">
-                    <div class="modal-header">
-                        <button class="close" data-dismiss="modal" type="button">&times;</button>
-                        <h4 class="modal-title">修改头像</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="avatar-body">
-                            <div class="avatar-upload">
-                                <input type="hidden" class="avatar-src" name="avatar_src">
-                                <input type="hidden" class="avatar-data" name="avatar_data">
-                                <label for="avatarInput" class="avatar-input-label">图片上传</label>
-                                <button class="btn btn-primary" type="button" onclick="$('input[id=avatarInput]').click();">
+
+        <div class="modal fade" id="avatar-modify-modal" role="dialog" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <form class="avatar-form">
+                        <div class="modal-header">
+                            <button class="close" data-dismiss="modal" type="button">&times;</button>
+                            <h4 class="modal-title">修改头像</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="avatar-body">
+                                <div class="avatar-upload">
+                                    <input type="hidden" class="avatar-src" name="avatar_src">
+                                    <input type="hidden" class="avatar-data" name="avatar_data">
+                                    <label for="avatarInput" class="avatar-input-label">图片上传</label>
+                                    <button class="btn btn-primary" type="button" onclick="$('input[id=avatarInput]').click();">
                                 <span class="docs-tooltip" data-toggle="tooltip" title="选择照片">
                                   <span class="fa fa-upload"></span>
                                 </span>
-                                </button>
-                                <span id="avatar-name"></span>
-                                <input type="file" class="avatar-input hide" id="avatarInput" name="avatar_file" accept="image/*"/>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-9">
-                                    <div class="avatar-wrapper"></div>
-                                    <div class="form-group avatar-btns">
-                                        <div class="col-md-6 col-sm-12">
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-primary fa fa-rotate-left" data-method="rotate" data-option="-45" title="向左旋转45度">
-                                                      向左旋转
-                                                </button>
+                                    </button>
+                                    <span id="avatar-name"></span>
+                                    <input type="file" class="avatar-input hide" id="avatarInput" name="avatar_file" accept="image/*"/>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <div class="avatar-wrapper"></div>
+                                        <div class="form-group avatar-btns">
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-primary fa fa-rotate-left" data-method="rotate" data-option="-45" title="向左旋转45度">
+                                                        向左旋转
+                                                    </button>
+                                                </div>
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-primary fa fa-rotate-right" data-method="rotate" data-option="45" title="向右旋转45度">
+                                                        向右旋转
+                                                    </button>
+                                                </div>
                                             </div>
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-primary fa fa-rotate-right" data-method="rotate" data-option="45" title="向右旋转45度">
-                                                      向右旋转
-                                                </button>
+                                            <div class="col-md-6 col-sm-12">
+                                                <button class="btn btn-primary fa fa-arrows" data-method="setDragMode" data-option="move" type="button" title="移动"></button>
+                                                <button class="btn btn-primary fa fa-crop" data-method="setDragMode" data-option="crop" type="button" title="剪裁"></button>
+                                                <button class="btn btn-primary fa fa-search-plus" data-method="zoom" data-option="0.1" type="button" title="放大"></button>
+                                                <button class="btn btn-primary fa fa-search-minus" data-method="zoom" data-option="-0.1" type="button" title="缩小"></button>
+                                                <button class="btn btn-primary fa fa-refresh" data-method="reset" type="button" title="重置图片"></button>
                                             </div>
-                                        </div>
-                                        <div class="col-md-6 col-sm-12">
-                                            <button class="btn btn-primary fa fa-arrows" data-method="setDragMode" data-option="move" type="button" title="移动"></button>
-                                            <button class="btn btn-primary fa fa-crop" data-method="setDragMode" data-option="crop" type="button" title="剪裁"></button>
-                                            <button class="btn btn-primary fa fa-search-plus" data-method="zoom" data-option="0.1" type="button" title="放大"></button>
-                                            <button class="btn btn-primary fa fa-search-minus" data-method="zoom" data-option="-0.1" type="button" title="缩小"></button>
-                                            <button class="btn btn-primary fa fa-refresh" data-method="reset" type="button" title="重置图片"></button>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-3 col-sm-12">
-                                    <div class="avatar-preview preview-lg mr-b-10" id="imageHead"></div>
-                                    <button class="btn btn-danger btn-block avatar-save fa fa-save" type="button" data-dismiss="modal">
-                                        保存修改
-                                    </button>
+                                    <div class="col-md-3 col-sm-12">
+                                        <div class="avatar-preview preview-lg mr-b-10" id="imageHead"></div>
+                                        <button class="btn btn-danger btn-block avatar-save fa fa-save" type="button" data-dismiss="modal">
+                                            保存修改
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="loading" aria-label="Loading" role="img" tabindex="-1"></div>
+
+        <div class="modal fade" id="editNicknameModal" role="dialog" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">昵称修改</h4>
                     </div>
-                </form>
+                    <div class="modal-body">
+                        <form class="form-horizontal" id="modifyUsernameForm" method="POST" action="/usr/name-modify">
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">新昵称:</label>
+                                <div class="col-md-6">
+                                    <input class="form-control" type="text" name="username" placeholder="请输入新的昵称"/>
+                                </div>
+                            </div>
+                            <div class="form-group" >
+                                <hr>
+                                <div class="col-md-offset-3  col-md-4 col-xs-4" >
+                                    <button class="btn btn-primary" type="submit">确认修改</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="editEmailModal" role="dialog" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Email修改</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form v-cloak :class="{hidden : !this.isValidOldEmail}" action="/usr/old-email-modify-valid" method="post" class="form-horizontal" id="oldEmailValidForm">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">原邮箱的验证码:</label>
+                                <div class="col-md-9">
+                                    <div class="input-group">
+                                        <input class="form-control mr-r-5" type="text" name="emailCode" value="123456" style="width: 48%;"/>
+                                        <button class="btn btn-warning" v-cloak :class="{disabled : !this.canSentCodeOldBtnClick}" @click="countDown4OldSentEmail" type="button">
+                                            {{ oldBtnContent }}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" >
+                                <hr>
+                                <div class="col-md-offset-3 col-xs-offset-2 col-md-4 col-xs-4" >
+                                    <button class="btn btn-primary" type="submit" id="oldEmailCodeValid">提交验证</button>
+                                </div>
+                            </div>
+                        </form>
+                        <form v-cloak :class="{hidden : this.isValidOldEmail}" class="form-horizontal" action="/usr/new-email-confirm-valid" method="post" id="newEmailValidForm">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">新邮箱:</label>
+                                <div class="col-md-8">
+                                    <input class="form-control" v-dom="newEmailAddr" v-model="newEmailAddr.val" type="text" name="newEmail"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">新邮箱的验证码:</label>
+                                <div class="col-md-9">
+                                    <div class="input-group">
+                                        <input class="form-control mr-r-5" type="text" name="emailCode" value="123456" style="width: 48%;"/>
+                                        <button class="btn btn-warning" v-cloak :class="{disabled : !this.canSentCodeNewBtnClick}" @click="countDown4NewSentEmail" type="button">
+                                            {{ newBtnContent }}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" >
+                                <hr>
+                                <div class="col-md-offset-3 col-xs-offset-2 col-md-4 col-xs-4" >
+                                    <button class="btn btn-primary" type="submit" id="newEmailCodeValid">确认新邮箱</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="editMobileModal" role="dialog" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">手机号修改</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">原手机号的验证码:</label>
+                                <div class="col-md-9">
+                                    <div class="input-group">
+                                        <input class="form-control mr-r-5" type="text" value="123456" style="width: 48%;"/>
+                                        <button id="oldMobile" class="btn btn-warning sent-mobile-code" type="button">
+                                            获取手机验证码
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">新手机号:</label>
+                                <div class="col-md-8">
+                                    <input class="form-control" type="text" value="134xxxxxxxx"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">新手机号的验证码:</label>
+                                <div class="col-md-9">
+                                    <div class="input-group">
+                                        <input class="form-control mr-r-5" type="text" value="123456" style="width: 48%;"/>
+                                        <button id="newMobile" class="btn btn-warning sent-mobile-code" type="button">
+                                            获取邮箱验证码
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="loading" aria-label="Loading" role="img" tabindex="-1"></div>
+
 
     <footer class="main-footer">
         <div class="container footer-container">
@@ -561,6 +774,7 @@
     <!-- adminLTE -->
     <script type="text/javascript" src="js/adminLTE/adminlte.min.js"></script>
     <!-- vue -->
+    <script type="text/javascript" src="js/vue/qs.min.js"></script>
     <script type="text/javascript" src="js/vue/vue.min.js"></script>
     <script type="text/javascript" src="js/vue/axios.min.js"></script>
     <!-- tools -->
@@ -569,6 +783,8 @@
     <script type="text/javascript" src="js/tools/nprogress.js"></script>
     <script type="text/javascript" src="js/tools/toastr.min.js"></script>
     <script type="text/javascript" src="js/tools/cropper.min.js"></script>
+    <script type="text/javascript" src="js/tools/formValidation.min.js"></script>
+    <script type="text/javascript" src="js/tools/framework/form-validate-bootstrap.min.js"></script>
     <script type="text/javascript" src="js/view/decorate.js"></script>
     <!-- user-center -->
     <script type="text/javascript" src="js/view/avatar-ready.js"></script>
