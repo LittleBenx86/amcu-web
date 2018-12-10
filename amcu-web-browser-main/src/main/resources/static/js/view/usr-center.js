@@ -645,6 +645,10 @@ $(function(){
     $('#pidSelect').on('shown.bs.select', function () {
         getProvincesDataEvent().then((provinces) => {
             $('#pidSelect').html('');
+            $('#cidSelect').html('');
+            $('#cidSelect').selectpicker('refresh');
+            $('#aidSelect').html('');
+            $('#aidSelect').selectpicker('refresh');
             $('#pidSelect').append('<option value="" disabled selected>请选择</option>');
             $.each(provinces, (i) => {
                 $('#pidSelect').append('<option value='+ provinces[i].code +'>' + provinces[i].text + '</option>');
@@ -656,6 +660,8 @@ $(function(){
     $('#pidSelect').on('change', function () {
         getCitiesDataEvent(this.options[this.selectedIndex].value).then((cities) => {
             $('#cidSelect').html('');
+            $('#aidSelect').html('');
+            $('#cidSelect').selectpicker('refresh');
             $('#cidSelect').append('<option value="" disabled selected>请选择</option>');
             $.each(cities, (i) => {
                 $('#cidSelect').append('<option value='+ cities[i].code +'>' + cities[i].text + '</option>');
@@ -667,6 +673,7 @@ $(function(){
     $('#cidSelect').on('change', function () {
         getAreasDataEvent(this.options[this.selectedIndex].value).then((areas) => {
             $('#aidSelect').html('');
+            $('#cidSelect').selectpicker('refresh');
             $('#aidSelect').append('<option value="" disabled selected>请选择</option>');
             $.each(areas, (i) => {
                 $('#aidSelect').append('<option value='+ areas[i].code +'>' + areas[i].text + '</option>');
