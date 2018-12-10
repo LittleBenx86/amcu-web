@@ -54,15 +54,17 @@ let usrCenterVM = new Vue({
         pwdEmailBtnContent : "获取邮箱验证码",
         seconds3 : 60,
         canPwdEmailBtnClick : true,
-        /** 个人信息 */
+        /** user profile */
         realname : "尚未填写",
         career : "尚未填写",
         simpleProfile : "尚未填写",
+        /** education */
         universityAddress : "尚未填写",
         university : "尚未填写",
         collage : "尚未填写",
         major : "尚未填写",
         grade : "尚未填写",
+        startEduModify : false,
     },
     methods : {
         getCurLoginUserInfo(userId) {
@@ -221,6 +223,9 @@ let usrCenterVM = new Vue({
             }).catch((xhr, status, error) => {
                 toastr.error("头像修改失败", "提示");
             });
+        },
+        modifyEduEvent() {
+            this.startEduModify = !this.startEduModify;
         },
     },
     created : function() {
@@ -617,7 +622,6 @@ $(function(){
         e.preventDefault();
         let $form = $(e.target);
 
-
         $.ajax({
             url : $form.attr('action'),
             data : $form.serialize(),
@@ -636,7 +640,267 @@ $(function(){
 
     });
 
+    /******** 省/市/区select ********/
+
+    $('#pidSelect').on('shown.bs.select', function () {
+        getProvincesDataEvent().then((provinces) => {
+            $('#pidSelect').html('');
+            $('#pidSelect').append('<option value="" disabled selected>请选择</option>');
+            $.each(provinces, (i) => {
+                $('#pidSelect').append('<option value='+ provinces[i].code +'>' + provinces[i].text + '</option>');
+            });
+            $('#pidSelect').selectpicker('refresh');
+        });
+    });
+
+    $('#pidSelect').on('change', function () {
+        getCitiesDataEvent(this.options[this.selectedIndex].value).then((cities) => {
+            $('#cidSelect').html('');
+            $('#cidSelect').append('<option value="" disabled selected>请选择</option>');
+            $.each(cities, (i) => {
+                $('#cidSelect').append('<option value='+ cities[i].code +'>' + cities[i].text + '</option>');
+            });
+            $('#cidSelect').selectpicker('refresh');
+        });
+    });
+
+    $('#cidSelect').on('change', function () {
+        getAreasDataEvent(this.options[this.selectedIndex].value).then((areas) => {
+            $('#aidSelect').html('');
+            $('#aidSelect').append('<option value="" disabled selected>请选择</option>');
+            $.each(areas, (i) => {
+                $('#aidSelect').append('<option value='+ areas[i].code +'>' + areas[i].text + '</option>');
+            });
+            $('#aidSelect').selectpicker('refresh');
+        });
+    });
+
+    $("#userEduPCAForm").formValidation({
+        framework: 'bootstrap',
+        icon : {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields : {
+            provinceCode : {
+                validators : {
+                    notEmpty: {
+                        message : "请选择省份"
+                    },
+                }
+            },
+            cityCode : {
+                validators : {
+                    notEmpty: {
+                        message : "请选择城市"
+                    },
+                }
+            },
+            areaCode : {
+                validators : {
+                    notEmpty: {
+                        message : "请选择市区"
+                    },
+                }
+            },
+        }
+    }).on('success.form.fv', function(e) {
+        e.preventDefault();
+        let $form = $(e.target);
+
+        /*
+        $.ajax({
+            url : $form.attr('action'),
+            data : $form.serialize(),
+            type : "POST",
+            dataType : 'JSON',
+            success : function(result, status, xhr) {
+                if(200 === result.statusCode) {
+                    $("#editEmailModal").modal("hide");
+                    usrCenterVM.isValidOldEmail = true;
+                }
+            },
+            error : function(xhr, status, error) {
+                if(500 === xhr.status){
+                    toastr.error(xhr.responseJSON.content);
+                }
+                usrCenterVM.isValidOldEmail = false;
+            }
+        });
+        */
+    });
+
+    $("#userEduUniversityForm").formValidation({
+        framework: 'bootstrap',
+        icon : {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields : {
+            university : {
+                validators : {
+                    notEmpty: {
+                        message : "请填写在读/毕业学校"
+                    },
+                }
+            },
+        }
+    }).on('success.form.fv', function(e) {
+        e.preventDefault();
+        let $form = $(e.target);
+
+        /*
+        $.ajax({
+            url : $form.attr('action'),
+            data : $form.serialize(),
+            type : "POST",
+            dataType : 'JSON',
+            success : function(result, status, xhr) {
+                if(200 === result.statusCode) {
+                    $("#editEmailModal").modal("hide");
+                    usrCenterVM.isValidOldEmail = true;
+                }
+            },
+            error : function(xhr, status, error) {
+                if(500 === xhr.status){
+                    toastr.error(xhr.responseJSON.content);
+                }
+                usrCenterVM.isValidOldEmail = false;
+            }
+        });
+        */
+    });
+
+    $("#userEduCollageForm").formValidation({
+        framework: 'bootstrap',
+        icon : {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields : {
+            collage : {
+                validators : {
+                    notEmpty: {
+                        message : "请填写学院"
+                    },
+                }
+            },
+        }
+    }).on('success.form.fv', function(e) {
+        e.preventDefault();
+        let $form = $(e.target);
+
+        /*
+        $.ajax({
+            url : $form.attr('action'),
+            data : $form.serialize(),
+            type : "POST",
+            dataType : 'JSON',
+            success : function(result, status, xhr) {
+                if(200 === result.statusCode) {
+                    $("#editEmailModal").modal("hide");
+                    usrCenterVM.isValidOldEmail = true;
+                }
+            },
+            error : function(xhr, status, error) {
+                if(500 === xhr.status){
+                    toastr.error(xhr.responseJSON.content);
+                }
+                usrCenterVM.isValidOldEmail = false;
+            }
+        });
+        */
+    });
+
+    $("#userEduMajorForm").formValidation({
+        framework: 'bootstrap',
+        icon : {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields : {
+            major : {
+                validators : {
+                    notEmpty: {
+                        message : "请填写所修专业"
+                    },
+                }
+            },
+        }
+    }).on('success.form.fv', function(e) {
+        e.preventDefault();
+        let $form = $(e.target);
+
+        /*
+        $.ajax({
+            url : $form.attr('action'),
+            data : $form.serialize(),
+            type : "POST",
+            dataType : 'JSON',
+            success : function(result, status, xhr) {
+                if(200 === result.statusCode) {
+                    $("#editEmailModal").modal("hide");
+                    usrCenterVM.isValidOldEmail = true;
+                }
+            },
+            error : function(xhr, status, error) {
+                if(500 === xhr.status){
+                    toastr.error(xhr.responseJSON.content);
+                }
+                usrCenterVM.isValidOldEmail = false;
+            }
+        });
+        */
+    });
+
+    $("#userEduGradeForm").formValidation({
+        framework: 'bootstrap',
+        icon : {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields : {
+            grade : {
+                validators : {
+                    notEmpty: {
+                        message : "请选择年级"
+                    },
+                }
+            },
+        }
+    }).on('success.form.fv', function(e) {
+        e.preventDefault();
+        let $form = $(e.target);
+
+        /*
+        $.ajax({
+            url : $form.attr('action'),
+            data : $form.serialize(),
+            type : "POST",
+            dataType : 'JSON',
+            success : function(result, status, xhr) {
+                if(200 === result.statusCode) {
+                    $("#editEmailModal").modal("hide");
+                    usrCenterVM.isValidOldEmail = true;
+                }
+            },
+            error : function(xhr, status, error) {
+                if(500 === xhr.status){
+                    toastr.error(xhr.responseJSON.content);
+                }
+                usrCenterVM.isValidOldEmail = false;
+            }
+        });
+        */
+    });
+
     /******** 函数定义 ********/
+
     function showTarTabView(type) {
         $("#info-tabs a[href='#" + type + "']").tab('show');
     }
@@ -669,6 +933,56 @@ $(function(){
             u8arr[n] = bstr.charCodeAt(n);
         }
         return new Blob([u8arr], {type: mime});
+    }
+
+    function getProvincesDataEvent() {
+        return $.ajax({
+            url : "/location/provinces",
+            type : 'GET',
+            dataType : 'JSON',
+        }).then((result) => {
+            if(200 === result.statusCode) {
+                return result.respBody;
+            } else if(500 === result.statusCode) {
+                toastr.error(result.msg, "Sorry!");
+            }
+        }).catch((xhr) => {
+            toastr.error("获取省份数据出错", "Sorry!");
+        });
+    }
+
+    function getCitiesDataEvent(pid) {
+        return $.ajax({
+            url : "/location/cities",
+            type : 'GET',
+            dataType : 'JSON',
+            data : { code : pid },
+        }).then((result) => {
+            if(200 === result.statusCode) {
+                return result.respBody;
+            } else if(500 === result.statusCode) {
+                toastr.error(result.msg, "Sorry!");
+            }
+        }).catch((xhr) => {
+            toastr.error("获取城市数据出错", "Sorry!");
+        });
+    }
+
+    function getAreasDataEvent(cid) {
+        return $.ajax({
+            url : "/location/areas",
+            type : 'GET',
+            dataType : 'JSON',
+            data : { code : cid },
+        }).then((result) => {
+            if(200 === result.statusCode) {
+                return result.respBody;
+            } else if(500 === result.statusCode) {
+                toastr.error(result.msg, "Sorry!");
+            }
+        }).catch((xhr) => {
+            toastr.error("获取市区数据出错", "Sorry!");
+        });
     }
 
 });

@@ -12,6 +12,7 @@
     <link rel="icon" href="img/favicon.ico" type="image/x-icon">
     <!-- Boostrap -->
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap/bootstrap-select.min.css">
     <!-- adminLTE -->
     <link rel="stylesheet" href="css/adminLTE/AdminLTE.min.css">
     <!-- tools -->
@@ -205,6 +206,11 @@
                                                 <textarea class="form-control" readonly v-cloak="">{{ simpleProfile }}</textarea>
                                             </div>
                                         </div>
+                                        <div class="form-group">
+                                            <div class="col-md-offset-2  col-md-4 col-xs-4" >
+                                                <button class="btn btn-success" type="button" data-toggle="modal" data-target="#editUserProfileModal">开始完善信息</button>
+                                            </div>
+                                        </div>
                                     </form>
                                 </div>
                                 <h3 class="title-bar">Education</h3>
@@ -215,11 +221,21 @@
                                             <div class="col-md-6">
                                                 <span class="form-control" readonly v-cloak="">{{ universityAddress }}</span>
                                             </div>
+                                            <div class="col-md-1" v-if="startEduModify" v-cloak>
+                                                <a class="edit" data-toggle="modal" data-target="#editUserEduPCAModal" >
+                                                    <h4 class="mr-t-8"><b class="fa fa-pencil-square-o"></b></h4>
+                                                </a>
+                                            </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-md-2 control-label">在读/毕业学校:</label>
                                             <div class="col-md-6">
                                                 <span class="form-control" readonly v-cloak="">{{ university }}</span>
+                                            </div>
+                                            <div class="col-md-1" v-if="startEduModify" v-cloak>
+                                                <a class="edit" data-toggle="modal" data-target="#editUserEduUniversityModal" >
+                                                    <h4 class="mr-t-8"><b class="fa fa-pencil-square-o"></b></h4>
+                                                </a>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -227,17 +243,42 @@
                                             <div class="col-md-6">
                                                 <span class="form-control" readonly v-cloak="">{{ collage }}</span>
                                             </div>
+                                            <div class="col-md-1" v-if="startEduModify" v-cloak>
+                                                <a class="edit" data-toggle="modal" data-target="#editUserEduCollageModal" >
+                                                    <h4 class="mr-t-8"><b class="fa fa-pencil-square-o"></b></h4>
+                                                </a>
+                                            </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-md-2 control-label">所修专业:</label>
                                             <div class="col-md-6">
                                                 <span class="form-control" readonly v-cloak="">{{ major }}</span>
                                             </div>
+                                            <div class="col-md-1" v-if="startEduModify" v-cloak>
+                                                <a class="edit" data-toggle="modal" data-target="#editUserEduMajorModal" >
+                                                    <h4 class="mr-t-8"><b class="fa fa-pencil-square-o"></b></h4>
+                                                </a>
+                                            </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-md-2 control-label">年级:</label>
                                             <div class="col-md-6">
                                                 <span class="form-control" readonly v-cloak="">{{ grade }}</span>
+                                            </div>
+                                            <div class="col-md-1" v-if="startEduModify" v-cloak>
+                                                <a class="edit" data-toggle="modal" data-target="#editUserEduGradeModal" >
+                                                    <h4 class="mr-t-8"><b class="fa fa-pencil-square-o"></b></h4>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-offset-2  col-md-4 col-xs-4" >
+                                                <a v-cloak v-if="startEduModify == false" class="btn btn-success" @click="modifyEduEvent">
+                                                    <span class="fa fa-pencil-square-o mr-r-5"></span>开始修改
+                                                </a>
+                                                <a v-cloak v-else class="btn btn-danger" @click="modifyEduEvent">
+                                                    <span class="fa fa-times mr-r-5"></span>取消修改
+                                                </a>
                                             </div>
                                         </div>
                                     </form>
@@ -665,7 +706,7 @@
                                 <label class="col-md-3 control-label">原邮箱的验证码:</label>
                                 <div class="col-md-9">
                                     <div class="input-group">
-                                        <input class="form-control mr-r-5" type="text" name="emailCode" value="123456" style="width: 48%;"/>
+                                        <input class="form-control mr-r-5" type="text" name="emailCode" style="width: 48%;"/>
                                         <button class="btn btn-warning" v-cloak :class="{disabled : !this.canSentCodeOldBtnClick}" @click="countDown4OldSentEmail" type="button">
                                             {{ oldBtnContent }}
                                         </button>
@@ -690,7 +731,7 @@
                                 <label class="col-md-3 control-label">新邮箱的验证码:</label>
                                 <div class="col-md-9">
                                     <div class="input-group">
-                                        <input class="form-control mr-r-5" type="text" name="emailCode" value="123456" style="width: 48%;"/>
+                                        <input class="form-control mr-r-5" type="text" name="emailCode"  style="width: 48%;"/>
                                         <button class="btn btn-warning" v-cloak :class="{disabled : !this.canSentCodeNewBtnClick}" @click="countDown4NewSentEmail" type="button">
                                             {{ newBtnContent }}
                                         </button>
@@ -753,6 +794,196 @@
                 </div>
             </div>
         </div>
+
+        <div class="modal fade" id="editUserProfileModal" role="dialog" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">个人信息修改</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/usr/edit-profile" method="post" class="form-horizontal" id="userProfileForm" role="form">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">真实姓名:</label>
+                                <div class="col-md-9">
+                                    <div class="input-group">
+                                        <input class="form-control mr-r-5" type="text" name="firstname" placeholder="名/First Name" style="width: 49%;"/>
+                                        <input class="form-control" type="text" name="lastnamme" placeholder="姓/Last Name" style="width: 49%;"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">当前职业:</label>
+                                <div class="col-md-8">
+                                    <input class="form-control mr-r-5" type="text" name="curCareer" placeholder="如:嵌入式软件工程师"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">个人简介:</label>
+                                <div class="col-md-8">
+                                    <textarea class="form-control" name="curCareer" placeholder="简单介绍下自己(￣┰￣*)"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group" >
+                                <hr>
+                                <div class="col-md-offset-3 col-xs-offset-2 col-md-4 col-xs-4" >
+                                    <button class="btn btn-primary" type="submit">确认提交</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="editUserEduPCAModal" role="dialog" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">教育经历修改</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/usr/edit-edu" method="post" class="form-horizontal" id="userEduPCAForm" role="form">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">学校所在省/市/区:</label>
+                                <div class="col-md-9">
+                                    <select class="form-control selectpicker" id="pidSelect" name="provinceCode" data-live-search="true" data-width="120" data-none-selected-text="请选择省份">
+                                    </select>
+                                    <select class="form-control selectpicker" id="cidSelect" name="cityCode" data-live-search="true" data-width="120" data-none-selected-text="请选择城市">
+                                    </select>
+                                    <select class="form-control selectpicker" id="aidSelect" name="areaCode" data-live-search="true" data-width="120" data-none-selected-text="请选择市区">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group" >
+                                <hr>
+                                <div class="col-md-offset-3 col-xs-offset-2 col-md-4 col-xs-4" >
+                                    <button class="btn btn-primary" type="submit">确认提交</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="editUserEduUniversityModal" role="dialog" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">教育经历修改</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/usr/edit-edu" method="post" class="form-horizontal" id="userEduUniversityForm" role="form">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">在读/毕业学校:</label>
+                                <div class="col-md-8">
+                                    <input class="form-control mr-r-5" type="text" name="university" placeholder="如:华南农业大学"/>
+                                </div>
+                            </div>
+                            <div class="form-group" >
+                                <hr>
+                                <div class="col-md-offset-3 col-xs-offset-2 col-md-4 col-xs-4" >
+                                    <button class="btn btn-primary" type="submit">确认提交</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="editUserEduCollageModal" role="dialog" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">教育经历修改</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/usr/edit-edu" method="post" class="form-horizontal" id="userEduCollageForm" role="form">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">所在学院:</label>
+                                <div class="col-md-8">
+                                    <input class="form-control mr-r-5" type="text" name="collage" placeholder="如:电子工程学院"/>
+                                </div>
+                            </div>
+                            <div class="form-group" >
+                                <hr>
+                                <div class="col-md-offset-3 col-xs-offset-2 col-md-4 col-xs-4" >
+                                    <button class="btn btn-primary" type="submit">确认提交</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="editUserEduMajorModal" role="dialog" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">教育经历修改</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/usr/edit-edu" method="post" class="form-horizontal" id="userEduMajorForm" role="form">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">所修专业:</label>
+                                <div class="col-md-8">
+                                    <input class="form-control mr-r-5" type="text" name="major" placeholder="如:电子信息工程/通讯工程"/>
+                                </div>
+                            </div>
+                            <div class="form-group" >
+                                <hr>
+                                <div class="col-md-offset-3 col-xs-offset-2 col-md-4 col-xs-4" >
+                                    <button class="btn btn-primary" type="submit">确认提交</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="editUserEduGradeModal" role="dialog" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">教育经历修改</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/usr/edit-edu" method="post" class="form-horizontal" id="userEduGradeForm" role="form">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">年级:</label>
+                                <div class="col-md-6">
+                                    <select class="form-control selectpicker" id="gradeSelect" name="grade" data-live-search="true">
+                                        <option value="" disabled selected>请选择年级</option>
+                                        <option value="1">大一</option>
+                                        <option value="2">大二</option>
+                                        <option value="3">大三</option>
+                                        <option value="4">大四</option>
+                                        <option value="5" data-subtext="已工作/研究生以上学位在读">已毕业</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group" >
+                                <hr>
+                                <div class="col-md-offset-3 col-xs-offset-2 col-md-4 col-xs-4" >
+                                    <button class="btn btn-primary" type="submit">确认提交</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
 
@@ -771,12 +1002,13 @@
     <script type="text/javascript" src="js/jquery/jquery-3.3.1.min.js"></script>
     <!-- Boostrap -->
     <script type="text/javascript" src="js/boostrap/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/boostrap/bootstrap-select.min.js"></script>
     <!-- adminLTE -->
     <script type="text/javascript" src="js/adminLTE/adminlte.min.js"></script>
     <!-- vue -->
-    <script type="text/javascript" src="js/vue/qs.min.js"></script>
     <script type="text/javascript" src="js/vue/vue.min.js"></script>
     <script type="text/javascript" src="js/vue/axios.min.js"></script>
+    <script type="text/javascript" src="js/vue/qs.min.js"></script>
     <!-- tools -->
     <script type="text/javascript" src="js/tools/ResizeSensor.min.js"></script>
     <script type="text/javascript" src="js/tools/theia-sticky-sidebar.min.js"></script>
