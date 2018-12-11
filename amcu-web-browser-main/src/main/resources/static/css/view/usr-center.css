@@ -47,3 +47,38 @@
     margin-left: 10px;
 }
 
+.icon, span.ban7, span.ban7w, span.ban10, span.ban23, span.check7, span.check23, span.exclamation7, span.exclamation23, span.trash7, span.trash10 {
+    background-image: url("../../img/imgUpload/sprite.png");
+}
+
+.icon, span.ban7, span.ban7w, span.ban10, span.ban23, span.check7, span.check23, span.exclamation7, span.exclamation23, span.trash7, span.trash10 {
+    background-image: url("../../img/imgUpload/sprite.png");
+}
+
+.ssi-dropZonePreview {
+    min-height: 150px;
+    border: 2px dashed #ccc;
+    content: '可将图片拖入到此处上传哦!o(*^＠^*)o';
+}
+
+.ssi-imgToUploadTable {
+    border: 1px solid #e1e1e1;
+    color: #000;
+    font-size: 15px;
+    margin-right: 4px;
+    box-shadow: 0 10px 6px -6px #777;
+    padding: 5px;
+    display: inline-block;
+    width: 300px;
+    -ms-word-break: break-all;
+    word-break: break-word;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+}
+
+.ssi-imgToUpload {
+    width: 285px;
+    height: auto;
+}
+

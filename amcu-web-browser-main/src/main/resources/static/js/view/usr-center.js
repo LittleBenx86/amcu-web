@@ -7,7 +7,7 @@
 /******** vue数据控制 ********/
 
 Vue.directive('dom', {
-    bind: function(el, binding) {
+    bind: (el, binding) => {
         let obj = binding.value;
         if (obj != null) {
             let key = Object.keys(binding.modifiers)[0] || "el";
@@ -58,6 +58,7 @@ let usrCenterVM = new Vue({
         realname : "尚未填写",
         career : "尚未填写",
         simpleProfile : "尚未填写",
+        startProfileModify : false,
         /** education */
         universityAddress : "尚未填写",
         university : "尚未填写",
@@ -65,6 +66,12 @@ let usrCenterVM = new Vue({
         major : "尚未填写",
         grade : "尚未填写",
         startEduModify : false,
+        /** amcuer validate */
+        authRealname : "尚未认证",
+        authSession : "尚未认证",
+        authDeprt : "尚未认证",
+        authJob : "尚未认证",
+        sessions : 10,
     },
     methods : {
         getCurLoginUserInfo(userId) {
@@ -95,15 +102,14 @@ let usrCenterVM = new Vue({
            });
         },
         getOAuthBindingInfo() {
-            axios.get("/connect").then(function(result){
+            axios.get("/connect").then((result) => {
                 let data = result.data;
                 usrCenterVM.isQQBinded = data["callback.do"];
                 usrCenterVM.isWxBinded = data["weixin"];
                 usrCenterVM.isLkBinded = data["linkedin"];
                 usrCenterVM.isGithubBinded = data["github"];
                 usrCenterVM.isCodingBinded = data["coding"];
-
-            }, function(xhr){
+            }).catch( (xhr) => {
 
             });
         },
@@ -131,7 +137,7 @@ let usrCenterVM = new Vue({
         modifyAccountEvent() {
             this.isAccountModify = !this.isAccountModify;
         },
-        modifyPasswordByOldPasswordEvent : function() {
+        modifyPasswordByOldPasswordEvent() {
             this.startPasswordModifyByOldPassword = !this.startPasswordModifyByOldPassword;
             if(this.startPasswordModifyByEmail)
                 this.startPasswordModifyByEmail = !this.startPasswordModifyByEmail;
@@ -141,7 +147,7 @@ let usrCenterVM = new Vue({
             if(this.startPasswordModifyByOldPassword)
                 this.startPasswordModifyByOldPassword = !this.startPasswordModifyByOldPassword;
         },
-        sendEmailCodeBy163 : function(mailAddr) {
+        sendEmailCodeBy163(mailAddr) {
             if(null == mailAddr || "" === mailAddr || undefined === mailAddr) {
                 toastr.warning("请先填写邮箱地址", "提示");
                 return;
@@ -209,7 +215,7 @@ let usrCenterVM = new Vue({
                 }
             },1000);
         },
-        mobileFunctionInDeveloping : function() {
+        mobileFunctionInDeveloping() {
             toastr.info("手机(短信)业务功能尚不可用!", "提示");
         },
         modifyUserAvatarEvent(avatar) {
@@ -227,8 +233,11 @@ let usrCenterVM = new Vue({
         modifyEduEvent() {
             this.startEduModify = !this.startEduModify;
         },
+        modifyProfileEvent() {
+            this.startProfileModify = !this.startProfileModify;
+        }
     },
-    created : function() {
+    created : () => {
        let tuid = getUrlParam("tuid");
        if(null == tuid || undefined === tuid || isNaN(tuid)) {
            axios.get('/auth/usr-enduring').then(function(result){
@@ -640,6 +649,165 @@ $(function(){
 
     });
 
+    /******** user profile ********/
+
+    $("#userProfileNameForm").formValidation({
+        framework: 'bootstrap',
+        icon : {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields : {
+            firstname : {
+                validators : {
+                    notEmpty: {
+                        message : "名不能为空"
+                    },
+                    regexp : {
+                        regexp : /^(^[\u4E00-\u9FFF]{1,20}$)|(^[A-Za-z]{1,20}$)$/,
+                        message : "名最多只能输入20个字符",
+                    },
+                    stringLength : {
+                        max : 20,
+                        message : "最长20个字符"
+                    }
+                }
+            },
+            lastname : {
+                validators : {
+                    notEmpty: {
+                        message : "姓不能为空"
+                    },
+                    regexp : {
+                        regexp : /^(^[\u4E00-\u9FFF]{1,17}$)|(^[A-Za-z]{1,20}$)$/,
+                        message : "姓最多只能输入英文20个字符/中文17个字符",
+                    },
+                    stringLength : {
+                        max : 20,
+                        message : "最长20个字符"
+                    }
+                }
+            },
+        }
+    }).on('success.form.fv', function(e) {
+        e.preventDefault();
+        let $form = $(e.target);
+
+        /*
+        $.ajax({
+            url : $form.attr('action'),
+            data : $form.serialize(),
+            type : "POST",
+            dataType : 'JSON',
+            success : function(result, status, xhr) {
+                if(200 === result.statusCode) {
+                    $("#editEmailModal").modal("hide");
+                    usrCenterVM.isValidOldEmail = true;
+                }
+            },
+            error : function(xhr, status, error) {
+                if(500 === xhr.status){
+                    toastr.error(xhr.responseJSON.content);
+                }
+                usrCenterVM.isValidOldEmail = false;
+            }
+        });
+        */
+    });
+
+    $("#userProfileCareerForm").formValidation({
+        framework: 'bootstrap',
+        icon : {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields : {
+            curCareer : {
+                validators : {
+                    notEmpty: {
+                        message : "当前职业不能为空"
+                    },
+                    stringLength : {
+                        max : 36,
+                        message : "职业名称最多只能输入36个字符"
+                    }
+                }
+            },
+        }
+    }).on('success.form.fv', function(e) {
+        e.preventDefault();
+        let $form = $(e.target);
+
+        /*
+        $.ajax({
+            url : $form.attr('action'),
+            data : $form.serialize(),
+            type : "POST",
+            dataType : 'JSON',
+            success : function(result, status, xhr) {
+                if(200 === result.statusCode) {
+                    $("#editEmailModal").modal("hide");
+                    usrCenterVM.isValidOldEmail = true;
+                }
+            },
+            error : function(xhr, status, error) {
+                if(500 === xhr.status){
+                    toastr.error(xhr.responseJSON.content);
+                }
+                usrCenterVM.isValidOldEmail = false;
+            }
+        });
+        */
+    });
+
+    $("#userProfileSignatureForm").formValidation({
+        framework: 'bootstrap',
+        icon : {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields : {
+            diySignature : {
+                validators : {
+                    notEmpty: {
+                        message : "个人简介不能为空(～￣(OO)￣)ブ"
+                    },
+                    stringLength : {
+                        max : 160,
+                        message : "最多只能输入160个字符"
+                    }
+                }
+            },
+        }
+    }).on('success.form.fv', function(e) {
+        e.preventDefault();
+        let $form = $(e.target);
+
+        /*
+        $.ajax({
+            url : $form.attr('action'),
+            data : $form.serialize(),
+            type : "POST",
+            dataType : 'JSON',
+            success : function(result, status, xhr) {
+                if(200 === result.statusCode) {
+                    $("#editEmailModal").modal("hide");
+                    usrCenterVM.isValidOldEmail = true;
+                }
+            },
+            error : function(xhr, status, error) {
+                if(500 === xhr.status){
+                    toastr.error(xhr.responseJSON.content);
+                }
+                usrCenterVM.isValidOldEmail = false;
+            }
+        });
+        */
+    });
+
     /******** 省/市/区select ********/
 
     $('#pidSelect').on('shown.bs.select', function () {
@@ -906,6 +1074,171 @@ $(function(){
         */
     });
 
+    /******** amcu auth validate ********/
+
+    $('#authImgUpload').ssi_uploader({
+        url:'http://127.0.0.1:8976/upload',
+        local : 'en',
+        maxFileSize : 2, //Mb
+        allowed:['jpg','png', 'jpeg'],
+        maxNumberOfFiles : 1,
+        responseValidation : {
+            validationKey : {
+                success: 'success',
+                error: 'error'
+            },
+            resultKey: 'validationKey'
+        },
+        ajaxOptions : {
+            success : (result) => {
+                console.info(result.respBody);
+                $('#authImgInput').val(result.respBody);
+            },
+            error : (xhr) => {
+                toastr.error("图片上传异常", "Exception");
+            },
+        },
+        errorHandler : (msg, type) => {
+            console.info(msg);
+            console.info(type);
+        },
+        beforeEachUpload:function(fileInfo, xhr){
+            if(fileInfo.size > 2048) {
+                xhr.abort();
+            }
+            return '文件尺寸大于2M！';
+        },
+        onEachUpload: (fileInfo) => {
+            if(fileInfo.uploadStatus === "success") {
+                toastr.success("认证图片上传成功", "Congratulation");
+            }
+        },
+    });
+
+    $('#sessionSelect').on('shown.bs.select', function () {
+        $('#sessionSelect').html('');
+        $('#sessionSelect').append('<option value="" disabled selected>请选择</option>');
+        for (let i = 0; i < usrCenterVM.sessions; i++) {
+            $('#sessionSelect').append('<option value=' + (i+1) + '>第' + (i+1) + '届</option>');
+        }
+        $('#sessionSelect').selectpicker('refresh');
+    });
+
+    $('#departSelect').on('shown.bs.select', function () {
+        getDepartsDataEvent().then((ds) => {
+            $('#departSelect').html('');
+            $('#jobSelect').html('');
+            $('#jobSelect').selectpicker('refresh');
+            $('#departSelect').append('<option value="" disabled selected>请选择</option>');
+            $.each(ds, (i) => {
+                $('#departSelect').append('<option value='+ ds[i].id +'>' + ds[i].title + '</option>');
+            });
+            $('#departSelect').selectpicker('refresh');
+        });
+    });
+
+    $('#departSelect').on('change', function () {
+        getJobsDataEvent(this.options[this.selectedIndex].value).then((js) => {
+            $('#jobSelect').html('');
+            $('#jobSelect').append('<option value="" disabled selected>请选择</option>');
+            $.each(js, (i) => {
+                $('#jobSelect').append('<option value='+ js[i].id +'>' + js[i].title + '</option>');
+            });
+            $('#jobSelect').selectpicker('refresh');
+        });
+    });
+
+    $("#amcuerAuthValidateForm").formValidation({
+        framework: 'bootstrap',
+        icon : {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields : {
+            authImg : {
+                validators : {
+                    notEmpty: {
+                        message : "请上传认证图片"
+                    },
+                }
+            },
+            firstname : {
+                validators : {
+                    notEmpty: {
+                        message : "名不能为空"
+                    },
+                    regexp : {
+                        regexp : /^(^[\u4E00-\u9FFF]{1,20}$)|(^[A-Za-z]{1,20}$)$/,
+                        message : "名最多只能输入20个字符",
+                    },
+                    stringLength : {
+                        max : 20,
+                        message : "最长20个字符"
+                    }
+                }
+            },
+            lastname : {
+                validators : {
+                    notEmpty: {
+                        message : "姓不能为空"
+                    },
+                    regexp : {
+                        regexp : /^(^[\u4E00-\u9FFF]{1,17}$)|(^[A-Za-z]{1,20}$)$/,
+                        message : "姓最多只能输入英文20个字符/中文17个字符",
+                    },
+                    stringLength : {
+                        max : 20,
+                        message : "最长20个字符"
+                    }
+                }
+            },
+            sessionNo : {
+                validators : {
+                    notEmpty: {
+                        message : "请选定认证的届数"
+                    },
+                }
+            },
+            departNo : {
+                validators : {
+                    notEmpty: {
+                        message : "请选定认证的部门"
+                    },
+                }
+            },
+            jobNo : {
+                validators : {
+                    notEmpty: {
+                        message : "请选定认证的部门工作"
+                    },
+                }
+            },
+        }
+    }).on('success.form.fv', function(e) {
+        e.preventDefault();
+        let $form = $(e.target);
+
+        $.ajax({
+            url : $form.attr('action'),
+            data : $form.serialize(),
+            type : "POST",
+            dataType : 'JSON',
+            success : function(result, status, xhr) {
+                if(200 === result.statusCode) {
+                    $("#editEmailModal").modal("hide");
+                    usrCenterVM.isValidOldEmail = true;
+                }
+            },
+            error : function(xhr, status, error) {
+                if(500 === xhr.status){
+                    toastr.error(xhr.responseJSON.content);
+                }
+                usrCenterVM.isValidOldEmail = false;
+            }
+        });
+    });
+
     /******** 函数定义 ********/
 
     function showTarTabView(type) {
@@ -991,5 +1324,40 @@ $(function(){
             toastr.error("获取市区数据出错", "Sorry!");
         });
     }
+
+    function getDepartsDataEvent() {
+        return $.ajax({
+            url : "/depart",
+            type : 'GET',
+            dataType : 'JSON',
+        }).then((result) => {
+            if(200 === result.statusCode) {
+                return result.respBody;
+            } else if(500 === result.statusCode) {
+                toastr.error(result.msg, "Sorry!");
+            }
+        }).catch((xhr) => {
+            toastr.error("获取单片机协会部门数据出错", "Sorry!");
+        });
+    }
+
+    function getJobsDataEvent(departNo) {
+        return $.ajax({
+            url : "/depart/jobs",
+            type : 'GET',
+            dataType : 'JSON',
+            data : { departNo : departNo },
+        }).then((result) => {
+            if(200 === result.statusCode) {
+                return result.respBody;
+            } else if(500 === result.statusCode) {
+                toastr.error(result.msg, "Sorry!");
+            }
+        }).catch((xhr) => {
+            toastr.error("获取单片机协会部门工作数据出错", "Sorry!");
+        });
+    }
+
+
 
 });
