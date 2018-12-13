@@ -10,30 +10,30 @@
     <title>文章正文--华南农业大学单片机协会</title>
 
     <!-- icon -->
-    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../img/favicon.ico" type="image/x-icon">
     <!-- Boostrap -->
-    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="css/bootstrap/bootstrap-select.min.css">
+    <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/bootstrap/bootstrap-select.min.css">
     <!-- adminLTE -->
-    <link rel="stylesheet" href="css/adminLTE/AdminLTE.min.css">
+    <link rel="stylesheet" href="../css/adminLTE/AdminLTE.min.css">
     <!-- tools -->
-    <link rel="stylesheet" href="css/tools/font-awesome.min.css">
-    <link rel="stylesheet" href="css/tools/normalize.css">
-    <link rel="stylesheet" href="css/tools/nprogress.css">
-    <link rel="stylesheet" href="css/tools/share.min.css">
-    <link rel="stylesheet" href="css/tools/toastr.min.css">
+    <link rel="stylesheet" href="../css/tools/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/tools/normalize.css">
+    <link rel="stylesheet" href="../css/tools/nprogress.css">
+    <link rel="stylesheet" href="../css/tools/share.min.css">
+    <link rel="stylesheet" href="../css/tools/toastr.min.css">
     <!-- simditor -->
-    <link rel="stylesheet" href="css/simditor/simditor.css">
-    <link rel="stylesheet" href="css/simditor/simditor-html.css">
+    <link rel="stylesheet" href="../css/simditor/simditor.css">
+    <link rel="stylesheet" href="../css/simditor/simditor-html.css">
     <!-- article -->
-    <link rel="stylesheet" href="css/view/nav-common.css">
-    <link rel="stylesheet" href="css/view/comment-reply.css">
-    <link rel="stylesheet" href="css/view/article.css">
+    <link rel="stylesheet" href="../css/view/main.css">
+    <link rel="stylesheet" href="../css/view/comment-reply.css">
+    <link rel="stylesheet" href="../css/view/article.css">
 
     <!--[if gte IE 9]>
-    <script type="text/javascript" src="js/ie-exts/html5shiv.min.js"></script>
-    <script type="text/javascript" src="js/ie-exts/respond.min.js"></script>
-    <script type="text/javascript" src="js/ie-exts/selectivizr-min.js"></script>
+    <script type="text/javascript" src="../js/ie-exts/html5shiv.min.js"></script>
+    <script type="text/javascript" src="../js/ie-exts/respond.min.js"></script>
+    <script type="text/javascript" src="../js/ie-exts/selectivizr-min.js"></script>
     <![endif]-->
     <!--[if lt IE 9]>
     <script>window.location.href='upgrade-browser.html';</script>
@@ -45,8 +45,8 @@
         <nav class="navbar navbar-default" id="navbar" role="navigation">
             <div class="container">
                 <div class="navbar-header">
-                    <a href="index.html" class="navbar-brand logo-brand">
-                        <img class="amcu-logo" id="logo" src="img/logo/logo.png" alt="协会logo">
+                    <a href="../index.html" class="navbar-brand logo-brand">
+                        <img class="amcu-logo" id="logo" src="../img/logo/logo.png" alt="协会logo">
                     </a>
 
                     <button class="navbar-toggle x collapsed mr-t-4" type="button" data-toggle="collapse" data-target="#navbar-menu">
@@ -58,10 +58,10 @@
                 <div class="collapse navbar-collapse pull-left mr-l-39p mr-t-4" id="navbar-menu">
                     <ul class="nav navbar-nav head-nav navbar-left">
                         <li>
-                            <a data-cont="AMCU网站" title="AMCU网站" href="index.html">首页</a>
+                            <a data-cont="AMCU网站" title="AMCU网站" href="../index.html">首页</a>
                         </li>
                         <li>
-                            <a data-cont="协会资讯" title="协会资讯" href="info.html">协会资讯</a>
+                            <a data-cont="协会资讯" title="协会资讯" href="../sys/info.html">协会资讯</a>
                         </li>
                         <li>
                             <a data-cont="文章" title="文章" href="article-center.html" style="color: #0074E8;">文章</a>
@@ -82,54 +82,50 @@
                         </li>
                     </ul>
                 </div>
-                <div class="navbar-custom-menu pull-right mr-t-4" id="user-nav-wrapper">
-                        <ul class="nav navbar-nav user-nav-on-show" id="user-nav">
-                            <template v-if="isLogin">
-                                <li class="dropdown user user-menu" id="user-menu">
-                                    <a href="javascript:void(0)" class="dropdown-toggle link-default-img" data-toggle="dropdown" aria-expanded="false">
-                                        <img :src="curUsrAvatar" class="user-image" alt="测试人员123">
-                                        <span class="visible-lg-inline">{{ curUsername }}</span>
-                                    </a>
-                                    <ul class="dropdown-menu mr-t-10">
-                                        <li>
-                                            <div class="box box-primary cur-usr-box margin-bottom-none">
-                                                <div class="box-header">
-                                                    <img :src="curUsrAvatar" class="cur-usr-image center-block img-circle" alt="">
-                                                    <p>
-                                                        <span>{{ curUsername }}</span>
-                                                        <small>{{ curUserEmail }}</small>
-                                                    </p>
-                                                </div>
+                <div class="navbar-custom-menu pull-right mr-t-4" id="userNavWrapper">
+                    <ul class="nav navbar-nav user-nav-on-show" id="user-nav">
+                        <template v-if="isLogin" v-cloak="">
+                            <li class="dropdown user user-menu" id="user-menu">
+                                <a href="javascript:void(0)" class="dropdown-toggle link-default-img" data-toggle="dropdown" aria-expanded="false">
+                                    <img :src="curUsrAvatar" class="user-image" alt="测试人员123">
+                                    <span class="visible-lg-inline">{{ curUsername }}</span>
+                                </a>
+                                <ul class="dropdown-menu mr-t-10">
+                                    <li>
+                                        <div class="box box-primary cur-usr-box margin-bottom-none">
+                                            <div class="box-header">
+                                                <img :src="curUsrAvatar" class="cur-usr-image center-block img-circle" alt="">
+                                                <p>
+                                                    <span>{{ curUsername }}</span>
+                                                    <small>{{ curUserEmail }}</small>
+                                                </p>
                                             </div>
-                                            <div class="box-footer">
-                                                <div class="pull-left">
-                                                    <a :href="curUserCenterUrl" class="btn btn-default">
-                                                        <i class="glyphicon glyphicon-user" style="margin-right: 5px;"></i>个人中心
-                                                    </a>
-                                                </div>
-                                                <div class="pull-right">
-                                                    <a href="/signout" class="btn btn-danger">
-                                                        <i class="glyphicon glyphicon-log-out" style="margin-right: 5px;"></i>退出登录
-                                                    </a>
-                                                </div>
+                                        </div>
+                                        <div class="box-footer">
+                                            <div class="pull-left">
+                                                <a :href="curUserCenterUrl" class="btn btn-success">
+                                                    <i class="glyphicon glyphicon-user" style="margin-right: 5px;"></i>个人中心
+                                                </a>
                                             </div>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </template>
-                            <template v-else>
-                                <li class="user user-menu">
-                                    <a href="/index.html">
-                                        <span>登录</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/auth-signup.html">
-                                        <span>注册</span>
-                                    </a>
-                                </li>
-                            </template>
-                        </ul>
+                                            <div class="pull-right">
+                                                <a href="/signout" class="btn btn-danger">
+                                                    <i class="glyphicon glyphicon-log-out" style="margin-right: 5px;"></i>退出登录
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </template>
+                        <template v-else v-cloak="">
+                            <li class="user user-menu">
+                                <a href="/"><span>登录</span></a>
+                            </li>
+                            <li>
+                                <a href="/auth-signup.html"><span>注册</span></a>
+                            </li>
+                        </template>
+                    </ul>
                 </div>
             </div>
         </nav>
@@ -146,7 +142,7 @@
                         </div>
                         <div class="box-body">
                             <a href="javascript:void(0)">
-                                <img class="user-avatar center-block img-circle img-responsive" src="img/avatar/5_1.png">
+                                <img class="user-avatar center-block img-circle img-responsive" src="../img/avatar/5_1.png">
                             </a>
                             <span class="user-name">测试作者8888888888888888888</span>
                             <span class="user-integration">声望:<span id="integrations">6666666</span></span>
@@ -216,7 +212,7 @@
                             <i class="fa fa-wechat margin-r-5"></i>AMCU微信公众号
                         </strong>
                         <p class="text-muted">公众号:<strong>华农单协</strong>
-                            <img class="group-img center-block" src="img/avatar/wx_amcu.jpg" alt="华农单协">
+                            <img class="group-img center-block" src="../img/avatar/wx_amcu.jpg" alt="华农单协">
                         </p>
                         <p>关注了可能能成为大佬哦!</p>
                     </div>
@@ -622,7 +618,7 @@
                                 <!-- 评论框 -->
                                 <div class="comment-send">
                                     <div class="user-face">
-                                        <img class="user-head" src="img/avatar/5_1.png">
+                                        <img class="user-head" src="../img/avatar/5_1.png">
                                     </div>
                                     <div class="textarea-container">
                                         <div class="baffle-wrap">
@@ -647,7 +643,7 @@
                                     <div class="list-item reply-wrap" id="" data-comment-id="">
                                         <div class="user-face">
                                             <a href="javascript:void(0)" data-uid="">
-                                                <img class="comment-user-avatar" src="img/avatar/5_1.png" />
+                                                <img class="comment-user-avatar" src="../img/avatar/5_1.png" />
                                             </a>
                                             <div class="user-card" style="display: none;">
                                                 <p class="loading-card">
@@ -713,23 +709,24 @@
     </footer>
 
     <!-- jquery -->
-    <script type="text/javascript" src="js/jquery/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="js/jquery/jquery-qrcode.min.js"></script>
+    <script type="text/javascript" src="../js/jquery/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../js/jquery/jquery-qrcode.min.js"></script>
     <!-- Boostrap -->
-    <script type="text/javascript" src="js/boostrap/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/boostrap/bootstrap.min.js"></script>
     <!-- adminLTE -->
-    <script type="text/javascript" src="js/adminLTE/adminlte.min.js"></script>
+    <script type="text/javascript" src="../js/adminLTE/adminlte.min.js"></script>
     <!-- vue -->
-    <script type="text/javascript" src="js/vue/vue.min.js"></script>
-    <script type="text/javascript" src="js/vue/vue-resource.min.js"></script>
+    <script type="text/javascript" src="../js/vue/vue.min.js"></script>
+    <script type="text/javascript" src="../js/vue/axios.min.js"></script>
+    <script type="text/javascript" src="../js/vue/qs.min.js"></script>
     <!-- tools -->
-    <script type="text/javascript" src="js/tools/ResizeSensor.min.js"></script>
-    <script type="text/javascript" src="js/tools/theia-sticky-sidebar.min.js"></script>
-    <script type="text/javascript" src="js/tools/nprogress.js"></script>
-    <script type="text/javascript" src="js/view/decorate.js"></script>
-    <script type="text/javascript" src="js/tools/social-share.min.js"></script>
-    <script type="text/javascript" src="js/tools/toastr.min.js"></script>
+    <script type="text/javascript" src="../js/tools/ResizeSensor.min.js"></script>
+    <script type="text/javascript" src="../js/tools/theia-sticky-sidebar.min.js"></script>
+    <script type="text/javascript" src="../js/tools/nprogress.js"></script>
+    <script type="text/javascript" src="../js/view/main.js"></script>
+    <script type="text/javascript" src="../js/tools/social-share.min.js"></script>
+    <script type="text/javascript" src="../js/tools/toastr.min.js"></script>
     <!-- articles -->
-    <script type="text/javascript" src="js/view/article.js"></script>
+    <script type="text/javascript" src="../js/view/article.js"></script>
 </body>
 </html>

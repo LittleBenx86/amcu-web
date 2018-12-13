@@ -46,7 +46,7 @@ public class BrowserSecurityController {
 
     @RequestMapping(SecurityConstants.DEFAULT_UNAUTHENTICATION_URL)
     @ResponseStatus(code = HttpStatus.UNAUTHORIZED)
-    public SimpleResponse requiresAuthentication(HttpServletRequest request, HttpServletResponse response)
+    public void requiresAuthentication(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
         /** 之前缓存的请求 */
         SavedRequest savedRequest = requestCache.getRequest(request, response);
@@ -54,13 +54,8 @@ public class BrowserSecurityController {
         if(null != savedRequest) {
             String tarUrl = savedRequest.getRedirectUrl();
             logger.info("引发跳转的请求是：" + tarUrl);
-            /** 是否是.html引发 */
-            if(StringUtils.endsWithIgnoreCase(tarUrl, ".html")) {
-                redirectStrategy.sendRedirect(request, response, securityProperties.getBrowser().getLoginPage());
-            }
+            redirectStrategy.sendRedirect(request, response, securityProperties.getBrowser().getLoginPage());
         }
-
-        return new SimpleResponse("访问的服务需要身份验证，请引导用户到登录页面");
     }
 
 }

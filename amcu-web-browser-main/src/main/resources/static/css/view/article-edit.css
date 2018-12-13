@@ -29,7 +29,10 @@ div#editor-box {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    min-height: 800px;
+}
+
+.simditor .simditor-body {
+    min-height: 800px !important;
 }
 
 .simditor .simditor-wrapper .simditor-toolbar {

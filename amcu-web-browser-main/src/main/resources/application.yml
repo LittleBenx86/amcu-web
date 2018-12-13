@@ -97,7 +97,7 @@ sys:
   properties:
     browser:
       response-type: JSON
-      login-page: /index.html
+      login-page: /
       sign-out-url: /signout-success.html
       session:
         session-invalid-url: /session/invalid

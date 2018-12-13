@@ -5,7 +5,7 @@
 
 /******** vue数据控制 ********/
 
-var indexVM = new Vue({
+let indexVM = new Vue({
     el : '#v-index',
     data : {
         isLogin : false,
@@ -129,7 +129,7 @@ $(function () {
             }
         }).on('success.form.fv', function(e) {
                 e.preventDefault();
-                var $form = $(e.target);
+                let $form = $(e.target);
                 $.ajax({
                     url : $form.attr('action'),
                     data : $form.serialize(),
@@ -160,7 +160,7 @@ $(function () {
 
     /******** modal事件 ********/
 
-    var $signinModal = $("#signin-modal");
+    let $signinModal = $("#signin-modal");
 
     $("img#code").click(function(){
         this.src = '/code/image?width=120&height=36&ver=' + new Date();

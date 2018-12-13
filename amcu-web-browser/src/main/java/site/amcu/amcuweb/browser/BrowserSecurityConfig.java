@@ -131,6 +131,9 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
                             securityProperties.getBrowser().getSignUpUrl(),
                             securityProperties.getBrowser().getSession().getSessionInvalidUrl()
                     ).permitAll()
+                    .antMatchers(
+                            "/usr/article-edit.html"
+                    ).hasAnyRole("USER", "ADMIN")
                     .and()
                 .logout()
                     .logoutUrl(SecurityConstants.DEFAULT_USER_LOGOUT_URL)

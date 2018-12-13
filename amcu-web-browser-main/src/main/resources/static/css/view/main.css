@@ -1005,6 +1005,24 @@ blockquote {
     margin-bottom: 5px;
 }
 
+/*************** simditor编辑器相关 *******************/
+
+.simditor .simditor-body{
+    overflow-x: scroll !important;
+}
+
+.simditor .simditor-body::-webkit-scrollbar {
+    width: 2px;
+    height : 4px;
+}
+
+.simditor .simditor-body::-webkit-scrollbar-thumb {
+    background-color: #337ab7;
+    -webkit-border-radius: 2em;
+    -moz-border-radius: 2em;
+    border-radius: 2em;
+}
+
 /*************** vue相关样式 *******************/
 
 [v-cloak] {
@@ -1017,5 +1035,7 @@ blockquote {
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
     opacity: 0;
 }
+
+
 
 

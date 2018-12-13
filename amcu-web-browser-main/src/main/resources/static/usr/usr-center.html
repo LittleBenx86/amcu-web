@@ -9,28 +9,28 @@
     <meta name="keywords" content="AMCU,MCU,大学生,单片机开发者社区,电子专业,硬件工程师,Android工程师,开发者,Java工程师,个人中心">
     <title>个人中心--华南农业大学单片机协会</title>
     <!-- icon -->
-    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../img/favicon.ico" type="image/x-icon">
     <!-- Boostrap -->
-    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="css/bootstrap/bootstrap-select.min.css">
+    <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/bootstrap/bootstrap-select.min.css">
     <!-- adminLTE -->
-    <link rel="stylesheet" href="css/adminLTE/AdminLTE.min.css">
+    <link rel="stylesheet" href="../css/adminLTE/AdminLTE.min.css">
     <!-- tools -->
-    <link rel="stylesheet" href="css/tools/font-awesome.min.css">
-    <link rel="stylesheet" href="css/tools/normalize.css">
-    <link rel="stylesheet" href="css/tools/nprogress.css">
-    <link rel="stylesheet" href="css/tools/toastr.min.css">
-    <link rel="stylesheet" href="css/tools/cropper.min.css">
-    <link rel="stylesheet" href="css/tools/formValidation.min.css">
-    <link rel="stylesheet" href="css/tools/ssi-uploader.min.css">
+    <link rel="stylesheet" href="../css/tools/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/tools/normalize.css">
+    <link rel="stylesheet" href="../css/tools/nprogress.css">
+    <link rel="stylesheet" href="../css/tools/toastr.min.css">
+    <link rel="stylesheet" href="../css/tools/cropper.min.css">
+    <link rel="stylesheet" href="../css/tools/formValidation.min.css">
+    <link rel="stylesheet" href="../css/tools/ssi-uploader.min.css">
     <!-- usr-center -->
-    <link rel="stylesheet" href="css/view/nav-common.css">
-    <link rel="stylesheet" href="css/view/usr-center.css">
+    <link rel="stylesheet" href="../css/view/main.css">
+    <link rel="stylesheet" href="../css/view/usr-center.css">
 
     <!--[if gte IE 9]>
-    <script type="text/javascript" src="js/ie-exts/html5shiv.min.js"></script>
-    <script type="text/javascript" src="js/ie-exts/respond.min.js"></script>
-    <script type="text/javascript" src="js/ie-exts/selectivizr-min.js"></script>
+    <script type="text/javascript" src="../js/ie-exts/html5shiv.min.js"></script>
+    <script type="text/javascript" src="../js/ie-exts/respond.min.js"></script>
+    <script type="text/javascript" src="../js/ie-exts/selectivizr-min.js"></script>
     <![endif]-->
     <!--[if lt IE 9]>
     <script>window.location.href='upgrade-browser.html';</script>
@@ -42,8 +42,8 @@
         <nav class="navbar navbar-default" id="navbar" role="navigation">
             <div class="container">
                 <div class="navbar-header">
-                    <a href="index.html" class="navbar-brand logo-brand">
-                        <img class="amcu-logo" id="logo" src="img/logo/logo.png" alt="协会logo">
+                    <a href="../index.html" class="navbar-brand logo-brand">
+                        <img class="amcu-logo" id="logo" src="../img/logo/logo.png" alt="协会logo">
                     </a>
                     <button class="navbar-toggle x collapsed" type="button" data-toggle="collapse" data-target="#navbar-menu">
                         <span class="icon-bar"></span>
@@ -57,10 +57,10 @@
                             <a data-cont="AMCU网站" title="AMCU网站" href="javascript:void(0)">首页</a>
                         </li>
                         <li>
-                            <a data-cont="协会资讯" title="协会资讯" href="info.html">协会资讯</a>
+                            <a data-cont="协会资讯" title="协会资讯" href="../sys/info.html">协会资讯</a>
                         </li>
                         <li>
-                            <a data-cont="文章" title="文章" href="article-center.html">文章</a>
+                            <a data-cont="文章" title="文章" href="../content/article-center.html">文章</a>
                         </li>
                         <li class="dropdown">
                             <a data-cont="合作企业" title="合作企业" class="dropdown-toggle" data-toggle="dropdown" href="#">合作企业<b class="caret"></b></a>
@@ -451,7 +451,7 @@
                                     <div class="row mr-b-10">
                                         <label class="col-md-2 control-label"><span class="pull-right">QQ:</span></label>
                                         <div class="col-md-9">
-                                            <img src="img/avatar/qq.ico" />
+                                            <img src="../img/avatar/qq.ico" />
                                             <div class="pull-right">
                                                 <template v-if="isQQBinded == false" v-cloak>
                                                     <form action="/connect/qq" method="post">
@@ -472,7 +472,7 @@
                                     <div class="row mr-b-10">
                                         <label class="col-md-2 control-label"><span class="pull-right">WeChat:</span></label>
                                         <div class="col-md-9">
-                                            <img src="img/avatar/wx.ico" />
+                                            <img src="../img/avatar/wx.ico" />
                                             <div class="pull-right">
                                                 <template v-if="isWxBinded == false" v-cloak>
                                                     <form action="/connect/weixin" method="post">
@@ -493,7 +493,7 @@
                                     <div class="row mr-b-10">
                                         <label class="col-md-2 control-label"><span class="pull-right">LinkedIn:</span></label>
                                         <div class="col-md-9">
-                                            <img src="img/avatar/linkedin.ico" />
+                                            <img src="../img/avatar/linkedin.ico" />
                                             <div class="pull-right">
                                                 <template v-if="isLkBinded == false" v-cloak>
                                                     <form action="/connect/linkedin" method="post">
@@ -514,7 +514,7 @@
                                     <div class="row mr-b-10">
                                         <label class="col-md-2"><span class="pull-right">Github:</span></label>
                                         <div class="col-md-9">
-                                            <img src="img/avatar/github.ico" />
+                                            <img src="../img/avatar/github.ico" />
                                             <div class="pull-right">
                                                 <template v-if="isGithubBinded == false" v-cloak>
                                                     <form action="/qqLogin/github" method="post">
@@ -535,7 +535,7 @@
                                     <div class="row mr-b-10">
                                         <label class="col-md-2 control-label"><span class="pull-right">Coding:</span></label>
                                         <div class="col-md-9">
-                                            <img src="img/avatar/coding.ico" />
+                                            <img src="../img/avatar/coding.ico" />
                                             <div class="pull-right">
                                                 <template v-if="isCodingBinded == false" v-cloak>
                                                     <form action="/qqLogin/coding" method="post">
@@ -1131,29 +1131,29 @@
     </footer>
 
     <!-- jquery -->
-    <script type="text/javascript" src="js/jquery/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../js/jquery/jquery-3.3.1.min.js"></script>
     <!-- Boostrap -->
-    <script type="text/javascript" src="js/boostrap/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/boostrap/bootstrap-select.min.js"></script>
+    <script type="text/javascript" src="../js/boostrap/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/boostrap/bootstrap-select.min.js"></script>
     <!-- adminLTE -->
-    <script type="text/javascript" src="js/adminLTE/adminlte.min.js"></script>
+    <script type="text/javascript" src="../js/adminLTE/adminlte.min.js"></script>
     <!-- vue -->
-    <script type="text/javascript" src="js/vue/vue.min.js"></script>
-    <script type="text/javascript" src="js/vue/axios.min.js"></script>
-    <script type="text/javascript" src="js/vue/qs.min.js"></script>
+    <script type="text/javascript" src="../js/vue/vue.min.js"></script>
+    <script type="text/javascript" src="../js/vue/axios.min.js"></script>
+    <script type="text/javascript" src="../js/vue/qs.min.js"></script>
     <!-- tools -->
-    <script type="text/javascript" src="js/tools/ResizeSensor.min.js"></script>
-    <script type="text/javascript" src="js/tools/theia-sticky-sidebar.min.js"></script>
-    <script type="text/javascript" src="js/tools/nprogress.js"></script>
-    <script type="text/javascript" src="js/tools/toastr.min.js"></script>
-    <script type="text/javascript" src="js/tools/cropper.min.js"></script>
-    <script type="text/javascript" src="js/tools/formValidation.min.js"></script>
-    <script type="text/javascript" src="js/tools/framework/form-validate-bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/tools/ssi-uploader.min.js"></script>
-    <script type="text/javascript" src="js/view/decorate.js"></script>
+    <script type="text/javascript" src="../js/tools/ResizeSensor.min.js"></script>
+    <script type="text/javascript" src="../js/tools/theia-sticky-sidebar.min.js"></script>
+    <script type="text/javascript" src="../js/tools/nprogress.js"></script>
+    <script type="text/javascript" src="../js/tools/toastr.min.js"></script>
+    <script type="text/javascript" src="../js/tools/cropper.min.js"></script>
+    <script type="text/javascript" src="../js/tools/formValidation.min.js"></script>
+    <script type="text/javascript" src="../js/tools/framework/form-validate-bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/tools/ssi-uploader.min.js"></script>
+    <script type="text/javascript" src="../js/view/main.js"></script>
     <!-- user-center -->
-    <script type="text/javascript" src="js/view/avatar-ready.js"></script>
-    <script type="text/javascript" src="js/view/usr-center.js"></script>
+    <script type="text/javascript" src="../js/view/avatar-ready.js"></script>
+    <script type="text/javascript" src="../js/view/usr-center.js"></script>
 
 </body>
 </html>

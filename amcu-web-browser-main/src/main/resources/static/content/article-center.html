@@ -6,27 +6,26 @@
     <meta http-equiv="x-ua-compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="description" content="AMCU是华南农业大学单片机开发爱好者的交流平台">
-    <meta name="keywords" content="AMCU,MCU,大学生,单片机爱好者社区,电子专业,硬件工程师,Android工程师,开发者,Java工程师,文章搜索">
-    <title>文章搜索--华南农业大学单片机协会</title>
-
+    <meta name="keywords" content="AMCU,MCU,大学生,单片机开发者社区,电子专业,硬件工程师,Android工程师,开发者,Java工程师,热门文章,最新文章">
+    <title>热门文章/最新文章--华南农业大学单片机协会</title>
     <!-- icon -->
-    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../img/favicon.ico" type="image/x-icon">
     <!-- Boostrap -->
-    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
     <!-- adminLTE -->
-    <link rel="stylesheet" href="css/adminLTE/AdminLTE.min.css">
+    <link rel="stylesheet" href="../css/adminLTE/AdminLTE.min.css">
     <!-- tools -->
-    <link rel="stylesheet" href="css/tools/font-awesome.min.css">
-    <link rel="stylesheet" href="css/tools/normalize.css">
-    <link rel="stylesheet" href="css/tools/nprogress.css">
+    <link rel="stylesheet" href="../css/tools/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/tools/normalize.css">
+    <link rel="stylesheet" href="../css/tools/nprogress.css">
     <!-- index -->
-    <link rel="stylesheet" href="css/view/nav-common.css">
-    <link rel="stylesheet" href="css/view/search.css">
+    <link rel="stylesheet" href="../css/view/main.css">
+    <link rel="stylesheet" href="../css/view/article-center.css">
 
     <!--[if gte IE 9]>
-    <script type="text/javascript" src="js/ie-exts/html5shiv.min.js"></script>
-    <script type="text/javascript" src="js/ie-exts/respond.min.js"></script>
-    <script type="text/javascript" src="js/ie-exts/selectivizr-min.js"></script>
+    <script type="text/javascript" src="../js/ie-exts/html5shiv.min.js"></script>
+    <script type="text/javascript" src="../js/ie-exts/respond.min.js"></script>
+    <script type="text/javascript" src="../js/ie-exts/selectivizr-min.js"></script>
     <![endif]-->
     <!--[if lt IE 9]>
     <script>window.location.href='upgrade-browser.html';</script>
@@ -38,8 +37,8 @@
         <nav class="navbar navbar-default" id="navbar" role="navigation">
             <div class="container">
                 <div class="navbar-header">
-                    <a href="index.html" class="navbar-brand logo-brand">
-                        <img class="amcu-logo" id="logo" src="img/logo/logo.png" alt="协会logo">
+                    <a href="../index.html" class="navbar-brand logo-brand">
+                        <img class="amcu-logo" id="logo" src="../img/logo/logo.png" alt="协会logo">
                     </a>
                     <button class="navbar-toggle x collapsed" type="button" data-toggle="collapse" data-target="#navbar-menu">
                         <span class="icon-bar"></span>
@@ -50,13 +49,13 @@
                 <div class="collapse navbar-collapse" id="navbar-menu">
                     <ul class="nav navbar-nav navbar-right head-nav">
                         <li>
-                            <a data-cont="AMCU网站" title="AMCU网站" href="index.html">首页</a>
+                            <a data-cont="AMCU网站" title="AMCU网站" href="../index.html">首页</a>
                         </li>
                         <li>
-                            <a data-cont="协会资讯" title="协会资讯" href="info.html">协会资讯</a>
+                            <a data-cont="协会资讯" title="协会资讯" href="../sys/info.html">协会资讯</a>
                         </li>
                         <li>
-                            <a data-cont="文章" title="文章" href="article-center.html" style="color: #0074E8;">文章</a>
+                            <a data-cont="文章" title="文章" href="javascript:void(0)" style="color: #0074E8;">文章</a>
                         </li>
                         <li class="dropdown">
                             <a data-cont="合作企业" title="合作企业" class="dropdown-toggle" data-toggle="dropdown" href="#">合作企业<b class="caret"></b></a>
@@ -71,6 +70,15 @@
                         </li>
                         <li>
                             <a data-cont="用户中心" title="用户中心" href="##">用户中心</a>
+                        </li>
+                        <li>
+                            <form class="navbar-form navbar-right input-group form-search w-180" role="search">
+                                <input id="kw-a" class="form-control" name="kw" type="text" placeholder="search"/>
+                                <input id="type-a" name="t" value="article" type="hidden" />
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i>搜索</button>
+                                </span>
+                            </form>
                         </li>
                     </ul>
                 </div>
@@ -87,7 +95,7 @@
                             用户信息
                         </div>
                         <div class="box-body">
-                            <img class="user-avatar center-block img-circle img-responsive" src="img/avatar/5_1.png">
+                            <img class="user-avatar center-block img-circle img-responsive" src="../img/avatar/5_1.png">
                             <span class="user-name">测试人员8888888888888888888</span>
                             <span class="user-integration">声望:<span id="integrations">6666666</span></span>
                             <span class="user-auth">
@@ -95,8 +103,8 @@
                                 <span class="label label-danger">AMCU成员</span>
                             </span>
                             <div class="for-btn">
-                                <button class="btn btn-success"><span class="glyphicon glyphicon-edit" style="margin-right: 5px;"></span>写博客</button>
-                                <button class="btn btn-danger"><span class="glyphicon glyphicon-log-out" style="margin-right: 5px;"></span>退出登录</button>
+                                <button class="btn btn-success"><span class="glyphicon glyphicon-edit"></span>写博客</button>
+                                <button class="btn btn-danger"><span class="glyphicon glyphicon-log-out"></span>退出登录</button>
                             </div>
                         </div>
                     </div>
@@ -110,49 +118,41 @@
                             <i class="fa fa-wechat margin-r-5"></i>AMCU微信公众号
                         </strong>
                         <p class="text-muted">公众号:<strong>华农单协</strong>
-                            <img class="group-img center-block" src="img/avatar/wx_amcu.jpg" alt="华农单协">
+                            <img class="group-img center-block" src="../img/avatar/wx_amcu.jpg" alt="华农单协">
                         </p>
                         <p>关注了可能能成为大佬哦!</p>
                     </div>
                 </div>
             </div>
-            <div class="tab-content col-md-9 col-xs-12">
+            <div class="articles tab-content col-md-9 col-xs-12">
                 <div>
                     <ul class="breadcrumb bread-nav-w">
                         <li><a href="/index.html">首页</a></li>
-                        <li><a href="javascript:void(0)">搜索</a></li>
-                        <li><a href="javascript:void(0)" id="cur-type">文章</a></li>
+                        <li><a href="javascript:void(0)">文章</a></li>
+                        <li><a href="javascript:void(0)" id="cur-type">热门文章</a></li>
                     </ul>
                 </div>
                 <div>
                     <div class="nav-tabs-custom margin-bottom-none">
-                        <ul class="nav nav-tabs ul-nav-w ul-nav-border" id="search-tabs">
-                            <li class="active"><a href="#search-article" data-toggle="tab">文章</a></li>
-                            <li><a href="#search-notice" data-toggle="tab">资讯</a></li>
-                            <li><a href="#search-usr" data-toggle="tab">用户</a></li>
+                        <ul class="nav nav-tabs ul-nav-w ul-nav-border" id="article-tabs">
+                            <li class="active"><a href="#hot-article" data-toggle="tab">热门文章</a></li>
+                            <li><a href="#new-article" data-toggle="tab">最新文章</a></li>
                         </ul>
                     </div>
                     <div class="tab-content">
-                        <div class="box box-default tab-pane active" id="search-article">
-                            <form id="search-a" class="input-group form-search" role="search">
-                                <input id="kw-a" class="form-control" name="kw" type="text" placeholder="search"/>
-                                <input id="type-a" name="t" value="article" type="hidden" />
-                                <span class="input-group-btn">
-                                    <button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i>搜索</button>
-                                </span>
-                            </form>
+                        <div class="box box-default tab-pane active" id="hot-article">
                             <div class="box-body">
-                                <ul class="article-content">
+                                <ul class="hot-content">
                                     <li class="content-li">
                                         <div class="row">
                                             <div class="col-md-12 title-wrap">
                                                 <p class="nowrap bold link-size-16">
-                                                    <a class="link-default" href="javascript:void(0);">文章1</a>
+                                                    <a class="link-default" href="javascript:void(0);">热门文章1</a>
                                                 </p>
                                                 <ul class="list-inline">
                                                     <li>
                                                         <a href="javascript:void(0);">
-                                                            <img class="img-circle" src="img/avatar/5_1.png" alt="">
+                                                            <img class="img-circle" src="../img/avatar/5_1.png" alt="">
                                                             <span class="usr-name">测试人员123</span>
                                                             <span class="deploy">
                                                             发布时间:<span class="time">2018-11-15</span>
@@ -185,12 +185,12 @@
                                         <div class="row">
                                             <div class="col-md-12 title-wrap">
                                                 <p class="nowrap bold link-size-16">
-                                                    <a class="link-default" href="javascript:void(0);">文章1</a>
+                                                    <a class="link-default" href="javascript:void(0);">热门文章1</a>
                                                 </p>
                                                 <ul class="list-inline">
                                                     <li>
                                                         <a href="javascript:void(0);">
-                                                            <img class="img-circle" src="img/avatar/5_1.png" alt="">
+                                                            <img class="img-circle" src="../img/avatar/5_1.png" alt="">
                                                             <span class="usr-name">测试人员123</span>
                                                             <span class="deploy">
                                                             发布时间:<span class="time">2018-11-15</span>
@@ -223,12 +223,12 @@
                                         <div class="row">
                                             <div class="col-md-12 title-wrap">
                                                 <p class="nowrap bold link-size-16">
-                                                    <a class="link-default" href="javascript:void(0);">文章1</a>
+                                                    <a class="link-default" href="javascript:void(0);">热门文章1</a>
                                                 </p>
                                                 <ul class="list-inline">
                                                     <li>
                                                         <a href="javascript:void(0);">
-                                                            <img class="img-circle" src="img/avatar/5_1.png" alt="">
+                                                            <img class="img-circle" src="../img/avatar/5_1.png" alt="">
                                                             <span class="usr-name">测试人员123</span>
                                                             <span class="deploy">
                                                             发布时间:<span class="time">2018-11-15</span>
@@ -261,12 +261,12 @@
                                         <div class="row">
                                             <div class="col-md-12 title-wrap">
                                                 <p class="nowrap bold link-size-16">
-                                                    <a class="link-default" href="javascript:void(0);">文章1</a>
+                                                    <a class="link-default" href="javascript:void(0);">热门文章1</a>
                                                 </p>
                                                 <ul class="list-inline">
                                                     <li>
                                                         <a href="javascript:void(0);">
-                                                            <img class="img-circle" src="img/avatar/5_1.png" alt="">
+                                                            <img class="img-circle" src="../img/avatar/5_1.png" alt="">
                                                             <span class="usr-name">测试人员123</span>
                                                             <span class="deploy">
                                                             发布时间:<span class="time">2018-11-15</span>
@@ -299,12 +299,12 @@
                                         <div class="row">
                                             <div class="col-md-12 title-wrap">
                                                 <p class="nowrap bold link-size-16">
-                                                    <a class="link-default" href="javascript:void(0);">文章1</a>
+                                                    <a class="link-default" href="javascript:void(0);">热门文章1</a>
                                                 </p>
                                                 <ul class="list-inline">
                                                     <li>
                                                         <a href="javascript:void(0);">
-                                                            <img class="img-circle" src="img/avatar/5_1.png" alt="">
+                                                            <img class="img-circle" src="../img/avatar/5_1.png" alt="">
                                                             <span class="usr-name">测试人员123</span>
                                                             <span class="deploy">
                                                             发布时间:<span class="time">2018-11-15</span>
@@ -337,12 +337,12 @@
                                         <div class="row">
                                             <div class="col-md-12 title-wrap">
                                                 <p class="nowrap bold link-size-16">
-                                                    <a class="link-default" href="javascript:void(0);">文章1</a>
+                                                    <a class="link-default" href="javascript:void(0);">热门文章1</a>
                                                 </p>
                                                 <ul class="list-inline">
                                                     <li>
                                                         <a href="javascript:void(0);">
-                                                            <img class="img-circle" src="img/avatar/5_1.png" alt="">
+                                                            <img class="img-circle" src="../img/avatar/5_1.png" alt="">
                                                             <span class="usr-name">测试人员123</span>
                                                             <span class="deploy">
                                                             发布时间:<span class="time">2018-11-15</span>
@@ -375,12 +375,12 @@
                                         <div class="row">
                                             <div class="col-md-12 title-wrap">
                                                 <p class="nowrap bold link-size-16">
-                                                    <a class="link-default" href="javascript:void(0);">文章1</a>
+                                                    <a class="link-default" href="javascript:void(0);">热门文章1</a>
                                                 </p>
                                                 <ul class="list-inline">
                                                     <li>
                                                         <a href="javascript:void(0);">
-                                                            <img class="img-circle" src="img/avatar/5_1.png" alt="">
+                                                            <img class="img-circle" src="../img/avatar/5_1.png" alt="">
                                                             <span class="usr-name">测试人员123</span>
                                                             <span class="deploy">
                                                             发布时间:<span class="time">2018-11-15</span>
@@ -413,12 +413,12 @@
                                         <div class="row">
                                             <div class="col-md-12 title-wrap">
                                                 <p class="nowrap bold link-size-16">
-                                                    <a class="link-default" href="javascript:void(0);">文章1</a>
+                                                    <a class="link-default" href="javascript:void(0);">热门文章1</a>
                                                 </p>
                                                 <ul class="list-inline">
                                                     <li>
                                                         <a href="javascript:void(0);">
-                                                            <img class="img-circle" src="img/avatar/5_1.png" alt="">
+                                                            <img class="img-circle" src="../img/avatar/5_1.png" alt="">
                                                             <span class="usr-name">测试人员123</span>
                                                             <span class="deploy">
                                                             发布时间:<span class="time">2018-11-15</span>
@@ -451,12 +451,12 @@
                                         <div class="row">
                                             <div class="col-md-12 title-wrap">
                                                 <p class="nowrap bold link-size-16">
-                                                    <a class="link-default" href="javascript:void(0);">文章1</a>
+                                                    <a class="link-default" href="javascript:void(0);">热门文章1</a>
                                                 </p>
                                                 <ul class="list-inline">
                                                     <li>
                                                         <a href="javascript:void(0);">
-                                                            <img class="img-circle" src="img/avatar/5_1.png" alt="">
+                                                            <img class="img-circle" src="../img/avatar/5_1.png" alt="">
                                                             <span class="usr-name">测试人员123</span>
                                                             <span class="deploy">
                                                             发布时间:<span class="time">2018-11-15</span>
@@ -491,26 +491,19 @@
                                 分页插件
                             </div>
                         </div>
-                        <div class="box box-default tab-pane" id="search-notice">
-                            <form id="search-n" class="input-group form-search" role="search">
-                                <input id="kw-n" class="form-control" name="kw" type="text" placeholder="search"/>
-                                <input id="type-n" name="t" value="notice" type="hidden" />
-                                <span class="input-group-btn">
-                                    <button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i>搜索</button>
-                                </span>
-                            </form>
+                        <div class="box box-default tab-pane" id="new-article">
                             <div class="box-body">
-                                <ul class="notice-content">
+                                <ul class="new-content">
                                     <li class="content-li">
                                         <div class="row">
                                             <div class="col-md-12 title-wrap">
                                                 <p class="nowrap bold link-size-16">
-                                                    <a class="link-default" href="javascript:void(0);">资讯1</a>
+                                                    <a class="link-default" href="javascript:void(0);">最新文章1</a>
                                                 </p>
                                                 <ul class="list-inline">
                                                     <li>
                                                         <a href="javascript:void(0);">
-                                                            <img class="img-circle" src="img/avatar/5_1.png" alt="">
+                                                            <img class="img-circle" src="../img/avatar/5_1.png" alt="">
                                                             <span class="usr-name">测试人员123</span>
                                                             <span class="deploy">
                                                             发布时间:<span class="time">2018-11-15</span>
@@ -543,12 +536,12 @@
                                         <div class="row">
                                             <div class="col-md-12 title-wrap">
                                                 <p class="nowrap bold link-size-16">
-                                                    <a class="link-default" href="javascript:void(0);">资讯1</a>
+                                                    <a class="link-default" href="javascript:void(0);">最新文章1</a>
                                                 </p>
                                                 <ul class="list-inline">
                                                     <li>
                                                         <a href="javascript:void(0);">
-                                                            <img class="img-circle" src="img/avatar/5_1.png" alt="">
+                                                            <img class="img-circle" src="../img/avatar/5_1.png" alt="">
                                                             <span class="usr-name">测试人员123</span>
                                                             <span class="deploy">
                                                             发布时间:<span class="time">2018-11-15</span>
@@ -581,12 +574,12 @@
                                         <div class="row">
                                             <div class="col-md-12 title-wrap">
                                                 <p class="nowrap bold link-size-16">
-                                                    <a class="link-default" href="javascript:void(0);">资讯1</a>
+                                                    <a class="link-default" href="javascript:void(0);">最新文章1</a>
                                                 </p>
                                                 <ul class="list-inline">
                                                     <li>
                                                         <a href="javascript:void(0);">
-                                                            <img class="img-circle" src="img/avatar/5_1.png" alt="">
+                                                            <img class="img-circle" src="../img/avatar/5_1.png" alt="">
                                                             <span class="usr-name">测试人员123</span>
                                                             <span class="deploy">
                                                             发布时间:<span class="time">2018-11-15</span>
@@ -619,12 +612,12 @@
                                         <div class="row">
                                             <div class="col-md-12 title-wrap">
                                                 <p class="nowrap bold link-size-16">
-                                                    <a class="link-default" href="javascript:void(0);">资讯1</a>
+                                                    <a class="link-default" href="javascript:void(0);">最新文章1</a>
                                                 </p>
                                                 <ul class="list-inline">
                                                     <li>
                                                         <a href="javascript:void(0);">
-                                                            <img class="img-circle" src="img/avatar/5_1.png" alt="">
+                                                            <img class="img-circle" src="../img/avatar/5_1.png" alt="">
                                                             <span class="usr-name">测试人员123</span>
                                                             <span class="deploy">
                                                             发布时间:<span class="time">2018-11-15</span>
@@ -657,12 +650,12 @@
                                         <div class="row">
                                             <div class="col-md-12 title-wrap">
                                                 <p class="nowrap bold link-size-16">
-                                                    <a class="link-default" href="javascript:void(0);">资讯1</a>
+                                                    <a class="link-default" href="javascript:void(0);">最新文章1</a>
                                                 </p>
                                                 <ul class="list-inline">
                                                     <li>
                                                         <a href="javascript:void(0);">
-                                                            <img class="img-circle" src="img/avatar/5_1.png" alt="">
+                                                            <img class="img-circle" src="../img/avatar/5_1.png" alt="">
                                                             <span class="usr-name">测试人员123</span>
                                                             <span class="deploy">
                                                             发布时间:<span class="time">2018-11-15</span>
@@ -695,12 +688,12 @@
                                         <div class="row">
                                             <div class="col-md-12 title-wrap">
                                                 <p class="nowrap bold link-size-16">
-                                                    <a class="link-default" href="javascript:void(0);">资讯1</a>
+                                                    <a class="link-default" href="javascript:void(0);">最新文章1</a>
                                                 </p>
                                                 <ul class="list-inline">
                                                     <li>
                                                         <a href="javascript:void(0);">
-                                                            <img class="img-circle" src="img/avatar/5_1.png" alt="">
+                                                            <img class="img-circle" src="../img/avatar/5_1.png" alt="">
                                                             <span class="usr-name">测试人员123</span>
                                                             <span class="deploy">
                                                             发布时间:<span class="time">2018-11-15</span>
@@ -733,12 +726,12 @@
                                         <div class="row">
                                             <div class="col-md-12 title-wrap">
                                                 <p class="nowrap bold link-size-16">
-                                                    <a class="link-default" href="javascript:void(0);">资讯1</a>
+                                                    <a class="link-default" href="javascript:void(0);">最新文章1</a>
                                                 </p>
                                                 <ul class="list-inline">
                                                     <li>
                                                         <a href="javascript:void(0);">
-                                                            <img class="img-circle" src="img/avatar/5_1.png" alt="">
+                                                            <img class="img-circle" src="../img/avatar/5_1.png" alt="">
                                                             <span class="usr-name">测试人员123</span>
                                                             <span class="deploy">
                                                             发布时间:<span class="time">2018-11-15</span>
@@ -771,12 +764,12 @@
                                         <div class="row">
                                             <div class="col-md-12 title-wrap">
                                                 <p class="nowrap bold link-size-16">
-                                                    <a class="link-default" href="javascript:void(0);">资讯1</a>
+                                                    <a class="link-default" href="javascript:void(0);">最新文章1</a>
                                                 </p>
                                                 <ul class="list-inline">
                                                     <li>
                                                         <a href="javascript:void(0);">
-                                                            <img class="img-circle" src="img/avatar/5_1.png" alt="">
+                                                            <img class="img-circle" src="../img/avatar/5_1.png" alt="">
                                                             <span class="usr-name">测试人员123</span>
                                                             <span class="deploy">
                                                             发布时间:<span class="time">2018-11-15</span>
@@ -800,253 +793,6 @@
                                                             <i class="glyphicon glyphicon-eye-open"></i>
                                                             <span class="views">100</span>
                                                         </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="box-footer">
-                                分页插件
-                            </div>
-                        </div>
-                        <div class="box box-default tab-pane" id="search-usr">
-                            <form id="search-u" class="input-group form-search" role="search">
-                                <input id="kw-u" class="form-control" name="kw" type="text" placeholder="search"/>
-                                <input id="type-u" name="t" value="usr" type="hidden" />
-                                <span class="input-group-btn">
-                                    <button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i>搜索</button>
-                                </span>
-                            </form>
-                            <div class="box-body">
-                                <ul class="usr-content">
-                                    <li class="content-li">
-                                        <div class="row">
-                                            <div class="col-md-12 title-wrap">
-                                                <ul class="list-inline">
-                                                    <li class="cur-search-usr">
-                                                        <a href="javascript:void(0);">
-                                                            <img class="img-circle" src="img/avatar/5_1.png" alt="">
-                                                        </a>
-                                                    </li>
-                                                    <li class="li-ver-md">
-                                                        <div>
-                                                            <a href="javascript:void(0);">
-                                                                <span class="usr-name">测试人员123</span>
-                                                            </a>
-                                                            <div>
-                                                                Days:<span class="time">100天</span>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <span class="user-auth">
-                                                            <span class="label label-primary">网站成员</span>
-                                                            <span class="label label-danger">AMCU成员</span>
-                                                        </span>
-                                                    </li>
-                                                    <li class="pull-right">
-                                                        <button class="f-btn btn btn-danger btn-sm"><i class="glyphicon glyphicon-plus"></i>follow</button>
-                                                        <button class="f-btn btn btn-danger btn-sm hidden"><i class="glyphicon glyphicon-remove"></i>unfollow</button>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="content-li">
-                                        <div class="row">
-                                            <div class="col-md-12 title-wrap">
-                                                <ul class="list-inline">
-                                                    <li class="cur-search-usr">
-                                                        <a href="javascript:void(0);">
-                                                            <img class="img-circle" src="img/avatar/5_1.png" alt="">
-                                                        </a>
-                                                    </li>
-                                                    <li class="li-ver-md">
-                                                        <div>
-                                                            <a href="javascript:void(0);">
-                                                                <span class="usr-name">测试人员123</span>
-                                                            </a>
-                                                            <div>
-                                                                Days:<span class="time">100天</span>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <span class="user-auth">
-                                                            <span class="label label-primary">网站成员</span>
-                                                            <span class="label label-danger">AMCU成员</span>
-                                                        </span>
-                                                    </li>
-                                                    <li class="pull-right">
-                                                        <button class="f-btn btn btn-danger btn-sm"><i class="glyphicon glyphicon-plus"></i>follow</button>
-                                                        <button class="f-btn btn btn-danger btn-sm hidden"><i class="glyphicon glyphicon-remove"></i>unfollow</button>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="content-li">
-                                        <div class="row">
-                                            <div class="col-md-12 title-wrap">
-                                                <ul class="list-inline">
-                                                    <li class="cur-search-usr">
-                                                        <a href="javascript:void(0);">
-                                                            <img class="img-circle" src="img/avatar/5_1.png" alt="">
-                                                        </a>
-                                                    </li>
-                                                    <li class="li-ver-md">
-                                                        <div>
-                                                            <a href="javascript:void(0);">
-                                                                <span class="usr-name">测试人员123</span>
-                                                            </a>
-                                                            <div>
-                                                                Days:<span class="time">100天</span>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <span class="user-auth">
-                                                            <span class="label label-primary">网站成员</span>
-                                                            <span class="label label-danger">AMCU成员</span>
-                                                        </span>
-                                                    </li>
-                                                    <li class="pull-right">
-                                                        <button class="f-btn btn btn-danger btn-sm"><i class="glyphicon glyphicon-plus"></i>follow</button>
-                                                        <button class="f-btn btn btn-danger btn-sm hidden"><i class="glyphicon glyphicon-remove"></i>unfollow</button>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="content-li">
-                                        <div class="row">
-                                            <div class="col-md-12 title-wrap">
-                                                <ul class="list-inline">
-                                                    <li class="cur-search-usr">
-                                                        <a href="javascript:void(0);">
-                                                            <img class="img-circle" src="img/avatar/5_1.png" alt="">
-                                                        </a>
-                                                    </li>
-                                                    <li class="li-ver-md">
-                                                        <div>
-                                                            <a href="javascript:void(0);">
-                                                                <span class="usr-name">测试人员123</span>
-                                                            </a>
-                                                            <div>
-                                                                Days:<span class="time">100天</span>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <span class="user-auth">
-                                                            <span class="label label-primary">网站成员</span>
-                                                            <span class="label label-danger">AMCU成员</span>
-                                                        </span>
-                                                    </li>
-                                                    <li class="pull-right">
-                                                        <button class="f-btn btn btn-danger btn-sm"><i class="glyphicon glyphicon-plus"></i>follow</button>
-                                                        <button class="f-btn btn btn-danger btn-sm hidden"><i class="glyphicon glyphicon-remove"></i>unfollow</button>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="content-li">
-                                        <div class="row">
-                                            <div class="col-md-12 title-wrap">
-                                                <ul class="list-inline">
-                                                    <li class="cur-search-usr">
-                                                        <a href="javascript:void(0);">
-                                                            <img class="img-circle" src="img/avatar/5_1.png" alt="">
-                                                        </a>
-                                                    </li>
-                                                    <li class="li-ver-md">
-                                                        <div>
-                                                            <a href="javascript:void(0);">
-                                                                <span class="usr-name">测试人员123</span>
-                                                            </a>
-                                                            <div>
-                                                                Days:<span class="time">100天</span>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <span class="user-auth">
-                                                            <span class="label label-primary">网站成员</span>
-                                                            <span class="label label-danger">AMCU成员</span>
-                                                        </span>
-                                                    </li>
-                                                    <li class="pull-right">
-                                                        <button class="f-btn btn btn-danger btn-sm"><i class="glyphicon glyphicon-plus"></i>follow</button>
-                                                        <button class="f-btn btn btn-danger btn-sm hidden"><i class="glyphicon glyphicon-remove"></i>unfollow</button>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="content-li">
-                                        <div class="row">
-                                            <div class="col-md-12 title-wrap">
-                                                <ul class="list-inline">
-                                                    <li class="cur-search-usr">
-                                                        <a href="javascript:void(0);">
-                                                            <img class="img-circle" src="img/avatar/5_1.png" alt="">
-                                                        </a>
-                                                    </li>
-                                                    <li class="li-ver-md">
-                                                        <div>
-                                                            <a href="javascript:void(0);">
-                                                                <span class="usr-name">测试人员123</span>
-                                                            </a>
-                                                            <div>
-                                                                Days:<span class="time">100天</span>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <span class="user-auth">
-                                                            <span class="label label-primary">网站成员</span>
-                                                            <span class="label label-danger">AMCU成员</span>
-                                                        </span>
-                                                    </li>
-                                                    <li class="pull-right">
-                                                        <button class="f-btn btn btn-danger btn-sm"><i class="glyphicon glyphicon-plus"></i>follow</button>
-                                                        <button class="f-btn btn btn-danger btn-sm hidden"><i class="glyphicon glyphicon-remove"></i>unfollow</button>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="content-li">
-                                        <div class="row">
-                                            <div class="col-md-12 title-wrap">
-                                                <ul class="list-inline">
-                                                    <li class="cur-search-usr">
-                                                        <a href="javascript:void(0);">
-                                                            <img class="img-circle" src="img/avatar/5_1.png" alt="">
-                                                        </a>
-                                                    </li>
-                                                    <li class="li-ver-md">
-                                                        <div>
-                                                            <a href="javascript:void(0);">
-                                                                <span class="usr-name">测试人员123</span>
-                                                            </a>
-                                                            <div>
-                                                                Days:<span class="time">100天</span>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <span class="user-auth">
-                                                            <span class="label label-primary">网站成员</span>
-                                                            <span class="label label-danger">AMCU成员</span>
-                                                        </span>
-                                                    </li>
-                                                    <li class="pull-right">
-                                                        <button class="f-btn btn btn-danger btn-sm"><i class="glyphicon glyphicon-plus"></i>follow</button>
-                                                        <button class="f-btn btn btn-danger btn-sm hidden"><i class="glyphicon glyphicon-remove"></i>unfollow</button>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -1076,21 +822,20 @@
     </footer>
 
     <!-- jquery -->
-    <script type="text/javascript" src="js/jquery/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../js/jquery/jquery-3.3.1.min.js"></script>
     <!-- Boostrap -->
-    <script type="text/javascript" src="js/boostrap/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/boostrap/bootstrap.min.js"></script>
     <!-- adminLTE -->
-    <script type="text/javascript" src="js/adminLTE/adminlte.min.js"></script>
+    <script type="text/javascript" src="../js/adminLTE/adminlte.min.js"></script>
     <!-- vue -->
-    <script type="text/javascript" src="js/vue/vue.min.js"></script>
-    <script type="text/javascript" src="js/vue/vue-resource.min.js"></script>
-    <!-- tools-->
-    <script type="text/javascript" src="js/tools/ResizeSensor.min.js"></script>
-    <script type="text/javascript" src="js/tools/theia-sticky-sidebar.min.js"></script>
-    <script type="text/javascript" src="js/tools/nprogress.js"></script>
-    <script type="text/javascript" src="js/view/decorate.js"></script>
-    <!-- search -->
-    <script type="text/javascript" src="js/view/search.js"></script>
-
+    <script type="text/javascript" src="../js/vue/vue.min.js"></script>
+    <!-- tools -->
+    <script type="text/javascript" src="../js/tools/ResizeSensor.min.js"></script>
+    <script type="text/javascript" src="../js/tools/theia-sticky-sidebar.min.js"></script>
+    <script type="text/javascript" src="../js/tools/nprogress.js"></script>
+    <script type="text/javascript" src="../js/tools/toastr.min.js"></script>
+    <script type="text/javascript" src="../js/view/main.js"></script>
+    <!-- articles -->
+    <script type="text/javascript" src="../js/view/articles-center.js"></script>
 </body>
 </html>
