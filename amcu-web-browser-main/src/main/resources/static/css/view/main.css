@@ -270,6 +270,18 @@ hr {
     margin-bottom: 10px;
 }
 
+.mr-l-4 {
+    margin-left: 4px !important;
+}
+
+.mr-l-5 {
+    margin-left: 5px !important;
+}
+
+.mr-l-6 {
+    margin-left: 6px !important;
+}
+
 .mr-l-8 {
     margin-left: 8px !important;
 }
@@ -404,7 +416,7 @@ img#logo.amcu-logo {
 
 /*************** footer公用样式 *******************/
 
-.container.top-rel-ontainer {
+.container.top-rel-container {
     min-height: calc(100vh - 132px);
 }
 

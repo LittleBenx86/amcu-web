@@ -14,13 +14,13 @@
     <!-- Boostrap -->
     <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="../css/bootstrap/bootstrap-select.min.css">
+    <link rel="stylesheet" href="../css/bootstrap/bootstrap-switch.min.css">
     <!-- adminLTE -->
     <link rel="stylesheet" href="../css/adminLTE/AdminLTE.min.css">
     <!-- tools -->
     <link rel="stylesheet" href="../css/tools/font-awesome.min.css">
     <link rel="stylesheet" href="../css/tools/normalize.css">
     <link rel="stylesheet" href="../css/tools/nprogress.css">
-    <link rel="stylesheet" href="../css/tools/ios6switch.css">
     <link rel="stylesheet" href="../css/tools/tagsinput.css">
     <!-- simditor -->
     <link rel="stylesheet" href="../css/simditor/simditor.min.css">
@@ -89,7 +89,7 @@
                         <template v-if="isLogin" v-cloak="">
                             <li class="dropdown user user-menu" id="user-menu">
                                 <a href="javascript:void(0)" class="dropdown-toggle link-default-img" data-toggle="dropdown" aria-expanded="false">
-                                    <img :src="curUsrAvatar" class="user-image" alt="测试人员123">
+                                    <img :src="curUsrAvatar" class="user-image">
                                     <span class="visible-lg-inline">{{ curUsername }}</span>
                                 </a>
                                 <ul class="dropdown-menu mr-t-10">
@@ -133,22 +133,22 @@
         </nav>
     </header>
 
-    <div class="container top-rel-ontainer">
+    <div class="container top-rel-container" id="articleEdit">
         <div class="row">
             <div class="col-md-9">
                 <div>
                     <ul class="breadcrumb bread-nav-w">
-                        <li><a href="/index.html">首页</a></li>
+                        <li><a href="/">首页</a></li>
                         <li><a href="javascript:void(0)">文章</a></li>
                         <li><a href="javascript:void(0)">文章编写</a></li>
                     </ul>
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon title-pre">文章标题</span>
-                    <input type="text" class="form-control input-lg input-flat" name="title" id="title" placeholder="请输入标题"/>
+                    <input type="text" class="form-control input-lg input-flat" name="title" id="title" placeholder="请输入标题" :value="title" v-cloak=""/>
                 </div>
                 <div class="form-group mr-t-10" id="editor-box">
-                    <textarea id="s-editor" placeholder="请开始你的创作" autofocus></textarea>
+                    <textarea id="editor" autofocus></textarea>
                 </div>
             </div>
             <div class="right-sidedar col-md-3">
@@ -172,16 +172,16 @@
                                         <i class="fa fa-comments"></i>评论设置
                                     </label>
                                     <div class="col-md-6 col-xs-6 mr-t-6" id="comment">
-                                        <input type="checkbox" id="comment-switch" value="1"/>
+                                        <input id="commentSwitch" type="checkbox"/>
                                     </div>
                                 </div>
                             </div>
                             <div class="box-footer">
                                 <div class="pull-left">
-                                    <button class="btn btn-default">草稿</button>
+                                    <button class="btn btn-default" @click="saveAsScratchEvent" v-cloak="">草稿</button>
                                 </div>
                                 <div class="pull-right">
-                                    <button class="btn btn-success">发布</button>
+                                    <button class="btn btn-success" @click="releaseArticleEvent" v-cloak="">发布</button>
                                 </div>
                             </div>
                         </div>
@@ -221,7 +221,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 
     <footer class="main-footer">
@@ -240,6 +239,7 @@
     <!-- Boostrap -->
     <script type="text/javascript" src="../js/boostrap/bootstrap.min.js"></script>
     <script type="text/javascript" src="../js/boostrap/bootstrap-select.min.js"></script>
+    <script type="text/javascript" src="../js/boostrap/bootstrap-switch.min.js"></script>
     <!-- adminLTE -->
     <script type="text/javascript" src="../js/adminLTE/adminlte.min.js"></script>
     <!-- vue -->
@@ -265,7 +265,6 @@
     <script type="text/javascript" src="../js/tools/theia-sticky-sidebar.min.js"></script>
     <script type="text/javascript" src="../js/tools/nprogress.js"></script>
     <script type="text/javascript" src="../js/tools/toastr.min.js"></script>
-    <script type="text/javascript" src="../js/tools/ios6switch.min.js"></script>
     <script type="text/javascript" src="../js/tools/tagsinput.js"></script>
     <script type="text/javascript" src="../js/view/main.js"></script>
     <!-- article-edit -->

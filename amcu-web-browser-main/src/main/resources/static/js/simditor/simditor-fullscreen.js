@@ -29,7 +29,7 @@ SimditorFullscreen = (function(superClass) {
 
   SimditorFullscreen.i18n = {
     'zh-CN': {
-      fullscreen: '全屏'
+      fullscreen: '全屏/还原'
     }
   };
 

@@ -28,12 +28,12 @@ let usrNavWrapperVM = new Vue({
                         _this.curUserEmail = result.data.respBody.email;
                         _this.curIntegrations = 0;
                     } else if(500 === result.data.statusCode) {
-                        toastr.error(result.data.msg + "\n请重新登录!", "提示");
+                        toastr.error(result.data.msg + "\n请重新登录!", "Sorry!");
                         _this.isLogin = false;
                     }
                 }
             }).catch((xhr) => {
-                toastr.error("用户信息获取异常,请重新登录", "警告");
+                toastr.error("用户信息获取异常,请重新登录", "Sorry!");
                 _this.isLogin = false;
             });
         }
@@ -53,10 +53,39 @@ let usrNavWrapperVM = new Vue({
                 }
             }
         }).catch((xhr) => {
-            toastr.info("未登录!");
+            toastr.info("登录异常!");
             _this.isLogin = false;
         });
     }
+});
+
+let articleEditVM = new Vue({
+    el : "#articleEdit",
+    data : {
+        /** Editor */
+        isCommentEnable : true,
+        editor : null,
+        title : "",
+    },
+    methods : {
+        saveAsScratchEvent() {
+            if(this.editor !== null) {
+
+            } else {
+                toastr.error("获取编辑器文本异常!", "Sorry!");
+            }
+        },
+        releaseArticleEvent() {
+            if(this.editor !== null) {
+
+            } else {
+                toastr.error("获取编辑器文本异常!", "Sorry!");
+            }
+        },
+    },
+    created : () => {
+
+    },
 });
 
 /******** dom操作 ********/
@@ -65,20 +94,32 @@ $(function() {
 
     stickySidebar(".right-sidedar", 10);
 
-    CurrentLocalStorage.Cache.remove("/articles/temporary/autosave");
+    /******** switch ********/
+    $("input#commentSwitch").bootstrapSwitch({
+        onText:"开启",
+        offText: "关闭",
+        onColor: "success",
+        offColor: "warning",
+        size : "mini",
+        state : articleEditVM.isCommentEnable,
+        onSwitchChange : function(event, state){
+            articleEditVM.isCommentEnable = state;
+        }
+    });
 
-    /******** simditor编辑器 ********/
-    let  toolbars = ['title', 'bold', 'mark', 'italic', 'underline', 'fontScale', 'color', '|',
-                        'blockquote','indent', 'outdent', 'alignment', 'ol', 'ul', 'hr', '|',
-                        'checklist', 'code', 'table', 'link', 'image', '|',
-                        'markdown', 'html', 'fullscreen'];
+    /******** simditor ********/
 
-    let editor = new Simditor({
-        textarea : $("#s-editor"),
+    articleEditVM.editor = new Simditor({
+        textarea : $("#editor"),
+        placeholder : '请开始你的创作',
         pasteImage : true,
         defaultImage : "",
         toolbarFloat : true,
-        toolbar : toolbars,
+        toolbar : ['title', 'bold', 'mark', 'italic', 'underline', 'fontScale', 'color', '|',
+            'blockquote','indent', 'outdent', 'alignment', 'ol', 'ul', 'hr', '|',
+            'checklist', 'code', 'table', 'link', 'image', '|',
+            'markdown', 'html', 'fullscreen'],
+        cleanPaste : false,
         markdown: false,
         upload : {
             url : "http://127.0.0.1:8976/upload",
@@ -87,18 +128,6 @@ $(function() {
             leaveConfirm : "正在上传文件，如果离开上传会自动取消"
         },
     });
-
-    /******** switch ********/
-    $('#comment-switch').ios6switch({
-        size: 20,
-        switchoffText: '关闭',
-        switchonText: '开启',
-        animateSpeed: 250
-    });
-
-    $('#comment-switch')[0].onchange = function() {
-        console.info(validateCommontStatus());
-    };
 
     /******** diy tags ********/
 
