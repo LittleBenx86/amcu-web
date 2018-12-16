@@ -1,7 +1,5 @@
 package site.amcu.amcuweb.utils;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import site.amcu.amcuweb.properties.SecurityProperties;
 import site.amcu.amcuweb.properties.SignInRegxProperties;
 import site.amcu.amcuweb.support.SignInTypeSupport;
 

@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="description" content="AMCU是华南农业大学单片机开发爱好者的交流平台">
     <meta name="keywords" content="AMCU,MCU,大学生,单片机开发者社区,电子专业,硬件工程师,Android工程师,开发者,Java工程师,文章编写">
-    <title>文章编写--华南农业大学单片机协会</title>
+    <title>文章创作--华南农业大学单片机协会</title>
 
     <!-- icon -->
     <link rel="icon" href="../img/favicon.ico" type="image/x-icon">
@@ -22,6 +22,8 @@
     <link rel="stylesheet" href="../css/tools/normalize.css">
     <link rel="stylesheet" href="../css/tools/nprogress.css">
     <link rel="stylesheet" href="../css/tools/tagsinput.css">
+    <link rel="stylesheet" href="../css/tools/toastr.min.css">
+    <link rel="stylesheet" href="../css/tools/desktop-pet.css">
     <!-- simditor -->
     <link rel="stylesheet" href="../css/simditor/simditor.min.css">
     <link rel="stylesheet" href="../css/simditor/simditor-html.css">
@@ -145,10 +147,10 @@
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon title-pre">文章标题</span>
-                    <input type="text" class="form-control input-lg input-flat" name="title" id="title" placeholder="请输入标题" :value="title" v-cloak=""/>
+                    <input type="text" class="form-control input-lg input-flat" placeholder="请输入标题" v-model="title" v-cloak="" maxlength="60"/>
                 </div>
                 <div class="form-group mr-t-10" id="editor-box">
-                    <textarea id="editor" autofocus></textarea>
+                    <textarea id="editor"></textarea>
                 </div>
             </div>
             <div class="right-sidedar col-md-3">
@@ -164,7 +166,7 @@
                                         <i class="glyphicon glyphicon-bullhorn"></i>文章状态
                                     </label>
                                     <div class="col-md-6 col-xs-6 mr-t-6" id="article-status">
-                                        <span class="label label-success">发布成功</span>
+                                        <span class="label" :class="this.articleStatusColor">{{ this.articleStatusContent }}</span>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -193,17 +195,7 @@
                             文章分类
                         </div>
                         <div class="box-body">
-                            <select class="form-control selectpicker" name="catagory" data-live-search="true">
-                                <option value="1">catagory1</option>
-                                <option value="2">catagory2</option>
-                                <option value="3">catagory3</option>
-                                <option value="4">catagory4</option>
-                                <option value="5">catagory5</option>
-                                <option value="1">catagory1</option>
-                                <option value="2">catagory2</option>
-                                <option value="3">catagory3</option>
-                                <option value="4">catagory4</option>
-                                <option value="5">catagory5</option>
+                            <select class="form-control selectpicker" name="category" v-model="category" data-live-search="true" id="sysCategorySelect" data-none-selected-text="请选择主分类" v-cloak="">
                             </select>
                         </div>
                     </div>
@@ -214,13 +206,18 @@
                             自定义标签
                         </div>
                         <div class="box-body">
-                            <input id="diy-tags" name="tags" value="123,124,125" placeholder="add tag"/>
-                            <span class="help-block">自定义标签最多6个(如:STM32,单片机),回车或逗号生成标签!</span>
+                            <input id="diy-tags" name="tags" placeholder="add tag" maxlength="60"/>
+                            <span class="help-block">自定义标签,最少1个,最多6个(如:STM32,单片机),回车或逗号生成标签!</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+
+    <div id="spig" class="spig">
+        <div id="message">正在加载中……</div>
+        <div id="mumu" class="mumu"></div>
     </div>
 
     <footer class="main-footer">
@@ -242,15 +239,11 @@
     <script type="text/javascript" src="../js/boostrap/bootstrap-switch.min.js"></script>
     <!-- adminLTE -->
     <script type="text/javascript" src="../js/adminLTE/adminlte.min.js"></script>
-    <!-- vue -->
-    <script type="text/javascript" src="../js/vue/vue.min.js"></script>
-    <script type="text/javascript" src="../js/vue/axios.min.js"></script>
-    <script type="text/javascript" src="../js/vue/qs.min.js"></script>
     <!-- simditor -->
     <script type="text/javascript" src="../js/simditor/module.js"></script>
     <script type="text/javascript" src="../js/simditor/hotkeys.js"></script>
     <script type="text/javascript" src="../js/simditor/uploader.js"></script>
-    <script type="text/javascript" src="../js/simditor/simditor.min.js"></script>
+    <script type="text/javascript" src="../js/simditor/simditor.js"></script>
     <script type="text/javascript" src="../js/simditor/simditor-mark.js"></script>
     <script type="text/javascript" src="../js/simditor/beautify-html.js"></script>
     <script type="text/javascript" src="../js/simditor/simditor-html.js"></script>
@@ -260,16 +253,20 @@
     <script type="text/javascript" src="../js/simditor/simditor-dropzone.js"></script>
     <script type="text/javascript" src="../js/simditor/simditor-checklist.js"></script>
     <script type="text/javascript" src="../js/simditor/simditor-fullscreen.js"></script>
+    <!-- vue -->
+    <script type="text/javascript" src="../js/vue/vue.min.js"></script>
+    <script type="text/javascript" src="../js/vue/axios.min.js"></script>
+    <script type="text/javascript" src="../js/vue/qs.min.js"></script>
     <!-- tools -->
     <script type="text/javascript" src="../js/tools/ResizeSensor.min.js"></script>
     <script type="text/javascript" src="../js/tools/theia-sticky-sidebar.min.js"></script>
     <script type="text/javascript" src="../js/tools/nprogress.js"></script>
     <script type="text/javascript" src="../js/tools/toastr.min.js"></script>
     <script type="text/javascript" src="../js/tools/tagsinput.js"></script>
+    <script type="text/javascript" src="../js/tools/desktop-pet.js"></script>
     <script type="text/javascript" src="../js/view/main.js"></script>
     <!-- article-edit -->
     <script type="text/javascript" src="../js/view/article-edit.js"></script>
-
 
 </body>
 </html>

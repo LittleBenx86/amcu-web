@@ -219,10 +219,10 @@ let usrCenterVM = new Vue({
             toastr.info("手机(短信)业务功能尚不可用!", "提示");
         },
         modifyUserAvatarEvent(avatar) {
-            let data = Qs.stringify({'avatar':avatar})
+            let data = Qs.stringify({'avatar':avatar});
             axios.post("/usr/avatar-modify", data, {
                 headers:{
-                    'Content-Type':'application/x-www-form-urlencoded',
+                    'Content-Type':'application/x-www-form-urlencoded;charset=utf-8',
                 }
             }).then((result, status, xhr) => {
                 toastr.success("头像修改成功", "Congratulation");

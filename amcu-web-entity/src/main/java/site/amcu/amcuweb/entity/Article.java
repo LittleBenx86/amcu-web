@@ -13,7 +13,7 @@ import java.util.Date;
  * @Author: Ben-Zheng
  * @Date: 2018/11/13 14:15
  */
-@TableName(value = "tbl_name")
+@TableName(value = "tbl_article")
 public class Article implements Serializable {
 
     private static final long serialVersionUID = 2268480572307053318L;
@@ -49,6 +49,9 @@ public class Article implements Serializable {
 
     @ApiModelProperty(value = "文章的修改时间")
     private Date updateTime;
+
+    @ApiModelProperty(value = "文章是否开启评论")
+    private Integer commentOpen;
 
     /***************** setter & getter 是为了自动注入 *********************/
 
@@ -124,6 +127,14 @@ public class Article implements Serializable {
         this.updateTime = updateTime;
     }
 
+    public Integer getCommentOpen() {
+        return commentOpen;
+    }
+
+    public void setCommentOpen(Integer commentOpen) {
+        this.commentOpen = commentOpen;
+    }
+
     @Override
     public String toString() {
         return "Article{" +
@@ -136,6 +147,7 @@ public class Article implements Serializable {
                 ", status=" + status +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
+                ", commentOpen=" + commentOpen +
                 '}';
     }
 }

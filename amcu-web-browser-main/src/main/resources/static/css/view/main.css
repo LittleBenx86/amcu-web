@@ -233,7 +233,8 @@ select {
     margin: 0 auto;
 }
 
-hr {
+.hr-border {
+    width: 100%;
     display: block;
     height: 1px;
     border: 0;
@@ -268,6 +269,10 @@ hr {
 
 .mr-b-10 {
     margin-bottom: 10px;
+}
+
+.mr-l-2 {
+    margin-left: 2px !important;
 }
 
 .mr-l-4 {
@@ -643,6 +648,9 @@ img#logo.amcu-logo {
     color: white;
     padding: 5px 8px;
     border-radius: 3px;
+    max-width: 110px;
+    overflow: hidden;
+    text-overflow: ellipsis !important;
 }
 
 .diy-tag-style a:nth-child(6n) .badge {
@@ -686,13 +694,13 @@ img#logo.amcu-logo {
     display: block;
     width: 50px;
     height: 50px;
-    background: url(../../img/tools/backtop.png) no-repeat 0 0;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAABmCAMAAAC+/jJiAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkZBMDZBM0Q0Q0U5RDExRTJCRTRCOUFFMDJGMzNBRUJDIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkZBMDZBM0Q1Q0U5RDExRTJCRTRCOUFFMDJGMzNBRUJDIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6RkEwNkEzRDJDRTlEMTFFMkJFNEI5QUUwMkYzM0FFQkMiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6RkEwNkEzRDNDRTlEMTFFMkJFNEI5QUUwMkYzM0FFQkMiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5y3vn3AAAAElBMVEVlZWWoqKj////9///+//////8/Pa/hAAAABnRSTlP//////wCzv6S/AAAAqUlEQVR42uzWsQ7EIAwDUDdt//+Xb6C66o4YYsRoDwzETywggfsQc+OQY2JisoFEqCSCGnDBDJh4lio5W5kYsDO4Scj1FlMDfgYzGIrUYCwyg1mh38JM9JuYim4blas4IH7IJibbycIX7pazRCBGBo7j7EmELlTT/paieJZqzlYWzLdaNtdbLJqfWsn8lQqmq0xNUpiYdDw0ZDgybKRfUcdx1qN/4T4CDADQfgzHFSShewAAAABJRU5ErkJggg==) no-repeat 0 0;
     opacity: 0.5;
     filter: alpha(opacity=50);
 }
 
 .gotop:hover {
-    background: url(../../img/tools/backtop.png) no-repeat 0 -52px;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAABmCAMAAAC+/jJiAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkZBMDZBM0Q0Q0U5RDExRTJCRTRCOUFFMDJGMzNBRUJDIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkZBMDZBM0Q1Q0U5RDExRTJCRTRCOUFFMDJGMzNBRUJDIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6RkEwNkEzRDJDRTlEMTFFMkJFNEI5QUUwMkYzM0FFQkMiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6RkEwNkEzRDNDRTlEMTFFMkJFNEI5QUUwMkYzM0FFQkMiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5y3vn3AAAAElBMVEVlZWWoqKj////9///+//////8/Pa/hAAAABnRSTlP//////wCzv6S/AAAAqUlEQVR42uzWsQ7EIAwDUDdt//+Xb6C66o4YYsRoDwzETywggfsQc+OQY2JisoFEqCSCGnDBDJh4lio5W5kYsDO4Scj1FlMDfgYzGIrUYCwyg1mh38JM9JuYim4blas4IH7IJibbycIX7pazRCBGBo7j7EmELlTT/paieJZqzlYWzLdaNtdbLJqfWsn8lQqmq0xNUpiYdDw0ZDgybKRfUcdx1qN/4T4CDADQfgzHFSShewAAAABJRU5ErkJggg==) no-repeat 0 -52px;
 }
 
 /*************** 文章排版公用样式 *******************/
@@ -726,6 +734,7 @@ img#logo.amcu-logo {
     font-style: italic;
 }
 
+/*
 .single-content code {
     background: #f1f1f1;
     color: #555;
@@ -733,31 +742,44 @@ img#logo.amcu-logo {
     padding: 2px 4px;
     border-radius: 2px;
 }
+*/
 
 .single-content h2 {
-    font-size: 17px;
-    font-size: 1.7rem;
+    font-size: 24px;
+    font-size: 2.4rem;
     line-height: 190%;
     margin: 10px -21px;
     padding: 0 44px;
     border-left: 5px solid #e40000;
     border-bottom: 1px solid #e40000;
+    color: #EC356C;
 }
 
+
 .single-content h3 {
-    font-size: 16px;
-    font-size: 1.6rem;
+    font-size: 18px;
+    font-size: 1.8rem;
     line-height: 190%;
     margin: 2px -21px 10px -21px;
     padding: 0 44px;
     border-left: 5px solid #2f889a;
     border-bottom: 1px solid #2f889a;
+    color: #0d6aad;
 }
 
 .single-content h4 {
     font-size: 16px;
     font-size: 1.6rem;
     line-height: 280%;
+    margin-top: -90px;
+    padding: 90px 30px 5px 30px;
+    font-weight: bold;
+}
+
+.single-content h5 {
+    font-size: 10px;
+    font-size: 1rem;
+    line-height: 200%;
     margin-top: -90px;
     padding: 90px 30px 5px 30px;
 }
@@ -825,6 +847,122 @@ blockquote {
     height: auto;
     vertical-align: middle;
     display: block;
+}
+
+/*************** 表格公用样式 *******************/
+
+/*
+table,
+th,
+td {
+    border: 1px solid #ddd;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+    border-width: 1px 0 0 1px;
+    margin: 0 0 10px;
+}
+
+caption,
+th,
+td {
+    font-weight: normal;
+    text-align: left;
+}
+
+th {
+    border-width: 0 1px 1px 0;
+    font-weight: 700;
+}
+
+td {
+    border-width: 0 1px 1px 0;
+}
+
+th, td {
+    padding: 5px;
+}
+*/
+
+table {
+    width: 100%;
+    *border-collapse: collapse; /* IE7 and lower */
+    border-spacing: 0;
+    border: solid #ccc 1px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    -webkit-box-shadow: 0 1px 1px #ccc;
+    -moz-box-shadow: 0 1px 1px #ccc;
+    box-shadow: 0 1px 1px #ccc;
+}
+
+tr {
+    -o-transition: all 0.1s ease-in-out;
+    -webkit-transition: all 0.1s ease-in-out;
+    -moz-transition: all 0.1s ease-in-out;
+    -ms-transition: all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;
+}
+
+tr:hover {
+    background: #fbf8e9;
+}
+
+td,
+th {
+    border-left: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #dce9f9;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#ebf3fc), to(#dce9f9));
+    background-image: -webkit-linear-gradient(top, #ebf3fc, #dce9f9);
+    background-image: -moz-linear-gradient(top, #ebf3fc, #dce9f9);
+    background-image: -ms-linear-gradient(top, #ebf3fc, #dce9f9);
+    background-image: -o-linear-gradient(top, #ebf3fc, #dce9f9);
+    background-image: linear-gradient(top, #ebf3fc, #dce9f9);
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#ebf3fc, endColorstr=#dce9f9);
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient (GradientType=0, startColorstr=#ebf3fc, endColorstr=#dce9f9)";
+    -webkit-box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;
+    -moz-box-shadow:0 1px 0 rgba(255,255,255,.8) inset;
+    box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;
+    border-top: none;
+    text-shadow: 0 1px 0 rgba(255,255,255,.5);
+}
+
+td:first-child,
+th:first-child {
+    border-left: none;
+}
+
+th:first-child {
+    -moz-border-radius: 6px 0 0 0;
+    -webkit-border-radius: 6px 0 0 0;
+    border-radius: 6px 0 0 0;
+}
+
+th:last-child {
+    -moz-border-radius: 0 6px 0 0;
+    -webkit-border-radius: 0 6px 0 0;
+    border-radius: 0 6px 0 0;
+}
+
+tr:last-child td:first-child {
+    -moz-border-radius: 0 0 0 6px;
+    -webkit-border-radius: 0 0 0 6px;
+    border-radius: 0 0 0 6px;
+}
+
+tr:last-child td:last-child {
+    -moz-border-radius: 0 0 6px 0;
+    -webkit-border-radius: 0 0 6px 0;
+    border-radius: 0 0 6px 0;
 }
 
 /*************** tab内搜索公用样式 *******************/

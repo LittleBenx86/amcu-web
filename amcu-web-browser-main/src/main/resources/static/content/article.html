@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="description" content="AMCU是华南农业大学单片机开发爱好者的交流平台">
     <meta name="keywords" content="AMCU,MCU,大学生,单片机开发者社区,电子专业,硬件工程师,Android工程师,开发者,Java工程师,文章正文">
-    <title>文章正文--华南农业大学单片机协会</title>
+    <title>文章--华南农业大学单片机协会</title>
 
     <!-- icon -->
     <link rel="icon" href="../img/favicon.ico" type="image/x-icon">
@@ -22,11 +22,11 @@
     <link rel="stylesheet" href="../css/tools/nprogress.css">
     <link rel="stylesheet" href="../css/tools/share.min.css">
     <link rel="stylesheet" href="../css/tools/toastr.min.css">
-    <!-- simditor -->
-    <link rel="stylesheet" href="../css/simditor/simditor.css">
-    <link rel="stylesheet" href="../css/simditor/simditor-html.css">
-    <!-- article -->
+    <link rel="stylesheet" href="../css/tools/desktop-pet.css">
+    <link rel="stylesheet" href="../css/tools/gruvbox-dark.css">
+    <link rel="stylesheet" href="../css/tools/article-dir.css">
     <link rel="stylesheet" href="../css/view/main.css">
+    <!-- article -->
     <link rel="stylesheet" href="../css/view/comment-reply.css">
     <link rel="stylesheet" href="../css/view/article.css">
 
@@ -131,7 +131,7 @@
         </nav>
     </header>
 
-    <div class="container top-rel-container" style="transform: none">
+    <div class="container top-rel-container" style="transform: none" id="articleMain">
         <div class="row">
             <div class="left-sidebar col-md-3">
                 <!-- 作者信息 -->
@@ -144,8 +144,8 @@
                             <a href="javascript:void(0)">
                                 <img class="user-avatar center-block img-circle img-responsive" src="../img/avatar/5_1.png">
                             </a>
-                            <span class="user-name">测试作者8888888888888888888</span>
-                            <span class="user-integration">声望:<span id="integrations">6666666</span></span>
+                            <span class="user-name" v-cloak>{{ this.author }}</span>
+                            <span class="user-integration">声望:<span id="integrations" v-cloak>{{ this.integrations }}</span></span>
                             <span class="user-auth">
                                 <span class="label label-primary">网站成员</span>
                                 <span class="label label-danger">AMCU成员</span>
@@ -173,15 +173,15 @@
                     <div class="box box-primary">
                         <div class="box-body">
                             <div class="col-md-4 col-xs-4">
-                                <button class="btn btn-default"><i class="fa fa-thumbs-o-up"></i><span style="margin-left: 2px;">(100)</span></button>
-                                <button class="btn btn-danger hidden"><i class="fa fa-thumbs-o-up"></i><span style="margin-left: 2px;">(100)</span></button>
+                                <button class="btn btn-default"><i class="fa fa-thumbs-o-up"></i><span class="mr-l-2" v-cloak>({{ this.articleVotes }})</span></button>
+                                <button class="btn btn-danger hidden"><i class="fa fa-thumbs-o-up"></i><span class="mr-l-2" v-cloak>({{ this.articleVotes }})</span></button>
                             </div>
                             <div class="col-md-4 col-xs-4">
-                                <button class="btn btn-default"><i class="fa fa-bookmark"></i><span style="margin-left: 2px;">(100)</span></button>
-                                <button class="btn btn-danger hidden"><i class="fa fa-bookmark"></i><span style="margin-left: 2px;">(100)</span></button>
+                                <button class="btn btn-default"><i class="fa fa-bookmark"></i><span class="mr-l-2" v-cloak>({{ this.articleCollects }})</span></button>
+                                <button class="btn btn-danger hidden"><i class="fa fa-bookmark"></i><span class="mr-l-2" v-cloak>({{ this.articleCollects }})</span></button>
                             </div>
                             <div class="col-md-4 col-xs-4">
-                                <a class="btn btn-default" href="#share-location"><i class="fa fa-share-alt"></i><span style="margin-left: 2px;">分享</span></a>
+                                <a class="btn btn-default" href="#share-location"><i class="fa fa-share-alt"></i><span class="mr-l-2">分享</span></a>
                             </div>
                         </div>
                     </div>
@@ -190,7 +190,7 @@
                 <div class="article-bookmark hidden-xs" id="bookmark">
                     <div class="box box-primary">
                         <div class="box-header with-border">
-                            文章目录
+                            文章目录导航
                             <div class="box-tools pull-right">
                                 <button class="btn btn-box-tool" type="button" data-widget="collapse">
                                     <i class="fa fa-minus"></i>
@@ -198,7 +198,9 @@
                             </div>
                         </div>
                         <div class="box-body">
+                            <div id="catalogue">
 
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -222,392 +224,65 @@
                 <!-- 导航栏 -->
                 <div>
                     <ul class="breadcrumb bread-nav-w">
-                        <li><a href="/index.html">首页</a></li>
+                        <li><a href="/">首页</a></li>
                         <li><a href="javascript:void(0)">文章</a></li>
-                        <li><a href="javascript:void(0)" id="cur-type">usr-name</a></li>
+                        <li><a href="javascript:void(0)" v-cloak>{{ this.author }}</a></li>
+                        <li><a href="javascript:void(0)"  v-cloak>{{ this.articleCategory }}</a></li>
                     </ul>
                 </div>
-                <!-- 文章主体 -->
+                <!-- 文章渲染区域 -->
                 <div class="article-box">
                     <div class="box box-solid" id="primary">
                         <div class="box-body">
                             <header class="entry-header">
-                                <h1>测试标题</h1>
+                                <h1 v-cloak>{{ this.articleTitle }}</h1>
                             </header>
-
-                            <div id="article-info-list">
-                                <ul class="list-inline">
-                                    <li><span>文章主分类</span></li>
-                                    <li>
-                                        <ul class="list-inline">
-                                            <li><span>文章标签:</span></li>
-                                            <li>
-                                                <div  class="diy-tag-style">
-                                                    <a href="javascript:void(0)">
-                                                        <span class="badge">测试标签1</span>
-                                                    </a>
-                                                    <a href="javascript:void(0)">
-                                                        <span class="badge">测试标签2</span>
-                                                    </a>
-                                                    <a href="javascript:void(0)">
-                                                        <span class="badge">测试标签3</span>
-                                                    </a>
-                                                    <a href="javascript:void(0)">
-                                                        <span class="badge">测试标签4</span>
-                                                    </a>
-                                                    <a href="javascript:void(0)">
-                                                        <span class="badge">测试标签5</span>
-                                                    </a>
-                                                    <a href="javascript:void(0)">
-                                                        <span class="badge">测试标签6</span>
-                                                    </a>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div id="article-ext-list">
-                                <ul class="list-inline">
-                                    <li class="views pull-left mr-l-8">
-                                        <i class="glyphicon glyphicon-time"></i>
-                                        <span style="margin-left: 5px; margin-right: 5px;">发布时间:</span>
-                                        <span style="margin-left: 5px; margin-right: 5px;">2018-11-19 21:58</span>
-                                    </li>
-                                    <li class="views pull-right">
-                                        <i class="fa fa-eye"></i><span style="margin-left: 5px; margin-right: 5px;">100</span>views
-                                    </li>
-                                    <li class="views pull-right">
-                                        <a href="#comment-reply-location">
-                                            <i class="fa fa-commenting-o"></i><span style="margin-left: 5px; margin-right: 5px;">100</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <hr>
-                            <!-- 文章嵌入 -->
-                            <div class="article-entry">
-                                <div class="single-content">
-                                    <p>之前我们都是使用MD5&nbsp;<code>Md5PasswordEncoder</code>&nbsp;或者SHA&nbsp;<code>ShaPasswordEncoder</code>&nbsp;的哈希算法进行密码加密，在spring security中依然使用只要指定使用自定义加密算法就行，现在推荐spring使用的BCrypt&nbsp;<code>BCryptPasswordEncoder</code><span data-wiz-span="data-wiz-span">，一种基于随机生成salt的根据强大的哈希加密算法。</span></p>
-                                    <p>&nbsp;</p>
-                                    <h2>一、MD5加密</h2>
-                                    <div class="dp-highlighter">
-                                        <div class="bar"></div>
-                                        <ol class="dp-j" start="1">
-                                            <li class="alt"><span class="keyword">package</span>&nbsp;com.liuyanzhao.chuyun.util;</li>
-                                            <li class=""></li>
-                                            <li class="alt"></li>
-                                            <li class=""><span class="keyword">import</span>&nbsp;java.security.MessageDigest;</li>
-                                            <li class="alt"></li>
-                                            <li class=""><span class="comment">/**</span></li>
-                                            <li class="alt"><span class="comment">&nbsp;*&nbsp;@author&nbsp;测试</span></li>
-                                            <li class=""><span class="comment">&nbsp;*&nbsp;@date&nbsp;2018/11/20&nbsp;下午2:00</span></li>
-                                            <li class="alt"><span class="comment">&nbsp;*/</span></li>
-                                            <li class=""></li>
-                                            <li class="alt"><span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MD5Util&nbsp;{</li>
-                                            <li class=""></li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">final</span>&nbsp;String&nbsp;SALT&nbsp;=&nbsp;<span class="string">"liuyanzhao.com"</span>;</li>
-                                            <li class=""></li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">/**</span></li>
-                                            <li class=""><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;MD5加盐加密</span></li>
-                                            <li class="alt"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</span></li>
-                                            <li class=""><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;password</span></li>
-                                            <li class="alt"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return</span></li>
-                                            <li class=""><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span></li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;String&nbsp;encode(String&nbsp;password)&nbsp;{</li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;password&nbsp;=&nbsp;password&nbsp;+&nbsp;SALT;</li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MessageDigest&nbsp;md5&nbsp;=&nbsp;<span class="keyword">null</span>;</li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">try</span>&nbsp;{</li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;md5&nbsp;=&nbsp;MessageDigest.getInstance(<span class="string">"MD5"</span>);</li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">catch</span>&nbsp;(Exception&nbsp;e)&nbsp;{</li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;RuntimeException(e);</li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">char</span>[]&nbsp;charArray&nbsp;=&nbsp;password.toCharArray();</li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">byte</span>[]&nbsp;byteArray&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;<span class="keyword">byte</span>[charArray.length];</li>
-                                            <li class="alt"></li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(<span class="keyword">int</span>&nbsp;i&nbsp;=&nbsp;<span class="number">0</span>;&nbsp;i&nbsp;&lt;&nbsp;charArray.length;&nbsp;i++)</li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;byteArray[i]&nbsp;=&nbsp;(<span class="keyword">byte</span>)&nbsp;charArray[i];</li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">byte</span>[]&nbsp;md5Bytes&nbsp;=&nbsp;md5.digest(byteArray);</li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;StringBuffer&nbsp;hexValue&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;StringBuffer();</li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(<span class="keyword">int</span>&nbsp;i&nbsp;=&nbsp;<span class="number">0</span>;&nbsp;i&nbsp;&lt;&nbsp;md5Bytes.length;&nbsp;i++)&nbsp;{</li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">int</span>&nbsp;val&nbsp;=&nbsp;((<span class="keyword">int</span>)&nbsp;md5Bytes[i])&nbsp;&amp;&nbsp;<span class="number">0xff</span>;</li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(val&nbsp;&lt;&nbsp;<span class="number">16</span>)&nbsp;{</li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hexValue.append(<span class="string">"0"</span>);</li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</li>
-                                            <li class="alt"></li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hexValue.append(Integer.toHexString(val));</li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;hexValue.toString();</li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;}</li>
-                                            <li class=""></li>
-                                            <li class="alt"></li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">void</span>&nbsp;main(String[]&nbsp;args)&nbsp;{</li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;hashPass&nbsp;=&nbsp;MD5Util.encode(<span class="string">"123456"</span>);</li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(MD5Util.encode(<span class="string">"123456"</span>));<span class="comment">//08dc78d36d1512e5a81ef05b01a37860</span></li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"08dc78d36d1512e5a81ef05b01a37860"</span>.equals(hashPass));<span class="comment">//true</span></li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;}</li>
-                                            <li class="alt">}</li>
-                                        </ol>
-                                    </div>
-                                    <p>所谓加盐加密，就是在原先密码上加点“盐”然后加密。因为虽然MD5加密是不可逆的，但是别人可以根据你的MD5密码不断比较发现你的原密码，比如你的密码设置得很简单是123456，加密后是&nbsp;e10adc3949ba59abbe56e057f20f883e，一旦数据库泄露，密码丢失，不法分子很容易试探出来原密码。如果加上盐，只要别人不知道盐是什么，破解难度会提高很多。</p>
-                                    <p>&nbsp;</p>
-                                    <h2>二、BCrypt加密</h2>
-                                    <div class="dp-highlighter">
-                                        <div class="bar"></div>
-                                        <ol class="dp-j" start="1">
-                                            <li class="alt"><span class="keyword">package</span>&nbsp;com.liuyanzhao.chuyun.util;</li>
-                                            <li class=""></li>
-                                            <li class="alt"><span class="keyword">import</span>&nbsp;org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;</li>
-                                            <li class=""></li>
-                                            <li class="alt"><span class="comment">/**</span></li>
-                                            <li class=""><span class="comment">&nbsp;*&nbsp;@author&nbsp;测试</span></li>
-                                            <li class="alt"><span class="comment">&nbsp;*&nbsp;@date&nbsp;2018/11/20&nbsp;下午2:00</span></li>
-                                            <li class=""><span class="comment">&nbsp;*/</span></li>
-                                            <li class="alt"></li>
-                                            <li class=""><span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;BCryptUtil&nbsp;{</li>
-                                            <li class="alt"></li>
-                                            <li class=""></li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">/**</span></li>
-                                            <li class=""><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;对密码进行加密</span></li>
-                                            <li class="alt"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;password</span></li>
-                                            <li class=""><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return</span></li>
-                                            <li class="alt"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span></li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;String&nbsp;encode(String&nbsp;password)&nbsp;{</li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BCryptPasswordEncoder&nbsp;bcryptPasswordEncoder&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;BCryptPasswordEncoder();</li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;hashPass&nbsp;=&nbsp;bcryptPasswordEncoder.encode(password);</li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;hashPass;</li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;}</li>
-                                            <li class="alt"></li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">/**</span></li>
-                                            <li class="alt"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;对原密码和已加密的密码进行匹配，判断是否相等</span></li>
-                                            <li class=""><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;password</span></li>
-                                            <li class="alt"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;encodedPassword</span></li>
-                                            <li class=""><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return</span></li>
-                                            <li class="alt"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span></li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">boolean</span>&nbsp;match(String&nbsp;password,String&nbsp;encodedPassword)&nbsp;{</li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BCryptPasswordEncoder&nbsp;bcryptPasswordEncoder&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;BCryptPasswordEncoder();</li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">boolean</span>&nbsp;result&nbsp;=&nbsp;bcryptPasswordEncoder.matches(password,&nbsp;encodedPassword);</li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;result;</li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;}</li>
-                                            <li class="alt"></li>
-                                            <li class=""></li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">void</span>&nbsp;main(String[]&nbsp;args)&nbsp;{</li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;hashPass&nbsp;=&nbsp;encode(<span class="string">"123456"</span>);</li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(hashPass);</li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(match(<span class="string">"123456"</span>,hashPass));<span class="comment">//true</span></li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(match(<span class="string">"123456"</span>,<span class="string">"$2a$10$7wOQPHU2MfHt3X4wCFx5H.EZu.rlHMtY5HTFsqXiPd6BA5vNHJNf2"</span>));<span class="comment">//true</span></li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(match(<span class="string">"123456"</span>,<span class="string">"$2a$10$nYQWXcY.eVUwI8kYGtMCVOD0hWE4AKjzFg0oo91qc/ECQg/DD/CpS"</span>));<span class="comment">//true</span></li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(match(<span class="string">"123456"</span>,<span class="string">"$2a$10$9etIPtquQ3f..ACQkDHAVuBfjBoDXXWHHCOBl/RaJADxuXdSQB6I2"</span>));<span class="comment">//true</span></li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;}</li>
-                                            <li class="alt"></li>
-                                            <li class="">}</li>
-                                        </ol>
-                                    </div>
-                                    <p>使用 BCrypt 加密需要导入 Spring Security 的依赖。</p>
-                                    <p>我们发现每次运行都会得到不同的加密密码，但是这些加密后的密码都和 123456 相等。</p>
-                                    <p>&nbsp;</p>
-                                    <h2>三、Spring Security 使用 MD5 加密</h2>
-                                    <p>SecurityConfig</p>
-                                    <div class="dp-highlighter">
-                                        <div class="bar"></div>
-                                        <ol class="dp-j" start="1">
-                                            <li class="alt"><span class="keyword">package</span>&nbsp;com.liuyanzhao.chuyun.config;</li>
-                                            <li class=""></li>
-                                            <li class="alt"></li>
-                                            <li class=""><span class="keyword">import</span>&nbsp;com.liuyanzhao.chuyun.service.CustomUserService;</li>
-                                            <li class="alt"><span class="keyword">import</span>&nbsp;com.liuyanzhao.chuyun.util.MD5Util;</li>
-                                            <li class=""><span class="keyword">import</span>&nbsp;org.springframework.context.annotation.Bean;</li>
-                                            <li class="alt"><span class="keyword">import</span>&nbsp;org.springframework.security.authentication.dao.DaoAuthenticationProvider;</li>
-                                            <li class=""><span class="keyword">import</span>&nbsp;org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;</li>
-                                            <li class="alt"><span class="keyword">import</span>&nbsp;org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;</li>
-                                            <li class=""><span class="keyword">import</span>&nbsp;org.springframework.security.config.annotation.web.builders.HttpSecurity;</li>
-                                            <li class="alt"><span class="keyword">import</span>&nbsp;org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;</li>
-                                            <li class=""><span class="keyword">import</span>&nbsp;org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;</li>
-                                            <li class="alt"><span class="keyword">import</span>&nbsp;org.springframework.security.crypto.password.PasswordEncoder;</li>
-                                            <li class=""></li>
-                                            <li class="alt"></li>
-                                            <li class=""><span class="comment">/**</span></li>
-                                            <li class="alt"><span class="comment">&nbsp;*&nbsp;安全配置类</span></li>
-                                            <li class=""><span class="comment">&nbsp;*</span></li>
-                                            <li class="alt"><span class="comment">&nbsp;*&nbsp;@author&nbsp;测试</span></li>
-                                            <li class=""><span class="comment">&nbsp;*&nbsp;@date&nbsp;2018/1/23&nbsp;上午11:37</span></li>
-                                            <li class="alt"><span class="comment">&nbsp;*/</span></li>
-                                            <li class=""><span class="annotation">@EnableWebSecurity</span></li>
-                                            <li class="alt"><span class="annotation">@EnableGlobalMethodSecurity</span>(prePostEnabled&nbsp;=&nbsp;<span class="keyword">true</span>)&nbsp;<span class="comment">//&nbsp;启用方法安全设置</span></li>
-                                            <li class=""><span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;SecurityConfig&nbsp;<span class="keyword">extends</span>&nbsp;WebSecurityConfigurerAdapter&nbsp;{</li>
-                                            <li class="alt"></li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">final</span>&nbsp;String&nbsp;KEY&nbsp;=&nbsp;<span class="string">"liuyanzhao.com"</span>;</li>
-                                            <li class="alt"></li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">/**</span></li>
-                                            <li class="alt"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;自定义用户Service验证</span></li>
-                                            <li class=""><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return</span></li>
-                                            <li class="alt"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span></li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;<span class="annotation">@Bean</span></li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;CustomUserService&nbsp;customUserService()&nbsp;{</li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;CustomUserService();</li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;}</li>
-                                            <li class=""></li>
-                                            <li class="alt"></li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">/**</span></li>
-                                            <li class="alt"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;核心配置</span></li>
-                                            <li class=""><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;auth</span></li>
-                                            <li class="alt"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@throws&nbsp;Exception</span></li>
-                                            <li class=""><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span></li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;<span class="annotation">@Override</span></li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;<span class="keyword">void</span>&nbsp;configure(AuthenticationManagerBuilder&nbsp;auth)&nbsp;<span class="keyword">throws</span>&nbsp;Exception&nbsp;{</li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DaoAuthenticationProvider&nbsp;authenticationProvider&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;DaoAuthenticationProvider();</li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;authenticationProvider.setUserDetailsService(customUserService());</li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//使用&nbsp;MD5&nbsp;加密</span></li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;auth.userDetailsService(customUserService()).passwordEncoder(<span class="keyword">new</span>&nbsp;PasswordEncoder(){</li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="annotation">@Override</span></li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;String&nbsp;encode(CharSequence&nbsp;rawPassword)&nbsp;{</li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MD5Util.encode((String)rawPassword);</li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="annotation">@Override</span></li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">boolean</span>&nbsp;matches(CharSequence&nbsp;rawPassword,&nbsp;String&nbsp;encodedPassword)&nbsp;{</li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;encodedPassword.equals(MD5Util.encode((String)rawPassword));</li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}});&nbsp;<span class="comment">//user&nbsp;Details&nbsp;Service验证</span></li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;auth.authenticationProvider(authenticationProvider);</li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;}</li>
-                                            <li class="alt"></li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">/**</span></li>
-                                            <li class="alt"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;权限访问自定义配置</span></li>
-                                            <li class=""><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span></li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;<span class="annotation">@Override</span></li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;<span class="keyword">void</span>&nbsp;configure(HttpSecurity&nbsp;http)&nbsp;<span class="keyword">throws</span>&nbsp;Exception&nbsp;{</li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http.authorizeRequests()</li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.antMatchers(<span class="string">"/css/**"</span>,&nbsp;<span class="string">"/js/**"</span>,<span class="string">"/"</span>,<span class="string">"/fonts/**"</span>,<span class="string">"/users"</span>).permitAll()&nbsp;<span class="comment">//&nbsp;都可以访问</span></li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.antMatchers(<span class="string">"/h2-console/**"</span>).permitAll()&nbsp;<span class="comment">//&nbsp;都可以访问</span></li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.antMatchers(<span class="string">"/admin/**"</span>).hasRole(<span class="string">"ADMIN"</span>)&nbsp;<span class="comment">//&nbsp;需要相应的角色才能访问</span></li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.antMatchers(<span class="string">"/console/**"</span>).hasAnyRole(<span class="string">"ADMIN"</span>,<span class="string">"USER"</span>)&nbsp;<span class="comment">//&nbsp;需要相应的角色才能访问</span></li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.and()</li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.formLogin()&nbsp;&nbsp;&nbsp;<span class="comment">//基于&nbsp;Form&nbsp;表单登录验证</span></li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.loginPage(<span class="string">"/login"</span>)&nbsp;<span class="comment">//登录页面</span></li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.failureUrl(<span class="string">"/login?error=true"</span>)&nbsp;<span class="comment">//&nbsp;登录错误页面</span></li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.and().logout()</li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.and().rememberMe().key(KEY)&nbsp;<span class="comment">//&nbsp;启用&nbsp;remember&nbsp;me</span></li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.tokenValiditySeconds(<span class="number">1209600</span>)<span class="comment">//记住两周</span></li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.and().exceptionHandling().accessDeniedPage(<span class="string">"/403"</span>);&nbsp;&nbsp;<span class="comment">//&nbsp;处理异常，拒绝访问就重定向到&nbsp;403&nbsp;页面</span></li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http.csrf().ignoringAntMatchers(<span class="string">"/h2-console/**"</span>);&nbsp;<span class="comment">//&nbsp;禁用&nbsp;H2&nbsp;控制台的&nbsp;CSRF&nbsp;防护</span></li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http.headers().frameOptions().sameOrigin();&nbsp;<span class="comment">//&nbsp;允许来自同一来源的H2&nbsp;控制台的请求</span></li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;}</li>
-                                            <li class="alt"></li>
-                                            <li class=""></li>
-                                            <li class="alt"></li>
-                                            <li class="">}</li>
-                                        </ol>
-                                    </div>
-                                    <p>这里的&nbsp;MD5Util 可以直接用上面的第一步里的</p>
-                                    <p>&nbsp;</p>
-                                    <h2>四、Spring Security 使用 BCrypt 加密</h2>
-                                    <p>SecurityConfig</p>
-                                    <div class="dp-highlighter">
-                                        <div class="bar"></div>
-                                        <ol class="dp-j" start="1">
-                                            <li class="alt"><span class="keyword">package</span>&nbsp;com.liuyanzhao.chuyun.config;</li>
-                                            <li class=""></li>
-                                            <li class="alt"></li>
-                                            <li class=""><span class="keyword">import</span>&nbsp;com.liuyanzhao.chuyun.service.CustomUserService;</li>
-                                            <li class="alt"><span class="keyword">import</span>&nbsp;org.springframework.context.annotation.Bean;</li>
-                                            <li class=""><span class="keyword">import</span>&nbsp;org.springframework.security.authentication.dao.DaoAuthenticationProvider;</li>
-                                            <li class="alt"><span class="keyword">import</span>&nbsp;org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;</li>
-                                            <li class=""><span class="keyword">import</span>&nbsp;org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;</li>
-                                            <li class="alt"><span class="keyword">import</span>&nbsp;org.springframework.security.config.annotation.web.builders.HttpSecurity;</li>
-                                            <li class=""><span class="keyword">import</span>&nbsp;org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;</li>
-                                            <li class="alt"><span class="keyword">import</span>&nbsp;org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;</li>
-                                            <li class=""><span class="keyword">import</span>&nbsp;org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;</li>
-                                            <li class="alt"><span class="keyword">import</span>&nbsp;org.springframework.security.crypto.password.PasswordEncoder;</li>
-                                            <li class=""></li>
-                                            <li class="alt"></li>
-                                            <li class=""><span class="comment">/**</span></li>
-                                            <li class="alt"><span class="comment">&nbsp;*&nbsp;安全配置类</span></li>
-                                            <li class=""><span class="comment">&nbsp;*</span></li>
-                                            <li class="alt"><span class="comment">&nbsp;*&nbsp;@author&nbsp;测试</span></li>
-                                            <li class=""><span class="comment">&nbsp;*&nbsp;@date&nbsp;2018/1/23&nbsp;上午11:37</span></li>
-                                            <li class="alt"><span class="comment">&nbsp;*/</span></li>
-                                            <li class=""><span class="annotation">@EnableWebSecurity</span></li>
-                                            <li class="alt"><span class="annotation">@EnableGlobalMethodSecurity</span>(prePostEnabled&nbsp;=&nbsp;<span class="keyword">true</span>)&nbsp;<span class="comment">//&nbsp;启用方法安全设置</span></li>
-                                            <li class=""><span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;SecurityConfig&nbsp;<span class="keyword">extends</span>&nbsp;WebSecurityConfigurerAdapter&nbsp;{</li>
-                                            <li class="alt"></li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">final</span>&nbsp;String&nbsp;KEY&nbsp;=&nbsp;<span class="string">"liuyanzhao.com"</span>;</li>
-                                            <li class="alt"></li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">/**</span></li>
-                                            <li class="alt"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;自定义用户Service验证</span></li>
-                                            <li class=""><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return</span></li>
-                                            <li class="alt"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span></li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;<span class="annotation">@Bean</span></li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;CustomUserService&nbsp;customUserService()&nbsp;{</li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;CustomUserService();</li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;}</li>
-                                            <li class=""></li>
-                                            <li class="alt"></li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">/**</span></li>
-                                            <li class="alt"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;使用使用&nbsp;BCrypt加密</span></li>
-                                            <li class=""><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return</span></li>
-                                            <li class="alt"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span></li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;<span class="annotation">@Bean</span></li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;PasswordEncoder&nbsp;passwordEncoder()&nbsp;{</li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;BCryptPasswordEncoder();&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;使用&nbsp;BCrypt&nbsp;加密</span></li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;}</li>
-                                            <li class=""></li>
-                                            <li class="alt"></li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">/**</span></li>
-                                            <li class="alt"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;核心配置</span></li>
-                                            <li class=""><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;auth</span></li>
-                                            <li class="alt"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@throws&nbsp;Exception</span></li>
-                                            <li class=""><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span></li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;<span class="annotation">@Override</span></li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;<span class="keyword">void</span>&nbsp;configure(AuthenticationManagerBuilder&nbsp;auth)&nbsp;<span class="keyword">throws</span>&nbsp;Exception&nbsp;{</li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DaoAuthenticationProvider&nbsp;authenticationProvider&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;DaoAuthenticationProvider();</li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;authenticationProvider.setUserDetailsService(customUserService());</li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;authenticationProvider.setPasswordEncoder(passwordEncoder());</li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;auth.authenticationProvider(authenticationProvider);</li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;}</li>
-                                            <li class=""></li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">/**</span></li>
-                                            <li class=""><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;权限访问自定义配置</span></li>
-                                            <li class="alt"><span class="comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span></li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;<span class="annotation">@Override</span></li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;<span class="keyword">void</span>&nbsp;configure(HttpSecurity&nbsp;http)&nbsp;<span class="keyword">throws</span>&nbsp;Exception&nbsp;{</li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http.authorizeRequests()</li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.antMatchers(<span class="string">"/css/**"</span>,&nbsp;<span class="string">"/js/**"</span>,<span class="string">"/"</span>,<span class="string">"/fonts/**"</span>,<span class="string">"/users"</span>).permitAll()&nbsp;<span class="comment">//&nbsp;都可以访问</span></li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.antMatchers(<span class="string">"/h2-console/**"</span>).permitAll()&nbsp;<span class="comment">//&nbsp;都可以访问</span></li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.antMatchers(<span class="string">"/admin/**"</span>).hasRole(<span class="string">"ADMIN"</span>)&nbsp;<span class="comment">//&nbsp;需要相应的角色才能访问</span></li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.antMatchers(<span class="string">"/console/**"</span>).hasAnyRole(<span class="string">"ADMIN"</span>,<span class="string">"USER"</span>)&nbsp;<span class="comment">//&nbsp;需要相应的角色才能访问</span></li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.and()</li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.formLogin()&nbsp;&nbsp;&nbsp;<span class="comment">//基于&nbsp;Form&nbsp;表单登录验证</span></li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.loginPage(<span class="string">"/login"</span>)&nbsp;<span class="comment">//登录页面</span></li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.failureUrl(<span class="string">"/login?error=true"</span>)&nbsp;<span class="comment">//&nbsp;登录错误页面</span></li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.and().logout()</li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.and().rememberMe().key(KEY)&nbsp;<span class="comment">//&nbsp;启用&nbsp;remember&nbsp;me</span></li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.tokenValiditySeconds(<span class="number">1209600</span>)<span class="comment">//记住两周</span></li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.and().exceptionHandling().accessDeniedPage(<span class="string">"/403"</span>);&nbsp;&nbsp;<span class="comment">//&nbsp;处理异常，拒绝访问就重定向到&nbsp;403&nbsp;页面</span></li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http.csrf().ignoringAntMatchers(<span class="string">"/h2-console/**"</span>);&nbsp;<span class="comment">//&nbsp;禁用&nbsp;H2&nbsp;控制台的&nbsp;CSRF&nbsp;防护</span></li>
-                                            <li class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http.headers().frameOptions().sameOrigin();&nbsp;<span class="comment">//&nbsp;允许来自同一来源的H2&nbsp;控制台的请求</span></li>
-                                            <li class="alt">&nbsp;&nbsp;&nbsp;&nbsp;}</li>
-                                            <li class=""></li>
-                                            <li class="alt"></li>
-                                            <li class=""></li>
-                                            <li class="alt">}</li>
-                                        </ol>
-                                    </div>
-                                    <p>&nbsp;</p>
-                                    <p>&nbsp;</p>
-                                    <p>最后，还是建议使用 BCrypt 加密，更安全，但是密码字段长度至少要60位。</p>
-                                    <p>&nbsp;</p>
-                                    <p><audio style="display: none;" controls="controls"></audio></p>
-                                    <p><audio style="display: none;" controls="controls"></audio></p>
-                                    <p><audio style="display: none;" controls="controls"></audio></p>
-                                    <p><audio style="display: none;" controls="controls"></audio></p>
+                            <div id="article-info-list" style="width: 100%; min-height: 22px;">
+                                <div class="form-group">
+                                    <span class="col-md-1">标签:</span>
+                                    <ul class="list-inline col-md-11">
+                                        <li>
+                                            <div  class="diy-tag-style">
+                                                <a href="javascript:void(0)" v-cloak v-for="t in articleTags">
+                                                    <span class="badge" v-cloak data-toggle="tooltip" data-placement="top" :title="t">{{ t }}</span>
+                                                </a>
+                                            </div>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
+                            <div id="article-ext-list" style=" width: 100%; min-height: 30px;">
+                                <div class="form-group">
+                                    <ul class="list-inline">
+                                        <li class="views pull-left mr-l-8">
+                                            <i class="glyphicon glyphicon-time"></i>
+                                            <span style="margin-left: 5px; margin-right: 5px;">发布时间:</span>
+                                            <span style="margin-left: 5px; margin-right: 5px;" v-cloak>{{ this.articlePassAuditTime }}</span>
+                                        </li>
+                                        <li class="views pull-right" data-toggle="tooltip" data-placement="top" title="感谢支持">
+                                            <i class="fa fa-eye"></i><span class="mr-l-5 mr-r-5" v-cloak>{{ this.articleViews }}</span>views
+                                        </li>
+                                        <li class="views pull-right" class="mr-l-5 mr-r-5" data-toggle="tooltip" data-placement="top" title="快去评论">
+                                            <a href="#comment-reply-location" style="color: #999;">
+                                                <i class="fa fa-commenting-o"></i><span v-cloak>{{ this.articleComments }}</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <hr class="hr-border">
+                            <!-- 文章嵌入 -->
+                            <div class="article-entry">
+                                <!-- 文章主体区域 -->
+                                <div class="single-content" id="singleContent" v-cloak v-highlight v-html="this.articleContent"></div>
+                            </div>
                         </div>
+                        <!-- 分享 -->
                         <div class="box-footer" id="share-location">
                             <div class="social-share" data-sites="qq, qzone, wechat, douban, linkedin, weibo"></div>
                         </div>
                     </div>
                 </div>
-                <!--  -->
                 <div class="comment-reply-box" id="comment-reply-location">
                     <div class="box box-success">
                         <div class="box-header with-border">
@@ -623,7 +298,7 @@
                                     <div class="textarea-container">
                                         <div class="baffle-wrap">
                                             <div class="baffle">
-                                                当前稿件评论功能已关闭
+                                                当前评论功能已关闭
                                             </div>
                                         </div>
                                         <i class="ipt-arrow"></i>
@@ -694,7 +369,11 @@
                 </div>
             </div>
         </div>
+    </div>
 
+    <div id="spig" class="spig">
+        <div id="message">正在加载中……</div>
+        <div id="mumu" class="mumu"></div>
     </div>
 
     <footer class="main-footer">
@@ -723,10 +402,14 @@
     <script type="text/javascript" src="../js/tools/ResizeSensor.min.js"></script>
     <script type="text/javascript" src="../js/tools/theia-sticky-sidebar.min.js"></script>
     <script type="text/javascript" src="../js/tools/nprogress.js"></script>
-    <script type="text/javascript" src="../js/view/main.js"></script>
     <script type="text/javascript" src="../js/tools/social-share.min.js"></script>
     <script type="text/javascript" src="../js/tools/toastr.min.js"></script>
-    <!-- articles -->
+    <script type="text/javascript" src="../js/tools/desktop-pet.js"></script>
+    <script type="text/javascript" src="../js/tools/highlight.pack.js"></script>
+    <script type="text/javascript" src="../js/tools/highlightjs-line-numbers.min.js"></script>
+    <script type="text/javascript" src="../js/tools/article-dir.js"></script>
+    <script type="text/javascript" src="../js/view/main.js"></script>
+    <!-- article -->
     <script type="text/javascript" src="../js/view/article.js"></script>
 </body>
 </html>

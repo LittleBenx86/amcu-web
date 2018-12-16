@@ -95,6 +95,32 @@ function timeoutRelocateToSignout(timeout) {
     }
 }
 
+function relocateTo400Immediately() {
+    window.location.replace("/error/400.html");
+}
+
+function timeoutRelocateTo400(timeout) {
+    let regx = /^[0-9]+$/;
+    if(regx.test(timeout)) {
+        setTimeout(function() { relocateTo400Immediately(); }, timeout);
+    } else {
+        relocateTo400Immediately();
+    }
+}
+
+function relocateToTarAddrImmediately(addr) {
+    window.location.replace(addr);
+}
+
+function timeoutRelocateToTarAddr(addr, timeout) {
+    let regx = /^[0-9]+$/;
+    if(regx.test(timeout)) {
+        setTimeout(function() { relocateToTarAddrImmediately(addr); }, timeout);
+    } else {
+        relocateToTarAddrImmediately(addr);
+    }
+}
+
 function dateFormate(fmt, date) {
     let o = {
         "M+" : date.getMonth() + 1,         //月份

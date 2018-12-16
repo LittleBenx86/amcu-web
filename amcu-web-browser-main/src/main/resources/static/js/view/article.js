@@ -5,6 +5,14 @@
 
 /******** vue数据控制 ********/
 
+Vue.directive('highlight', function (el) {
+    let blocks = el.querySelectorAll('pre code');
+    blocks.forEach((block) => {
+        hljs.lineNumbersBlock(block);
+        hljs.highlightBlock(block);
+    });
+});
+
 let usrNavWrapperVM = new Vue({
     el : '#userNavWrapper',
     data: {
@@ -20,7 +28,6 @@ let usrNavWrapperVM = new Vue({
             axios.get('/usr/signin-usr?userId=' + userId).then(function(result){
                 if(200 === result.status){
                     if(200 === result.data.statusCode) {
-                        console.info(result);
                         _this.isLogin = true;
                         _this.curUsrAvatar = result.data.respBody.avatar == null ?
                             _this.curUsrAvatar :
@@ -60,8 +67,72 @@ let usrNavWrapperVM = new Vue({
     }
 });
 
+let articleMainVM = new Vue({
+    el : "#articleMain",
+    data : {
+        /** author info */
+        author : "加载中...",
+        integrations : 100,
+        /** article content */
+        articleTitle : "加载中...",
+        articleCategory : "加载中...",
+        articleTags : null,
+        articlePassAuditTime : "加载中...",
+        articleContent : "<p>加载中...</p>",
+        articleAllowComment : true,
+        /** article exts */
+        articleVotes : "100",
+        articleCollects : "100",
+        articleComments : "100",
+        articleViews : "100",
+    },
+    created() {
+        let aid = getUrlParam("aid"), auid = getUrlParam("auid"), view = getUrlParam("view");
+        if(aid !== null && !isNaN(aid) &&
+            auid !== null && !isNaN(auid) &&
+            view !== null) {
+            let _this = this;
+            _this.loadArticleContent(aid, auid, view).then((data) => {
+                if(data !== null && data !== undefined) {
+                    _this.articleTitle = data.article.title;
+                    _this.articleCategory = data.exts.category;
+                    _this.articlePassAuditTime = dateFormate("yyyy-MM-dd HH:mm:ss", new Date(data.article.updateTime));
+                    _this.articleContent = data.article.text;
+                    _this.articleAllowComment = (data.article.commentOpen === 1);
+                    _this.articleTags = data.article.diyCategory.split(",");
+                }
+            });
+        } else {
+            relocateTo400Immediately();
+        }
+    },
+    methods : {
+        loadArticleContent(aid, uid, v) {
+            return axios.get("/article", {
+                params : {
+                    "aid" : aid,
+                    "auid" : uid,
+                    "view" : v,
+                },
+            }).then((result) => {
+                if(200 === result.data.statusCode){
+                    return result.data.respBody;
+                } else if(500 === result.data.statusCode) {
+                    relocateTo400Immediately();
+                }
+            }).catch((xhr) => {
+                relocateTo400Immediately();
+            });
+        },
+    },
+});
+
 $(function(){
 
     stickySidebar(".left-sidebar", 10);
+
+    ArticleDirectory.createArticleDirectory("singleContent","h2","h3",46);
+
+    $("[data-toggle='tooltip']").tooltip();
 
 });

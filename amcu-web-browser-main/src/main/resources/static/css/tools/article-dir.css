@@ -1,0 +1,49 @@
+/*生成博客目录的CSS*/
+#catalogue{
+    font-size:12px;
+    font-family:Arial, Helvetica, sans-serif;
+    text-align:left;
+    width: 100%;
+}
+
+#innerContents{
+    overflow: auto;
+    overflow-x: hidden;!important;
+    width: 100%;
+    max-height:460px;
+}
+
+#innerContents dl{
+    margin:0;
+    padding:0;
+}
+
+#innerContents dt{
+    margin-top:5px;
+    margin-left:5px;
+    color: #0d6aad;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis !important;
+    -o-text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+}
+
+#innerContents dd{
+    margin-left:20px;
+    color: #2196F3;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis !important;
+    -o-text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+}
+
+#innerContents dd, dt {
+    cursor: pointer;
+}
+
+#innerContents dt:hover,
+#innerContents dd:hover {
+    color: #EC356C;
+}
